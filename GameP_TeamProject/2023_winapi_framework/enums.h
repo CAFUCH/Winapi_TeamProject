@@ -16,7 +16,7 @@ enum class KEY_TYPE
 	A,S,D,F,G,H,J,K,L,
 	Z,X,C,V,B,N,M,
 	CTRL, LALT, LSHIFT, SPACE,
-	ENTER, TAB, ESC, LBUTTON, RBUTTON, LAST
+	ENTER, TAB, ESC, LBUTTON, RBUTTON, END
 	// LAST의미: 끝이라는 뜻이야
 };
 
@@ -47,4 +47,18 @@ enum class EVENT_TYPE
 	CREATE_OBJECT,
 	SCENE_CHANGE,
 	END
+};
+
+enum class ELEMENT_TYPE
+{
+	WATER, FIRE, ELECTRICITY, END
+	// 물 불 전기?...
+};
+
+class Stat
+{
+public:
+	float m_fHp; float m_fHpMax;
+	float m_fAttackSpeed; float m_fMoveSpeed;
+	float m_fAttackPower; float m_fRecoverPower; float m_fDefensePower;
 };
