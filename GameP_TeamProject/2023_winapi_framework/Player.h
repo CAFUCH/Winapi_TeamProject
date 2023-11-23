@@ -1,6 +1,5 @@
 #pragma once
 #include "Object.h"
-#include <wtypes.h> // pch에서 해주고 있지 않나??
 class Texture; class Weapon;
 class Player :
     public Object
@@ -10,17 +9,26 @@ public:
     ~Player();
 
 public:
+    virtual void EnterCollision(Collider* _pOther) override;
+    virtual void ExitCollision(Collider* _pOther)  override;
+    virtual void StayCollision(Collider* _pOther)  override;
+
+public:
     void Update() override;
     void Render(HDC _dc) override;
+    
+    void AutoAim();
 
 private:
-    // 플레이어 이미지
+    // sprite
     Texture* m_pTex;
-    // 플레이어 스탯
-    Stat m_stat;
-    // 플레이어 현재 무기
+    // 현재 방향
+    wstring m_strDir;
+    // 공격 방향
+    Vec2 m_vAttackDir;
+    // 현재 무기
     Weapon* m_curWeapon;
-    // 플레이어 소지 무기
+    // 소지 무기
     vector<Weapon*> m_vecWeapon[3];
 };
 

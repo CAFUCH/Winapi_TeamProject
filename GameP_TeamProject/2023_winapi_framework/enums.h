@@ -50,7 +50,7 @@ enum class EVENT_TYPE
 	END
 };
 
-enum class ELEMENT_TYPE
+enum class ENTITY_ELEMENT_TYPE
 {
 	WATER, FIRE, ELECTRICITY, END
 	// 물 불 전기?...
@@ -59,7 +59,8 @@ enum class ELEMENT_TYPE
 class Stat
 {
 public:
-	float m_fHp; float m_fHpMax;
-	float m_fAttackSpeed; float m_fMoveSpeed;
-	float m_fAttackPower; float m_fRecoverPower; float m_fDefensePower;
+
+
+public:
+
 };

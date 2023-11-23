@@ -19,6 +19,8 @@ public:
 
 	void Component_Render(HDC _dc);
 
+	void SetDamage(float _damage);
+
 public:
 	const wstring& GetName() const { return m_strName; }
 	void SetName(wstring _name) { m_strName = _name; }
@@ -31,6 +33,8 @@ public:
 
 	bool GetIsDead() const { return !m_IsAlive; }
 
+	float GetDamage() const { return m_fAttackPower; }
+
 	Collider* GetCollider() const { return m_pCollider; }
 	Animator* GetAnimator() { return m_pAnimator; }
 
@@ -42,18 +46,25 @@ public:
 	void CreateCollider();
 	void CreateAnimator();
 
-private:
-	// 이름.
+protected:
+	// 이름
 	wstring m_strName; 
 	// 위치
 	Vec2 m_vPos; 
 	// 크기
 	Vec2 m_vScale; 
-	// 생존 여부
-	bool m_IsAlive;
 	// 콜라이더
 	Collider* m_pCollider;
 	// 애니메이터
 	Animator* m_pAnimator;
+
+	// 생존
+	bool m_IsAlive;
+	// 체력, 최대 체력
+	float m_fHp; float m_fHpMax;
+	// 공속, 이속
+	float m_fAttackSpeed; float m_fMoveSpeed;
+	// 공격력, 회복력, 방어력
+	float m_fAttackPower; float m_fRecoverPower; float m_fDefensePower;
 };
 

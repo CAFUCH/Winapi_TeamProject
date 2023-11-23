@@ -145,6 +145,7 @@
     <ClInclude Include="Weapon.h">
       <Filter>Engine\04. Object\MainObject</Filter>
     </ClInclude>
+    <ClInclude Include="Game_Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2023_winapi_framework.rc">
@@ -223,5 +224,6 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Engine\04. Object\MainObject</Filter>
     </ClCompile>
+    <ClCompile Include="Game_Scene.cpp" />
   </ItemGroup>
 </Project>

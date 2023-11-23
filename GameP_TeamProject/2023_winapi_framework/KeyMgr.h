@@ -12,7 +12,7 @@ class KeyMgr // InputMgr
 	SINGLE(KeyMgr);
 private:
 	vector<tKeyInfo> m_vecKey;
-	int m_arrVKKey[(int)KEY_TYPE::LAST] =
+	int m_arrVKKey[(int)KEY_TYPE::END] =
 	{ VK_LEFT, VK_RIGHT, VK_UP, VK_DOWN, 'Q' , 'W','E','R',
 	'T','Y','U','I','O','P',
 	'A','S','D','F','G','H','J','K','L',
