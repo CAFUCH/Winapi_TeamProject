@@ -17,6 +17,7 @@ enum class KEY_TYPE
 	Z,X,C,V,B,N,M,
 	CTRL, LALT, LSHIFT, SPACE,
 	ENTER, TAB, ESC, LBUTTON, RBUTTON, END
+
 	// LAST의미: 끝이라는 뜻이야
 };
 

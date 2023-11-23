@@ -1,7 +1,5 @@
 #pragma once
 #include "Object.h"
-#include "enums.h"
-
 #include <wtypes.h> // pch에서 해주고 있지 않나??
 class Texture; class Weapon;
 class Player :
@@ -15,14 +13,14 @@ public:
     void Update() override;
     void Render(HDC _dc) override;
 
-public:
-    //void 
-
 private:
+    // 플레이어 이미지
     Texture* m_pTex;
-    ELEMENT_TYPE m_eElementTy;
+    // 플레이어 스탯
     Stat m_stat;
+    // 플레이어 현재 무기
     Weapon* m_curWeapon;
-    //vector<Weapon*> m_vecWeapon;
+    // 플레이어 소지 무기
+    vector<Weapon*> m_vecWeapon[3];
 };
 

@@ -3,7 +3,7 @@
 #include "Core.h"
 void KeyMgr::Init()
 {
-	for (int i = 0; i < (int)KEY_TYPE::LAST; ++i)
+	for (int i = 0; i < (int)KEY_TYPE::END; ++i)
 	{
 		m_vecKey.push_back(tKeyInfo{KEY_STATE::NONE, false});
 	}
@@ -16,7 +16,7 @@ void KeyMgr::Update()
 //	HWND hMainHwnd = Core::GetInst()->GetHwnd();
 	if (hWnd != nullptr)
 	{
-		for (int i = 0; i < (int)KEY_TYPE::LAST; ++i)
+		for (int i = 0; i < (int)KEY_TYPE::END; ++i)
 		{
 			// Å°°¡ ´­·È´Ù.
 			if (GetAsyncKeyState(m_arrVKKey[i]))
@@ -56,7 +56,7 @@ void KeyMgr::Update()
 	// Æ÷Ä¿½Ì ÇØÁ¦ alt + tap
 	else
 	{
-		for (int i = 0; i < (int)KEY_TYPE::LAST; ++i)
+		for (int i = 0; i < (int)KEY_TYPE::END; ++i)
 		{
 			m_vecKey[i].IsPrevCheck = false;
 			if (m_vecKey[i].eState == KEY_STATE::PRESS ||

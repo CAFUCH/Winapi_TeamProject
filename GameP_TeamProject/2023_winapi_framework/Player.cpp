@@ -26,7 +26,8 @@ void Player::Update()
 
 	if (KEY_PRESS(KEY_TYPE::LEFT))
 	{
-
+		// 애니메이션
+		// 사운드
 		vPos.x -= m_stat.m_fMoveSpeed * fDT;
 	}
 	if (KEY_PRESS(KEY_TYPE::RIGHT))
@@ -51,6 +52,6 @@ void Player::Update()
 	}
 }
 
-void Player::Render(HDC _dc)
-{
-}
+//void Player::Render(HDC _dc)
+//{
+//}
