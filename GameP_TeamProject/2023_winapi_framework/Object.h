@@ -33,7 +33,7 @@ public:
 
 	bool GetIsDead() const { return !m_IsAlive; }
 
-	float GetDamage() const { return m_fAttackPower; }
+	float GetDamage() const { return m_fDamage; }
 
 	Collider* GetCollider() const { return m_pCollider; }
 	Animator* GetAnimator() { return m_pAnimator; }
@@ -47,6 +47,7 @@ public:
 	void CreateAnimator();
 
 protected:
+	// 기본 정보
 	// 이름
 	wstring m_strName; 
 	// 위치
@@ -58,6 +59,7 @@ protected:
 	// 애니메이터
 	Animator* m_pAnimator;
 
+	// 엔티티 정보
 	// 생존
 	bool m_IsAlive;
 	// 체력, 최대 체력
@@ -65,6 +67,8 @@ protected:
 	// 공속, 이속
 	float m_fAttackSpeed; float m_fMoveSpeed;
 	// 공격력, 회복력, 방어력
-	float m_fAttackPower; float m_fRecoverPower; float m_fDefensePower;
+	float m_fDamage; float m_fRecoverPower; float m_fDefensePower; float m_fCritical;
+	// 공격 거리, 공격 딜레이
+	float m_fDistance; float m_fDelay;
 };
 

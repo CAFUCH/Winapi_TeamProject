@@ -144,6 +144,9 @@ void Player::AutoAim()
 {
 	// 가장 가까운 적을 찾아 적의 위치를 저장한다...
 	// 현재 씬의 에너미를 다 가져오고... 음...
+
+	// 현재 씬의 에너미 다 받아오기
+	// 모든 에너미 검사하며 player.pos - enemy.pos의 절대값이 가장 작은 것을 찾기...
 }
 
 void Player::EnterCollision(Collider* _pOther)
