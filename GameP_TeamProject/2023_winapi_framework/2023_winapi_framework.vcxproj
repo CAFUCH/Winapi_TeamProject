@@ -193,6 +193,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeMgr.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
@@ -217,6 +218,7 @@
     <ClCompile Include="SelectGDI.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeMgr.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>

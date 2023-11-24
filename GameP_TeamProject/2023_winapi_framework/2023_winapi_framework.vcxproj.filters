@@ -62,6 +62,9 @@
     <Filter Include="Engine\08. Module">
       <UniqueIdentifier>{b8698270-780f-4bb6-bf63-bf69c99fa2ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\09. UI">
+      <UniqueIdentifier>{64e14b59-80f9-4b4d-b42b-f335b18d9a3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -146,6 +149,9 @@
       <Filter>Engine\04. Object\MainObject</Filter>
     </ClInclude>
     <ClInclude Include="Game_Scene.h" />
+    <ClInclude Include="UI.h">
+      <Filter>Engine\09. UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2023_winapi_framework.rc">
@@ -225,5 +231,8 @@
       <Filter>Engine\04. Object\MainObject</Filter>
     </ClCompile>
     <ClCompile Include="Game_Scene.cpp" />
+    <ClCompile Include="UI.cpp">
+      <Filter>Engine\09. UI</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

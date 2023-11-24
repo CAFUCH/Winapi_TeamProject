@@ -17,6 +17,7 @@
 Player::Player() 
 	: m_pTex(nullptr)
 {
+	
 	m_pTex = ResMgr::GetInst()->TexLoad(L"Player", L"Texture\\Player.png");
 
 	CreateCollider();
