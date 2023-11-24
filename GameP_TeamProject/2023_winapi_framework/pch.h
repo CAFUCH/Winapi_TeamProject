@@ -2,6 +2,7 @@
 //#include<iostream>
 #include <Windows.h>
 #include <vector>
+#include <queue>
 #include <map>
 #include <string>
 #include <algorithm>
@@ -13,6 +14,7 @@
 #include "enums.h"
 //using namespace std; 사용 지양
 using std::vector;
+using std::queue;
 using std::map;
 using std::wstring;
 
