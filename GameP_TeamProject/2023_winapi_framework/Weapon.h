@@ -23,9 +23,10 @@ protected:
 protected:
     // sprite
     Texture* m_pTex;
+
     // 현재 씬
-    std::shared_ptr<Scene> m_pCurScene;
-    // 현재 씬의 적
-    vector<Object*> m_vecEnemy;
+    //std::shared_ptr<Scene> m_pCurScene;
+    //// 현재 씬의 적
+    //vector<Object*> m_vecEnemy;
 };
 

@@ -65,6 +65,9 @@
     <Filter Include="Engine\09. UI">
       <UniqueIdentifier>{64e14b59-80f9-4b4d-b42b-f335b18d9a3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\04. Object\MainObject\Weapons">
+      <UniqueIdentifier>{5e95f08e-3e01-4b4d-a655-6bae22855769}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -152,6 +155,10 @@
     <ClInclude Include="UI.h">
       <Filter>Engine\09. UI</Filter>
     </ClInclude>
+    <ClInclude Include="PoolMgr.h" />
+    <ClInclude Include="Knife.h">
+      <Filter>Engine\04. Object\MainObject\Weapons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2023_winapi_framework.rc">
@@ -233,6 +240,10 @@
     <ClCompile Include="Game_Scene.cpp" />
     <ClCompile Include="UI.cpp">
       <Filter>Engine\09. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PoolMgr.cpp" />
+    <ClCompile Include="Knife.cpp">
+      <Filter>Engine\04. Object\MainObject\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
