@@ -34,6 +34,7 @@ public:
 	bool GetIsDead() const { return !m_IsAlive; }
 
 	float GetDamage() const { return m_fDamage; }
+	float GetDistance() const { return m_fDistance; }
 
 	Collider* GetCollider() const { return m_pCollider; }
 	Animator* GetAnimator() { return m_pAnimator; }

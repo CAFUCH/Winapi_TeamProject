@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Player.h"
 #include "Weapon.h"
+#include "Scene.h"
 
 #include "ResMgr.h"
 #include "SceneMgr.h"
@@ -19,6 +20,7 @@ Player::Player()
 {
 	
 	m_pTex = ResMgr::GetInst()->TexLoad(L"Player", L"Texture\\Player.png");
+	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
 
 	CreateCollider();
 	//GetCollider()->SetScale(Vec2(m_pTex->GetWidth(), m_pTex->GetHeight())); // 상수 넣어주기
@@ -137,6 +139,9 @@ void Player::Update()
 		m_curWeapon->Attack(m_vAttackDir);
 	}
 
+	// 현재씬의 에너미를 가져온다.
+	m_vecEnemy = m_pCurScene->GetGroupObject(OBJECT_GROUP::MONSTER);
+
 	SetPos(vPos);
 	GetAnimator()->Update();
 }
@@ -147,7 +152,16 @@ void Player::AutoAim()
 	// 현재 씬의 에너미를 다 가져오고... 음...
 
 	// 현재 씬의 에너미 다 받아오기
-	// 모든 에너미 검사하며 player.pos - enemy.pos의 절대값이 가장 작은 것을 찾기...
+	// 모든 에너미 검사하며 player.pos - enemy.pos의 절대값이 가장 작은 것을 찾기... zz...
+	Vec2 vPos = GetPos();
+
+	for (size_t i = 0; i < m_vecEnemy.size(); ++i)
+	{
+		//if (m_curWeapon->GetDistance() < Distance()))
+		//	continue;
+
+
+	}
 }
 
 void Player::EnterCollision(Collider* _pOther)
