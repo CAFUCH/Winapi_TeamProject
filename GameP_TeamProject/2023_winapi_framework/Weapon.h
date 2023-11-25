@@ -23,10 +23,5 @@ protected:
 protected:
     // sprite
     Texture* m_pTex;
-
-    // ÇöÀç ¾À
-    //std::shared_ptr<Scene> m_pCurScene;
-    //// ÇöÀç ¾ÀÀÇ Àû
-    //vector<Object*> m_vecEnemy;
 };
 

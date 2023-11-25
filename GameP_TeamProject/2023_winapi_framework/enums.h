@@ -52,7 +52,7 @@ enum class EVENT_TYPE
 
 enum class ENTITY_ELEMENT_TYPE
 {
-	WATER, FIRE, ELECTRICITY, END
+	NONE, WATER, FIRE, ELECTRICITY, END
 	// 물 불 전기?...
 };
 
