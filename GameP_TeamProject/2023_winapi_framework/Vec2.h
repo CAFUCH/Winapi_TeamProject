@@ -11,11 +11,15 @@ public:
 	Vec2(const Vec2& _vec);
 public:
 	float Length() { return (float)(sqrt(pow(x, 2) + pow(y, 2))); }
+	double Distance(Vec2 _v1, Vec2 _v2)
+	{
+		return sqrt(pow(_v2.x - _v1.x, 2) + pow(_v2.y - _v1.y, 2));
+	}
 	Vec2& Normalize()
 	{
 		float fLen = Length();
 		// 0¿Ã∏È æ»µ≈.
-		assert(fLen !=0.f);
+		assert(fLen != 0.f);
 		x /= fLen;
 		y /= fLen;
 		return *this;
