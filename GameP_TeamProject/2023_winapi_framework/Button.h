@@ -12,11 +12,11 @@ public:
 	void Init() override;
 	void Update() override;
 	void Render(HDC _dc) override;
-public:
+protected:
 	void OnClickEnter();
 	void OnClickStay();
 	void OnClickExit();
-public:
+public: //혹시 필요할 수도 잇으니깐
 	void SetPos(Vec2 _vPos) { pos = _vPos; }
 	const Vec2& GetPos() const { return pos; }
 
@@ -26,10 +26,15 @@ public:
 	void (*onReister)();
 private:
 	bool checkClick; //마우스가 눌린상태인지
+
+	float left = pos.x - scale.x;
+	float right = pos.x + scale.x;
+	float bottom = pos.y + scale.y;
+	float top = pos.y - scale.y;
+
 	Vec2 pos;
 	Vec2 scale;
 	Vec2 mousePos;
-
 	Texture* texture;
 	BUTTON_STATE* _curState;
 };
