@@ -1,12 +1,16 @@
 #pragma once
 #include "Object.h"
-class Texture;
+
+class Texture; class Scene;
 class Weapon :
     public Object
 {
 public:
     Weapon();
     ~Weapon();
+
+public:
+    void Update();
 
 public:
     // 공격 함수 (플레이어 호출)
@@ -19,5 +23,10 @@ protected:
 protected:
     // sprite
     Texture* m_pTex;
+
+    // 현재 씬
+    //std::shared_ptr<Scene> m_pCurScene;
+    //// 현재 씬의 적
+    //vector<Object*> m_vecEnemy;
 };
 

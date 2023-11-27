@@ -1,9 +1,12 @@
 #include "pch.h"
+
 #include "CollisionMgr.h"
 #include "SceneMgr.h"
+
 #include "Object.h"
 #include "Scene.h"
 #include "Collider.h"
+
 void CollisionMgr::Update()
 {
 	for (UINT Row = 0; Row < (UINT)OBJECT_GROUP::END; ++Row)
@@ -12,6 +15,7 @@ void CollisionMgr::Update()
 		{
 			if (m_arrCheck[Row] & (1 << Col))
 			{
+				// 두 개의 타입이
 				CollisionGroupUpdate((OBJECT_GROUP)Row, (OBJECT_GROUP)Col);
 			}
 		}
