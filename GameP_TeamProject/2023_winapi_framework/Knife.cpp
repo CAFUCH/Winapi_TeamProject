@@ -20,8 +20,6 @@ Knife::~Knife()
 
 void Knife::Attack(Vec2 dir)
 {
-	// 테스트용, h가서 abs로 바꿔줄 것.
-
 	// if (공격 쿨타임이 지났다면)
 	// m_texture 이동 (공격 거리만큼 공격 속도로)
 

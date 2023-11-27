@@ -18,59 +18,78 @@
 Player::Player() 
 	: m_pTex(nullptr)
 {
-	m_pTex = ResMgr::GetInst()->TexLoad(L"Player", L"Texture\\Player.png");
+	// 이미지 불러오기
+	m_pTex = ResMgr::GetInst()->TexLoad(L"PlayerT", L"Texture\\test1.bmp");
+	//m_pTex = ResMgr::GetInst()->TexLoad(L"Player", L"Texture\\jiwoo.bmp");
+	
+	// 현재 씬 불러오기
 	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
 
+	// 콜라이더 생성
 	CreateCollider();
-	//GetCollider()->SetScale(Vec2(m_pTex->GetWidth(), m_pTex->GetHeight())); // 상수 넣어주기
+	// 콜라이더 사이즈 초기화
+	GetCollider()->SetScale(Vec2(32.f, 32.f)); // 상수 넣어주기
 
+	// 애니메이터 생성
 	CreateAnimator();
 	/*Player Animation*/ {
 		// Player Idle Animation
 		{
 			GetAnimator()->CreateAnim(L"Player_Idle_Front", m_pTex, Vec2(0.f, 0.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Idle_Right", m_pTex, Vec2(0.f, 50.f),
+			GetAnimator()->CreateAnim(L"Player_Idle_Right", m_pTex, Vec2(0.f, 32.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Idle_Left", m_pTex, Vec2(0.f, 100.f),
+			GetAnimator()->CreateAnim(L"Player_Idle_Left", m_pTex, Vec2(0.f, 64.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Idle_Back", m_pTex, Vec2(0.f, 150.f),
+			GetAnimator()->CreateAnim(L"Player_Idle_Back", m_pTex, Vec2(0.f, 96.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
 		}
 		// Player Walk Animation
 		{
-			GetAnimator()->CreateAnim(L"Player_Walk_Front", m_pTex, Vec2(0.f, 200.f),
+			GetAnimator()->CreateAnim(L"Player_Walk_Front", m_pTex, Vec2(0.f, 128.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Walk_Right", m_pTex, Vec2(0.f, 250.f),
+			GetAnimator()->CreateAnim(L"Player_Walk_Right", m_pTex, Vec2(0.f, 160.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Walk_Left", m_pTex, Vec2(0.f, 400.f),
+			GetAnimator()->CreateAnim(L"Player_Walk_Left", m_pTex, Vec2(0.f, 192.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Walk_Back", m_pTex, Vec2(0.f, 450.f),
+			GetAnimator()->CreateAnim(L"Player_Walk_Back", m_pTex, Vec2(0.f, 224.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
 		}
 		// Player Hit Animation
 		{
-			GetAnimator()->CreateAnim(L"Player_Hit_Front", m_pTex, Vec2(0.f, 500.f),
+			GetAnimator()->CreateAnim(L"Player_Hit_Front", m_pTex, Vec2(0.f, 256.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 2, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Hit_Right", m_pTex, Vec2(0.f, 550.f),
+			GetAnimator()->CreateAnim(L"Player_Hit_Right", m_pTex, Vec2(0.f, 288.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 2, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Hit_Left", m_pTex, Vec2(0.f, 600.f),
+			GetAnimator()->CreateAnim(L"Player_Hit_Left", m_pTex, Vec2(0.f, 320.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 2, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Hitk_Back", m_pTex, Vec2(0.f, 650.f),
+			GetAnimator()->CreateAnim(L"Player_Hitk_Back", m_pTex, Vec2(0.f, 352.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 2, 0.2f);
 		}
 		// Player Die Animation
 		{
-			GetAnimator()->CreateAnim(L"Player_Die_Front", m_pTex, Vec2(0.f, 700.f),
+			GetAnimator()->CreateAnim(L"Player_Die_Front", m_pTex, Vec2(0.f, 384.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Die_Right", m_pTex, Vec2(0.f, 750.f),
+			GetAnimator()->CreateAnim(L"Player_Die_Right", m_pTex, Vec2(0.f, 416.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Die_Left", m_pTex, Vec2(0.f, 800.f),
+			GetAnimator()->CreateAnim(L"Player_Die_Left", m_pTex, Vec2(0.f, 448.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Die_Back", m_pTex, Vec2(0.f, 850.f),
+			GetAnimator()->CreateAnim(L"Player_Die_Back", m_pTex, Vec2(0.f, 480.f),
 				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
 		}
+
+		m_strDir = L"Front";
+		GetAnimator()->PlayAnim(L"Player_Idle_Front", true);
 	}
+
+	// Weapon 초기값
+	{
+		m_curWeaponIdx = 0;
+		m_maxWeaponCnt = 3;
+		m_vecWeapon.resize(m_maxWeaponCnt);
+	}
+
+	m_fMoveSpeed = 50.f;
 }
 
 Player::~Player()
@@ -79,17 +98,20 @@ Player::~Player()
 
 void Player::Update()
 {
+	// 위치 가져오기
 	Vec2 vPos = GetPos();
-	/*Player KeyUp(Stop)*/ {
+
+	// Player KeyUp(Stop)
+	{
 		if (KEY_UP(KEY_TYPE::W))
-		{
-			m_strDir = L"Front";
-			GetAnimator()->PlayAnim(L"Player_Idle_Front", true);
-		}
-		if (KEY_UP(KEY_TYPE::S))
 		{
 			m_strDir = L"Back";
 			GetAnimator()->PlayAnim(L"Player_Idle_Back", true);
+		}
+		if (KEY_UP(KEY_TYPE::S))
+		{
+			m_strDir = L"Front";
+			GetAnimator()->PlayAnim(L"Player_Idle_Front", true);
 		}
 		if (KEY_UP(KEY_TYPE::A))
 		{
@@ -102,17 +124,18 @@ void Player::Update()
 			GetAnimator()->PlayAnim(L"Player_Idle_Right", true);
 		}
 	}
-	/*Player KeyPress(Move)*/ {
+	// Player KeyPress(Move)
+	{
 		if (KEY_PRESS(KEY_TYPE::W))
 		{
-			m_strDir = L"Front";
-			GetAnimator()->PlayAnim(L"Player_Walk_Front", true);
+			m_strDir = L"Back";
+			GetAnimator()->PlayAnim(L"Player_Walk_Back", true);
 			vPos.y -= m_fMoveSpeed * fDT;
 		}
 		if (KEY_PRESS(KEY_TYPE::S))
 		{
-			m_strDir = L"Back";
-			GetAnimator()->PlayAnim(L"Player_Walk_Back", true);
+			m_strDir = L"Front";
+			GetAnimator()->PlayAnim(L"Player_Walk_Front", true);
 			vPos.y += m_fMoveSpeed * fDT;
 		}
 		if (KEY_PRESS(KEY_TYPE::A))
@@ -129,6 +152,7 @@ void Player::Update()
 		}
 	}
 
+	// 공격
 	if (KEY_DOWN(KEY_TYPE::SPACE))
 	{
 		// 자동 조준
@@ -136,40 +160,79 @@ void Player::Update()
 
 		// 현재 무기 사용
 		m_curWeapon->Attack(m_vAttackDir);
+
+		// 현재 위치 초기화
+		m_vAttackDir = {0, 0};
+	}
+
+	// 무기 교체
+	{
+		if (KEY_DOWN(KEY_TYPE::Q))
+			--m_curWeaponIdx;
+		if (KEY_DOWN(KEY_TYPE::E))
+			++m_curWeaponIdx;
+
+		if (m_curWeaponIdx < 0)
+			m_curWeaponIdx = m_maxWeaponCnt;
+		else if (m_curWeaponIdx > m_maxWeaponCnt)
+			m_curWeaponIdx = 0;
+
+		m_curWeapon = m_vecWeapon[m_curWeaponIdx];
 	}
 
 	// 현재씬의 에너미를 가져온다.
 	m_vecEnemy = m_pCurScene->GetGroupObject(OBJECT_GROUP::MONSTER);
 
+	// 위치 저장하기
 	SetPos(vPos);
+	// 애니메이션 실행
 	GetAnimator()->Update();
+}
+
+bool cmp1(std::pair<Vec2, double>& left, std::pair<Vec2, double>& right)
+{
+	return left.second > right.second;
 }
 
 void Player::AutoAim()
 {
-	// 가장 가까운 적을 찾아 적의 위치를 저장한다...
-	// 현재 씬의 에너미를 다 가져오고... 음...
-
-	// 현재 씬의 에너미 다 받아오기
 	// 모든 에너미 검사하며 player.pos - enemy.pos의 절대값이 가장 작은 것을 찾기... zz...
+
+	// 위치 받아오기
 	Vec2 vPos = GetPos();
+	// *에너미의 위치와 거리
+	vector<std::pair<Vec2, double>> testDist;
 
 	for (size_t i = 0; i < m_vecEnemy.size(); ++i)
 	{
-		//if (m_curWeapon->GetDistance() < Distance()))
-		//	continue;
-
-
+		// 공격 범위 밖에 있다면 검사하지 않는다
+		if (m_curWeapon->GetDistance() > m_vPos.Distance(GetPos(), m_vecEnemy[i]->GetPos()))
+			continue;
+		// 가장 가까운 적 찾기
+		else
+			testDist.push_back({ m_vecEnemy[i]->GetPos(), m_vPos.Distance(GetPos(), m_vecEnemy[i]->GetPos()) });
 	}
+
+	// 오름차순 정렬로 거리가 가장 작은 것을 앞으로 둔다
+	//std::sort(testDist.begin()->second, testDist.end()->second);
+	std::sort(testDist.begin(), testDist.end(), cmp1);
+	// 가장 첫 값의 enemy 위치를 넘긴다.
+	m_vAttackDir = testDist[0].first;
+
+	// 위치와 거리 초기화
+	testDist.clear();
 }
 
 void Player::EnterCollision(Collider* _pOther)
 {
 	const Object* pOtherObj = _pOther->GetObj();
 
+	// 플레이어 충돌한 오브젝트 (적, 적 무기, 떨어뜨리는 코인(?))
 	if (pOtherObj->GetName() == L"Enemy" || pOtherObj->GetName() == L"Enemy_Bullet")
 	{
+		// 데미지 받기
 		SetDamage(pOtherObj->GetDamage());
+		// Hit 애니메이션 실행
 		GetAnimator()->PlayAnim(L"Player_Hit_" + m_strDir, false);
 	}
 }

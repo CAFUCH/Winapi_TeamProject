@@ -27,7 +27,6 @@ enum class OBJECT_GROUP
 	PLAYER,
 	BULLET,
 	MONSTER,
-	UI,
 	END = 30
 };
 
@@ -51,27 +50,23 @@ enum class EVENT_TYPE
 	END
 };
 
-enum class ENEMY_STATE
-{
-	IDLE,
-};
-enum class STATE
-{
-
-};
 enum class ENTITY_ELEMENT_TYPE
 {
-	WATER, FIRE, ELECTRICITY, END
-	// 물 불 전기?...	
+	NONE, WATER, FIRE, ELECTRICITY, END
+	// 물 불 전기?...
+};
+
+enum class WEAPON_TYPE
+{
+	KNIFE, GUN, END
 };
 
 enum class BUTTON_STATE
 {
-	NONE,
 	ON_CLICK,
-	ON_CLICKING,
 	UN_CLICK
 };
+
 class Stat
 {
 public:

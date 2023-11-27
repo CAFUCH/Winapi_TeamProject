@@ -46,7 +46,7 @@ void Animation::Render(HDC _dc)
 	// 오프셋 적용
 	vPos = vPos + m_vecAnimFrame[m_CurFrame].vOffset;
 	TransparentBlt(_dc
-		,(int)(vPos.x - m_vecAnimFrame[m_CurFrame].vSlice.x /2.f)
+		,(int)(vPos.x - m_vecAnimFrame[m_CurFrame].vSlice.x / 2.f)
 		,(int)(vPos.y - m_vecAnimFrame[m_CurFrame].vSlice.y / 2.f)
 		,(int)(m_vecAnimFrame[m_CurFrame].vSlice.x)
 		,(int)(m_vecAnimFrame[m_CurFrame].vSlice.y)
@@ -56,6 +56,11 @@ void Animation::Render(HDC _dc)
 		,(int)(m_vecAnimFrame[m_CurFrame].vSlice.x)
 		,(int)(m_vecAnimFrame[m_CurFrame].vSlice.y)
 		,RGB(255,0,255));
+
+	//TransparentBlt(_dc, (int)(vPos.x - vScale.x / 2)
+	//	, (int)(vPos.y - vScale.y / 2),
+	//	Width * (vScale.x / 100), Height * (vScale.y / 100), m_pTex->GetDC(),
+	//	0, 0, Width, Height, RGB(255, 0, 255));
 }
 
 void Animation::Create(Texture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, int _framecount, float _fDuration)
