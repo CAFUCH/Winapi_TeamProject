@@ -55,7 +55,7 @@ void Object::Render(HDC _dc)
 {
 	// 기본적인 Render (독립적으로 렌더하고 싶은 obj가 있다면 해당 객체에서 렌더하자)
 	// 해당 Obj가 포함된 Scene의 Render에서 m_vObj 백터에 담겨 호출된다.
-	RECT_RENDER(m_vPos.x, m_vPos.y, m_vScale.x, m_vScale.y, _dc);
+	//RECT_RENDER(m_vPos.x, m_vPos.y, m_vScale.x, m_vScale.y, _dc);
 	Component_Render(_dc);
 }
 
@@ -85,6 +85,7 @@ void Object::SetDamage(float _damage)
 	if (m_fHp - _damage <= 0)
 	{
 		m_fHp = 0;
+		// PoolMgr를 사용할거면 EventMgr를 손 봐야 한다
 		EventMgr::GetInst()->DeleteObject(this);
 	}
 	else

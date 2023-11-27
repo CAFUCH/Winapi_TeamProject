@@ -56,11 +56,17 @@ enum class ENTITY_ELEMENT_TYPE
 	// 물 불 전기?...
 };
 
+enum class WEAPON_TYPE
+{
+	KNIFE, GUN, END
+};
+
 enum class BUTTON_STATE
 {
 	ON_CLICK,
 	UN_CLICK
 };
+
 class Stat
 {
 public:

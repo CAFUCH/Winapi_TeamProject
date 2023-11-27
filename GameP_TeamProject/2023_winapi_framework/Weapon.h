@@ -10,7 +10,7 @@ public:
     ~Weapon();
 
 public:
-    void Update();
+    //void Update();
 
 public:
     // 공격 함수 (플레이어 호출)

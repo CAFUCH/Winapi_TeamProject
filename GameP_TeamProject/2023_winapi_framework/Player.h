@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "Scene.h"
 class Texture; class Weapon;
 class Player :
     public Object
@@ -28,8 +29,10 @@ private:
     Vec2 m_vAttackDir;
     // 현재 무기
     Weapon* m_curWeapon;
+    // 소지 무기 개수
+    int m_maxWeaponCnt; int m_curWeaponIdx;
     // 소지 무기
-    vector<Weapon*> m_vecWeapon[3];
+    vector<Weapon*> m_vecWeapon;
 
     // 현재 씬 
     std::shared_ptr<Scene> m_pCurScene;
