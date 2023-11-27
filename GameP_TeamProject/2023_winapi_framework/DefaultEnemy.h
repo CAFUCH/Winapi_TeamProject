@@ -3,6 +3,6 @@
 class DefaultEnemy :
     public Enemy
 {
-
+    
 };
 

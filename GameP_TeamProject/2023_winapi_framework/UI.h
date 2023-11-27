@@ -1,5 +1,7 @@
 #pragma once
-class UI
+#include "Object.h"
+class UI :
+	public Object
 {
 public:
 	UI();

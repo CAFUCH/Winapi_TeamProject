@@ -9,7 +9,6 @@ public:
 	~Button();
 	Button(Vec2 _pos, Vec2 _scale);
 public:
-	void Init() override;
 	void Update() override;
 	void Render(HDC _dc) override;
 protected:
@@ -35,7 +34,9 @@ private:
 	Vec2 pos;
 	Vec2 scale;
 	Vec2 mousePos;
-	Texture* texture;
+	Texture* off_tex;
+	Texture* on_tex;
+	Texture* cur_tex;
 	BUTTON_STATE* _curState;
 };
 

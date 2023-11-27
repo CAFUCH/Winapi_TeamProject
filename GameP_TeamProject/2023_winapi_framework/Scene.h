@@ -5,7 +5,7 @@ class Scene
 {
 public:
 	Scene();
-	virtual ~Scene();
+	virtual ~Scene();	
 	// Init(), Update(), Render(), Release();
 	virtual void Init() abstract;
 	virtual void Update();
