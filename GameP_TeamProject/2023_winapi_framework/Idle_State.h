@@ -8,7 +8,7 @@ public:
     ~Idle_State();
 
 public:
-    virtual void Update(float _dt) override;
+    virtual void Update() override;
     virtual void EnterState() override;
     virtual void ExitState() override;
 
