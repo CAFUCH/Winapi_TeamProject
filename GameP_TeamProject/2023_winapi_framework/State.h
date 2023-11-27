@@ -3,7 +3,7 @@ class AI;
 class State
 {
 public:
-	State(ENEMY_STATE _eState);
+	State();
 	virtual ~State();
 
 public:
@@ -12,6 +12,8 @@ public:
 	virtual void ExitState() abstract;
 
 public:
+	void SetAI(AI* _ai) { m_pAI = _ai; }
+
 	const ENEMY_STATE& GetType() const { return m_eState; }
 	AI* GetAI() const { return m_pAI; }
 

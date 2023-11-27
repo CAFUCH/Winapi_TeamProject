@@ -3,8 +3,8 @@
 #include "AI.h"
 #include "Idle_State.h"
 
-Idle_State::Idle_State()
-	: State(ENEMY_STATE::IDLE)
+Idle_State::Idle_State(AI* _ai)
+	: ai(_ai)
 {
 
 }

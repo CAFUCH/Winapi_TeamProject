@@ -16,7 +16,7 @@ AI::~AI()
 
 void AI::AddState(ENEMY_STATE _enemyType, State* _state) //상태 추가
 {
-	
+
 	state_maps.insert(_enemyType, _enemyType);
 }
 

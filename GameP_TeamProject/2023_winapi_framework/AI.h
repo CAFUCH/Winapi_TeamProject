@@ -10,8 +10,9 @@ public:
 	void UpdateState();
 	void ChangeState(State* _state); //상태 변경
 public:
-	Enemy* owner;
+	Enemy* GetOnwer() const { return owner; }
 private:
+	Enemy* owner;
 	State* curState;
 	State* prevState;
 	map<ENEMY_STATE, State*> state_maps;
