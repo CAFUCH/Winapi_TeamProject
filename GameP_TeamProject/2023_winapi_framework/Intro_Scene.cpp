@@ -4,10 +4,10 @@
 #include "Button.h"
 void Intro_Scene::Init()
 {
-	Button* btn = new Button;
-	btn->SetPos(Vec2({ Core::GetInst()->GetResolution().x / 2, Core::GetInst()->GetResolution().y / 2 }));
-	btn->SetScale(Vec2(100.f, 100.f));
-	AddObject(btn,  OBJECT_GROUP::UI);
+	//Button* btn = new Button;
+	//btn->SetPos(Vec2({ Core::GetInst()->GetResolution().x / 2, Core::GetInst()->GetResolution().y / 2 }));
+	//btn->SetScale(Vec2(100.f, 100.f));
+	//AddObject(btn,  OBJECT_GROUP::UI);
 }
 
 void Intro_Scene::Update()

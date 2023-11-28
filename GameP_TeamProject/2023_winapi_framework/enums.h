@@ -27,6 +27,7 @@ enum class OBJECT_GROUP
 	PLAYER,
 	BULLET,
 	MONSTER,
+	UI,
 	END = 30
 };
 
@@ -66,7 +67,9 @@ enum class BUTTON_STATE
 	ON_CLICK,
 	UN_CLICK
 };
-
+enum class ENEMY_STATE {
+	IDLE,
+};
 class Stat
 {
 public:
