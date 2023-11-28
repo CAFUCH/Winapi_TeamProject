@@ -5,6 +5,7 @@
 #include "ResMgr.h"
 #include "SceneMgr.h"
 #include "TimeMgr.h"
+#include "KeyMgr.h"
 
 #include "Object.h"
 #include "Texture.h"
@@ -25,14 +26,16 @@ Gun::Gun()
 	// 애니메이터 생성
 	CreateAnimator();
 	/*Gun Animation*/ {
-		GetAnimator()->CreateAnim(L"Weapon_Gun", m_pTex, Vec2(0.f, 0.f),
-			Vec2(32.f, 32.f), Vec2(32.f, 0.f), 12, 0.5f);
+		GetAnimator()->CreateAnim(L"Gun_Attack", m_pTex, Vec2(0.f, 0.f),
+			Vec2(32.f, 32.f), Vec2(32.f, 0.f), 12, 5.f);
 	}
 
 	m_eElementType = ENTITY_ELEMENT_TYPE::NONE;
+	m_fDistance = 1000.f;
 
 	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
 	m_pOwner = m_pCurScene->GetGroupObject(OBJECT_GROUP::PLAYER);
+
 }
 
 Gun::~Gun()
@@ -41,16 +44,17 @@ Gun::~Gun()
 
 void Gun::Update()
 {
-	Vec2 vPos = GetPos();
+	SetPos({ m_pOwner[0]->GetPos().x - 100, m_pOwner[0]->GetPos().y });
 
-
+	//if (KEY_UP(KEY_TYPE::O))
+		GetAnimator()->PlayAnim(L"Gun_Attack", true);
 }
 
 void Gun::Attack(Vec2 dir)
 {
 	// if (공격 쿨타임이 지났다면)
 	// m_texture 이동 (공격 거리만큼 공격 속도로)
-	GetAnimator()->PlayAnim(L"Weapon_Gun", false);
+	//GetAnimator()->PlayAnim(L"Weapon_Gun", false);
 
 
 	//Vec2 vPos = GetPos();

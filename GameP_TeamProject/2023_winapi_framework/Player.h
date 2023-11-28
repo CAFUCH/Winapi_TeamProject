@@ -25,6 +25,8 @@ public:
 private:
     // sprite
     Texture* m_pTex;
+    // 이동 방향
+    Vec2 m_velocity;
     // 현재 방향
     std::pair<wstring, Vec2> m_strDir;
     // 공격 방향
@@ -32,9 +34,13 @@ private:
     // 최대 소지 개수, 현재 무기 인덱스
     int m_maxWeaponCnt; int m_curWeaponIdx;
     // 현재 무기
-    Weapon* m_curWeapon;
+    Object* m_curWeapon;
     // 소지 무기
-    vector<Weapon*> m_vecWeapon;
+    vector<Object*> m_vecWeapon;
+    //// 현재 무기
+    //Weapon* m_curWeapon;
+    //// 소지 무기
+    //vector<Weapon*> m_vecWeapon;
 
     // 현재 씬 
     std::shared_ptr<Scene> m_pCurScene;

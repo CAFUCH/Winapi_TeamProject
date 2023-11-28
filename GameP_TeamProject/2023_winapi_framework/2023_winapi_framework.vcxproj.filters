@@ -65,6 +65,12 @@
     <Filter Include="Engine\09. UI">
       <UniqueIdentifier>{64e14b59-80f9-4b4d-b42b-f335b18d9a3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\04. Object\MainObject\Weapons">
+      <UniqueIdentifier>{5e95f08e-3e01-4b4d-a655-6bae22855769}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\PoolMgr">
+      <UniqueIdentifier>{0e6bf1c2-1e5b-44da-898a-ff4ece0a727b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -148,20 +154,22 @@
     <ClInclude Include="Weapon.h">
       <Filter>Engine\04. Object\MainObject</Filter>
     </ClInclude>
-    <ClInclude Include="Game_Scene.h" />
     <ClInclude Include="UI.h">
       <Filter>Engine\09. UI</Filter>
     </ClInclude>
+    <ClInclude Include="Knife.h">
+      <Filter>Engine\04. Object\MainObject\Weapons</Filter>
+    </ClInclude>
     <ClInclude Include="Button.h" />
-    <ClInclude Include="Gun.h" />
-    <ClInclude Include="Knife.h" />
-    <ClInclude Include="PoolMgr.h" />
-    <ClInclude Include="Test_Scene.h" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="Idle_State.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Melee_Enemy.h" />
-    <ClInclude Include="AI.h" />
+    <ClInclude Include="Gun.h">
+      <Filter>Engine\04. Object\MainObject\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Game_Scene.h">
+      <Filter>Engine\05. Scene\MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="PoolMgr.h">
+      <Filter>Engine\03. Manager\PoolMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2023_winapi_framework.rc">
@@ -240,19 +248,21 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Engine\04. Object\MainObject</Filter>
     </ClCompile>
-    <ClCompile Include="Game_Scene.cpp" />
     <ClCompile Include="UI.cpp">
       <Filter>Engine\09. UI</Filter>
     </ClCompile>
+    <ClCompile Include="Knife.cpp">
+      <Filter>Engine\04. Object\MainObject\Weapons</Filter>
+    </ClCompile>
     <ClCompile Include="Button.cpp" />
-    <ClCompile Include="Gun.cpp" />
-    <ClCompile Include="Knife.cpp" />
-    <ClCompile Include="PoolMgr.cpp" />
-    <ClCompile Include="Test_Scene.cpp" />
-    <ClCompile Include="State.cpp" />
-    <ClCompile Include="Idle_State.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Melee_Enemy.cpp" />
-    <ClCompile Include="AI.cpp" />
+    <ClCompile Include="Gun.cpp">
+      <Filter>Engine\04. Object\MainObject\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Game_Scene.cpp">
+      <Filter>Engine\05. Scene\MainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="PoolMgr.cpp">
+      <Filter>Engine\03. Manager\PoolMgr</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

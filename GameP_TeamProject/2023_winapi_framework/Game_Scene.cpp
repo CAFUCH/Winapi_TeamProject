@@ -28,6 +28,24 @@ void Game_Scene::Init()
 		AddObject(pGun, OBJECT_GROUP::WEAPON);
 	}
 
+	// 적 생성 및 초기화 (테스트 버전)
+	{
+		Object* ptEnemy1 = new Player;
+		ptEnemy1->SetPos((Vec2({ 100.f, 100.f })));
+		ptEnemy1->SetScale(Vec2(100.f, 100.f));
+		AddObject(ptEnemy1, OBJECT_GROUP::MONSTER);
+
+		Object* ptEnemy2 = new Player;
+		ptEnemy2->SetPos((Vec2({ 300.f, 100.f })));
+		ptEnemy2->SetScale(Vec2(100.f, 100.f));
+		AddObject(ptEnemy2, OBJECT_GROUP::MONSTER);
+
+		Object* ptEnemy3 = new Player;
+		ptEnemy3->SetPos((Vec2({ 500.f, 100.f })));
+		ptEnemy3->SetScale(Vec2(100.f, 100.f));
+		AddObject(ptEnemy3, OBJECT_GROUP::MONSTER);
+	}
+
 	// 사운드 세팅
 	//ResMgr::GetInst()->Play(L"BGM");
 
