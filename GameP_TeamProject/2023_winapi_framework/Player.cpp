@@ -220,7 +220,7 @@ void Player::AutoAim()
 	m_vAttackDir = testDist[0].first;
 
 	// 위치와 거리 초기화
-	testDist.clear();
+	//testDist.clear();
 }
 
 void Player::EnterCollision(Collider* _pOther)

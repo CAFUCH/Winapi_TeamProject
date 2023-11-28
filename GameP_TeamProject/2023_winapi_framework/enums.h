@@ -27,6 +27,7 @@ enum class OBJECT_GROUP
 	PLAYER,
 	WEAPON,
 	MONSTER,
+	UI,
 	END = 30
 };
 

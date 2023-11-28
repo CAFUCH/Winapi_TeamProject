@@ -5,9 +5,8 @@ class Button :
 	public UI
 {
 public:
-	Button();
-	~Button();
 	Button(Vec2 _pos, Vec2 _scale);
+	~Button();
 public:
 	void Update() override;
 	void Render(HDC _dc) override;
@@ -16,20 +15,21 @@ protected:
 	void OnClickStay();
 	void OnClickExit();
 public: //혹시 필요할 수도 잇으니깐
-	void SetPos(Vec2 _vPos) { pos = _vPos; }
+	/*void SetPos(Vec2 _vPos) { pos = _vPos; }
 	const Vec2& GetPos() const { return pos; }
 
 	const Vec2& GetScale() const { return scale; }
-	void SetScale(Vec2 _vScale) { scale = _vScale; }
+	void SetScale(Vec2 _vScale) { scale = _vScale; }*/
 public:
-	void (*onReister)();
+public:
+	void* onReister;
 private:
 	bool checkClick; //마우스가 눌린상태인지
 
-	float left = pos.x - scale.x;
-	float right = pos.x + scale.x;
-	float bottom = pos.y + scale.y;
-	float top = pos.y - scale.y;
+	float left;
+	float right;
+	float bottom;
+	float top;
 
 	Vec2 pos;
 	Vec2 scale;

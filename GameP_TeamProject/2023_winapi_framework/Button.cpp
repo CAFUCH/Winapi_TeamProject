@@ -3,22 +3,24 @@
 #include "KeyMgr.h"
 #include "ResMgr.h"
 #include "Texture.h"
-Button::Button()
+Button::Button(Vec2 _pos, Vec2 _scale)
 	:on_tex(nullptr)
 	, off_tex(nullptr)
-	, pos(Vec2(0.f, 0.f))
-	, scale(Vec2(0.f, 0.f))
+	, pos(_pos)
+	, scale(_scale)
 {
+	SetPos(_pos);
+	SetScale(_scale);
+
 	on_tex = ResMgr::GetInst()->TexLoad(L"gameStart_btn_on", L"Texture\\GameStart_btn_on.bmp");
 	off_tex = ResMgr::GetInst()->TexLoad(L"gameStart_btn_off", L"Texture\\GameStart_btn_off.bmp");
 
-	cur_tex = off_tex;
-}
+	left = pos.x - (scale.x / 2);
+	right = pos.x + (scale.x / 2);
+	bottom = pos.y + (scale.y / 2);
+	top = pos.y - (scale.y / 2);
 
-Button::Button(Vec2 _pos, Vec2 _scale)
-	:pos(_pos)
-	, scale(_scale)
-{
+	cur_tex = on_tex;
 }
 
 Button::~Button()
@@ -30,7 +32,7 @@ void Button::Update()
 {
 	Vec2 mousePos = KeyMgr::GetInst()->GetMousePos();
 
-	cur_tex = off_tex;
+
 
 	if (left <= mousePos.x
 		&& right >= mousePos.x
@@ -49,6 +51,9 @@ void Button::Update()
 		else if (state == KEY_STATE::UP) {
 			OnClickExit();
 		}
+	}
+	else {
+		cur_tex = off_tex;
 	}
 
 }
