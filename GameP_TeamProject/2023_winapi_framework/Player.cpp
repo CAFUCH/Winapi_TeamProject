@@ -17,7 +17,7 @@
 
 bool cmp1(std::pair<Vec2, double>& left, std::pair<Vec2, double>& right)
 {
-	return left.second > right.second;
+	return left.second < right.second;
 }
 
 Player::Player() 
@@ -86,7 +86,7 @@ Player::Player()
 		GetAnimator()->PlayAnim(L"Player_Idle_Front", true);
 	}
 
-	// Weapon 초기값
+	// 초기화
 	{
 		m_curWeaponIdx = 0;
 		m_maxWeaponCnt = 3;
@@ -110,21 +110,25 @@ void Player::Update()
 		if (KEY_UP(KEY_TYPE::W))
 		{
 			//m_strDir = L"Back";
+			m_velocity.y = 0;
 			GetAnimator()->PlayAnim(L"Player_Idle_Back", true);
 		}
 		if (KEY_UP(KEY_TYPE::S))
 		{
 			//m_strDir = L"Front";
+			m_velocity.y = 0;
 			GetAnimator()->PlayAnim(L"Player_Idle_Front", true);
 		}
 		if (KEY_UP(KEY_TYPE::A))
 		{
 			//m_strDir = L"Left";
+			m_velocity.x = 0;
 			GetAnimator()->PlayAnim(L"Player_Idle_Left", true);
 		}
 		if (KEY_UP(KEY_TYPE::D))
 		{
 			//m_strDir = L"Right";
+			m_velocity.x = 0;
 			GetAnimator()->PlayAnim(L"Player_Idle_Right", true);
 		}
 	}
@@ -135,39 +139,58 @@ void Player::Update()
 			m_strDir = { L"Back", Vec2(2, 1)};
 			//vPos.Normalize();
 			GetAnimator()->PlayAnim(L"Player_Walk_Back", true);
-			vPos.y -= m_fMoveSpeed * fDT;
+			m_velocity.y = -m_fMoveSpeed;
+			m_velocity.Normalize();
+			//vPos.y -= m_fMoveSpeed * fDT;
 		}
 		if (KEY_PRESS(KEY_TYPE::S))
 		{
 			m_strDir = { L"Front", Vec2(1, 2)};
 			//vPos.Normalize();
 			GetAnimator()->PlayAnim(L"Player_Walk_Front", true);
-			vPos.y += m_fMoveSpeed * fDT;
+			m_velocity.y = m_fMoveSpeed;
+			m_velocity.Normalize();
+			//vPos.y += m_fMoveSpeed * fDT;
 		}
 		if (KEY_PRESS(KEY_TYPE::A))
 		{
 			m_strDir = { L"Left", Vec2(1, 2)};
 			//vPos.Normalize();
 			GetAnimator()->PlayAnim(L"Player_Walk_Left", true);
-			vPos.x -= m_fMoveSpeed * fDT;
+			m_velocity.x = -m_fMoveSpeed;
+			m_velocity.Normalize();
+			//vPos.x -= m_fMoveSpeed * fDT;
 		}
 		if (KEY_PRESS(KEY_TYPE::D))
 		{
 			m_strDir = { L"Right", Vec2(2, 1)};
 			//vPos.Normalize();
 			GetAnimator()->PlayAnim(L"Player_Walk_Right", true);
-			vPos.x += m_fMoveSpeed * fDT;
+			m_velocity.x = m_fMoveSpeed;
+			m_velocity.Normalize();
+			//vPos.x += m_fMoveSpeed * fDT;
 		}
-	}
+
+		//m_velocity.Normalize();
+
+		vPos = m_velocity * fDT;
+;	}
 
 	// 공격
 	if (KEY_DOWN(KEY_TYPE::SPACE))
 	{
+		// 준용티쳐께 여쭤보자!
+		//////////m_vecWeapon = m_pCurScene->GetGroupObject(OBJECT_GROUP::WEAPON);
+		//m_curWeapon = m_vecWeapon[0];
+
+		m_vecWeapon = m_pCurScene->GetGroupObject(OBJECT_GROUP::WEAPON);
+		m_curWeapon = m_vecWeapon[0];
+
 		// 자동 조준
 		AutoAim();
 
 		// 현재 무기 사용
-		m_curWeapon->Attack(m_vAttackDir);
+		//m_curWeapon->Attack(m_vAttackDir);// 이거 어카지
 
 		// 현재 위치 초기화
 		m_vAttackDir = {0, 0};
@@ -182,7 +205,7 @@ void Player::Update()
 
 		if (m_curWeaponIdx < 0)
 			m_curWeaponIdx = m_maxWeaponCnt - 1;
-		else if (m_curWeaponIdx > m_maxWeaponCnt)
+		else if (m_curWeaponIdx >= m_maxWeaponCnt)
 			m_curWeaponIdx = 0;
 
 		m_curWeapon = m_vecWeapon[m_curWeaponIdx];
@@ -207,20 +230,20 @@ void Player::AutoAim()
 	for (size_t i = 0; i < m_vecEnemy.size(); ++i)
 	{
 		// 공격 범위 밖에 있다면 검사하지 않는다
-		if (m_curWeapon->GetDistance() > m_vPos.Distance(GetPos(), m_vecEnemy[i]->GetPos()))
+		if (m_curWeapon->GetDistance() < m_vPos.Distance(GetPos(), m_vecEnemy[i]->GetPos()))
 			continue;
 		// 가장 가까운 적 찾기
 		else
 			testDist.push_back({ m_vecEnemy[i]->GetPos(), m_vPos.Distance(GetPos(), m_vecEnemy[i]->GetPos()) });
 	}
 
-	// 오름차순 정렬로 거리가 가장 작은 것을 앞으로 둔다 // 정렬 방법 바꾸자!
+	// 오름차순 정렬로 거리가 가장 작은 것을 앞으로 둔다 // 정렬 방법 바꾸자! -> 되긴함
 	std::sort(testDist.begin(), testDist.end(), cmp1);
 	// 가장 첫 값의 enemy 위치를 넘긴다.
-	m_vAttackDir = testDist[0].first;
+	m_vAttackDir = testDist.front().first;
 
 	// 위치와 거리 초기화
-	testDist.clear();
+	//testDist.clear();
 }
 
 void Player::EnterCollision(Collider* _pOther)

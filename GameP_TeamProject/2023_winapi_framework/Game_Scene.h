@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+class Weapon;
 class Game_Scene :
     public Scene
 {

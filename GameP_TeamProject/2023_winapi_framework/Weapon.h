@@ -10,6 +10,7 @@ public:
     ~Weapon();
 
 public:
+    //virtual void Update() override;
     // 공격 함수 (플레이어 호출)
     virtual void Attack(Vec2 dir) abstract;
 
