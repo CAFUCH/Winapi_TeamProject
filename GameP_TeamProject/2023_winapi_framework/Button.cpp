@@ -12,9 +12,6 @@ Button::Button(Vec2 _pos, Vec2 _scale)
 	SetPos(_pos);
 	SetScale(_scale);
 
-	on_tex = ResMgr::GetInst()->TexLoad(L"gameStart_btn_on", L"Texture\\GameStart_btn_on.bmp");
-	off_tex = ResMgr::GetInst()->TexLoad(L"gameStart_btn_off", L"Texture\\GameStart_btn_off.bmp");
-
 	left = pos.x - (scale.x / 2);
 	right = pos.x + (scale.x / 2);
 	bottom = pos.y + (scale.y / 2);
