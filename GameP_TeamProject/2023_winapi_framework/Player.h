@@ -11,26 +11,28 @@ public:
 
 public:
     virtual void EnterCollision(Collider* _pOther) override;
-    virtual void ExitCollision(Collider* _pOther)  override;
     virtual void StayCollision(Collider* _pOther)  override;
+    virtual void ExitCollision(Collider* _pOther)  override;
 
 public:
     void Update() override;
     //void Render(HDC _dc) override;
-    
     void AutoAim();
+
+public:
+    const Player GetPlayer() const { this; }
 
 private:
     // sprite
     Texture* m_pTex;
     // 현재 방향
-    wstring m_strDir;
+    std::pair<wstring, Vec2> m_strDir;
     // 공격 방향
     Vec2 m_vAttackDir;
+    // 최대 소지 개수, 현재 무기 인덱스
+    int m_maxWeaponCnt; int m_curWeaponIdx;
     // 현재 무기
     Weapon* m_curWeapon;
-    // 소지 무기 개수
-    int m_maxWeaponCnt; int m_curWeaponIdx;
     // 소지 무기
     vector<Weapon*> m_vecWeapon;
 

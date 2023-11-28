@@ -180,6 +180,7 @@
     <ClInclude Include="EventMgr.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game_Scene.h" />
+    <ClInclude Include="Gun.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="Knife.h" />
     <ClInclude Include="Object.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="EventMgr.cpp" />
     <ClCompile Include="Game_Scene.cpp" />
+    <ClCompile Include="Gun.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="Knife.cpp" />
     <ClCompile Include="main.cpp" />

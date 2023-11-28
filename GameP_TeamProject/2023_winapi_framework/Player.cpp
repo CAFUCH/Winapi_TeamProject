@@ -15,12 +15,16 @@
 #include "Animator.h"
 #include "Animation.h"
 
+bool cmp1(std::pair<Vec2, double>& left, std::pair<Vec2, double>& right)
+{
+	return left.second > right.second;
+}
+
 Player::Player() 
 	: m_pTex(nullptr)
 {
-	// 이미지 불러오기
-	m_pTex = ResMgr::GetInst()->TexLoad(L"PlayerT", L"Texture\\test1.bmp");
-	//m_pTex = ResMgr::GetInst()->TexLoad(L"Player", L"Texture\\jiwoo.bmp");
+	
+	m_pTex = ResMgr::GetInst()->TexLoad(L"PlayerT", L"Texture\\lastPlayer.bmp");
 	
 	// 현재 씬 불러오기
 	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
@@ -28,7 +32,7 @@ Player::Player()
 	// 콜라이더 생성
 	CreateCollider();
 	// 콜라이더 사이즈 초기화
-	GetCollider()->SetScale(Vec2(32.f, 32.f)); // 상수 넣어주기
+	GetCollider()->SetScale(Vec2(50.f, 50.f)); // 상수 넣어주기
 
 	// 애니메이터 생성
 	CreateAnimator();
@@ -36,49 +40,49 @@ Player::Player()
 		// Player Idle Animation
 		{
 			GetAnimator()->CreateAnim(L"Player_Idle_Front", m_pTex, Vec2(0.f, 0.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Idle_Right", m_pTex, Vec2(0.f, 32.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Idle_Left", m_pTex, Vec2(0.f, 64.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Idle_Back", m_pTex, Vec2(0.f, 96.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Idle_Right", m_pTex, Vec2(0.f, 128.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Idle_Left", m_pTex, Vec2(0.f, 256.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Idle_Back", m_pTex, Vec2(0.f, 384.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
 		}
 		// Player Walk Animation
 		{
-			GetAnimator()->CreateAnim(L"Player_Walk_Front", m_pTex, Vec2(0.f, 128.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Walk_Right", m_pTex, Vec2(0.f, 160.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Walk_Left", m_pTex, Vec2(0.f, 192.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Walk_Back", m_pTex, Vec2(0.f, 224.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Walk_Front", m_pTex, Vec2(0.f, 512.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Walk_Right", m_pTex, Vec2(0.f, 640.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Walk_Left", m_pTex, Vec2(0.f, 768.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Walk_Back", m_pTex, Vec2(0.f, 896.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
 		}
 		// Player Hit Animation
 		{
-			GetAnimator()->CreateAnim(L"Player_Hit_Front", m_pTex, Vec2(0.f, 256.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 2, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Hit_Right", m_pTex, Vec2(0.f, 288.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 2, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Hit_Left", m_pTex, Vec2(0.f, 320.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 2, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Hitk_Back", m_pTex, Vec2(0.f, 352.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 2, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Hit_Front", m_pTex, Vec2(0.f, 1024.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 2, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Hit_Right", m_pTex, Vec2(0.f, 1152.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 2, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Hit_Left", m_pTex, Vec2(0.f, 1280.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 2, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Hitk_Back", m_pTex, Vec2(0.f, 1408.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 2, 0.2f);
 		}
 		// Player Die Animation
 		{
-			GetAnimator()->CreateAnim(L"Player_Die_Front", m_pTex, Vec2(0.f, 384.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Die_Right", m_pTex, Vec2(0.f, 416.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Die_Left", m_pTex, Vec2(0.f, 448.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
-			GetAnimator()->CreateAnim(L"Player_Die_Back", m_pTex, Vec2(0.f, 480.f),
-				Vec2(32.f, 32.f), Vec2(32.f, 0.f), 4, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Die_Front", m_pTex, Vec2(0.f, 1536.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Die_Right", m_pTex, Vec2(0.f, 1664.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Die_Left", m_pTex, Vec2(0.f, 1792.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
+			GetAnimator()->CreateAnim(L"Player_Die_Back", m_pTex, Vec2(0.f, 1920.f),
+				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
 		}
 
-		m_strDir = L"Front";
+		m_strDir = {L"Front", Vec2(0, 1)};
 		GetAnimator()->PlayAnim(L"Player_Idle_Front", true);
 	}
 
@@ -89,7 +93,7 @@ Player::Player()
 		m_vecWeapon.resize(m_maxWeaponCnt);
 	}
 
-	m_fMoveSpeed = 50.f;
+	m_fMoveSpeed = 150.f;
 }
 
 Player::~Player()
@@ -105,22 +109,22 @@ void Player::Update()
 	{
 		if (KEY_UP(KEY_TYPE::W))
 		{
-			m_strDir = L"Back";
+			//m_strDir = L"Back";
 			GetAnimator()->PlayAnim(L"Player_Idle_Back", true);
 		}
 		if (KEY_UP(KEY_TYPE::S))
 		{
-			m_strDir = L"Front";
+			//m_strDir = L"Front";
 			GetAnimator()->PlayAnim(L"Player_Idle_Front", true);
 		}
 		if (KEY_UP(KEY_TYPE::A))
 		{
-			m_strDir = L"Left";
+			//m_strDir = L"Left";
 			GetAnimator()->PlayAnim(L"Player_Idle_Left", true);
 		}
 		if (KEY_UP(KEY_TYPE::D))
 		{
-			m_strDir = L"Right";
+			//m_strDir = L"Right";
 			GetAnimator()->PlayAnim(L"Player_Idle_Right", true);
 		}
 	}
@@ -128,25 +132,29 @@ void Player::Update()
 	{
 		if (KEY_PRESS(KEY_TYPE::W))
 		{
-			m_strDir = L"Back";
+			m_strDir = { L"Back", Vec2(2, 1)};
+			//vPos.Normalize();
 			GetAnimator()->PlayAnim(L"Player_Walk_Back", true);
 			vPos.y -= m_fMoveSpeed * fDT;
 		}
 		if (KEY_PRESS(KEY_TYPE::S))
 		{
-			m_strDir = L"Front";
+			m_strDir = { L"Front", Vec2(1, 2)};
+			//vPos.Normalize();
 			GetAnimator()->PlayAnim(L"Player_Walk_Front", true);
 			vPos.y += m_fMoveSpeed * fDT;
 		}
 		if (KEY_PRESS(KEY_TYPE::A))
 		{
-			m_strDir = L"Left";
+			m_strDir = { L"Left", Vec2(1, 2)};
+			//vPos.Normalize();
 			GetAnimator()->PlayAnim(L"Player_Walk_Left", true);
 			vPos.x -= m_fMoveSpeed * fDT;
 		}
 		if (KEY_PRESS(KEY_TYPE::D))
 		{
-			m_strDir = L"Right";
+			m_strDir = { L"Right", Vec2(2, 1)};
+			//vPos.Normalize();
 			GetAnimator()->PlayAnim(L"Player_Walk_Right", true);
 			vPos.x += m_fMoveSpeed * fDT;
 		}
@@ -173,7 +181,7 @@ void Player::Update()
 			++m_curWeaponIdx;
 
 		if (m_curWeaponIdx < 0)
-			m_curWeaponIdx = m_maxWeaponCnt;
+			m_curWeaponIdx = m_maxWeaponCnt - 1;
 		else if (m_curWeaponIdx > m_maxWeaponCnt)
 			m_curWeaponIdx = 0;
 
@@ -189,15 +197,8 @@ void Player::Update()
 	GetAnimator()->Update();
 }
 
-bool cmp1(std::pair<Vec2, double>& left, std::pair<Vec2, double>& right)
-{
-	return left.second > right.second;
-}
-
 void Player::AutoAim()
 {
-	// 모든 에너미 검사하며 player.pos - enemy.pos의 절대값이 가장 작은 것을 찾기... zz...
-
 	// 위치 받아오기
 	Vec2 vPos = GetPos();
 	// *에너미의 위치와 거리
@@ -213,8 +214,7 @@ void Player::AutoAim()
 			testDist.push_back({ m_vecEnemy[i]->GetPos(), m_vPos.Distance(GetPos(), m_vecEnemy[i]->GetPos()) });
 	}
 
-	// 오름차순 정렬로 거리가 가장 작은 것을 앞으로 둔다
-	//std::sort(testDist.begin()->second, testDist.end()->second);
+	// 오름차순 정렬로 거리가 가장 작은 것을 앞으로 둔다 // 정렬 방법 바꾸자!
 	std::sort(testDist.begin(), testDist.end(), cmp1);
 	// 가장 첫 값의 enemy 위치를 넘긴다.
 	m_vAttackDir = testDist[0].first;
@@ -233,14 +233,15 @@ void Player::EnterCollision(Collider* _pOther)
 		// 데미지 받기
 		SetDamage(pOtherObj->GetDamage());
 		// Hit 애니메이션 실행
-		GetAnimator()->PlayAnim(L"Player_Hit_" + m_strDir, false);
+		GetAnimator()->PlayAnim(L"Player_Hit_" + m_strDir.first, false);
 	}
-}
-
-void Player::ExitCollision(Collider* _pOther)
-{
 }
 
 void Player::StayCollision(Collider* _pOther)
 {
+}
+
+void Player::ExitCollision(Collider* _pOther)
+{
+	GetAnimator()->PlayAnim(L"Player_Idle_" + m_strDir.first, false);
 }
