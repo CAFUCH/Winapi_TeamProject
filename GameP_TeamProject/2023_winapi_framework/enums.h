@@ -62,10 +62,12 @@ enum class WEAPON_TYPE
 	KNIFE, GUN, END
 };
 
-enum class BUTTON_STATE
+enum class ENEMY_STATE
 {
-	ON_CLICK,
-	UN_CLICK
+	IDLE,
+	ATTACK,
+	WAIT,
+	CHASE,
 };
 
 class Stat

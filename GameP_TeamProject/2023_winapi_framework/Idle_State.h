@@ -13,7 +13,7 @@ public:
 	virtual void ExitState() override;
 
 private:
-	AI* ai;
+	AI* ai; 
 	Vec2 m_dir;
 	Vec2 m_centerpos;
 	float m_fMaxDis;

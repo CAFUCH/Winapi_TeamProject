@@ -152,13 +152,16 @@
     <ClInclude Include="UI.h">
       <Filter>Engine\09. UI</Filter>
     </ClInclude>
-    <ClInclude Include="Intro_Scene.h" />
-    <ClInclude Include="AI.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Idle_State.h" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="DefaultEnemy.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Gun.h" />
+    <ClInclude Include="Knife.h" />
+    <ClInclude Include="PoolMgr.h" />
+    <ClInclude Include="Test_Scene.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="Idle_State.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Melee_Enemy.h" />
+    <ClInclude Include="AI.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2023_winapi_framework.rc">
@@ -241,12 +244,15 @@
     <ClCompile Include="UI.cpp">
       <Filter>Engine\09. UI</Filter>
     </ClCompile>
-    <ClCompile Include="Intro_Scene.cpp" />
-    <ClCompile Include="AI.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Idle_State.cpp" />
-    <ClCompile Include="State.cpp" />
-    <ClCompile Include="DefaultEnemy.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Gun.cpp" />
+    <ClCompile Include="Knife.cpp" />
+    <ClCompile Include="PoolMgr.cpp" />
+    <ClCompile Include="Test_Scene.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="Idle_State.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Melee_Enemy.cpp" />
+    <ClCompile Include="AI.cpp" />
   </ItemGroup>
 </Project>

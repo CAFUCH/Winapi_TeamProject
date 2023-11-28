@@ -15,7 +15,7 @@ Idle_State::~Idle_State()
 
 void Idle_State::Update()
 {
-	AI* pAI = GetAI();
+	Enemy* pAI = ai->GetOnwer();
 
 	//Enemy* enemy = GetAI()->GetEnemy();
 

@@ -1,12 +1,13 @@
 #include "pch.h"
 #include "AI.h"
 #include "State.h"
-
+#include"Idle_State.h"
 AI::AI(Enemy* _onwer)
 	:owner(_onwer)
 	, curState(nullptr)
 	, prevState(nullptr)
 {
+
 }
 
 AI::~AI()
@@ -14,16 +15,21 @@ AI::~AI()
 
 }
 
+void AI::InitState(ENEMY_STATE _enemyType)
+{
+	State* state = FindState(_enemyType);
+	curState = state;
+}
+
 void AI::AddState(ENEMY_STATE _enemyType, State* _state) //상태 추가
 {
-
 	state_maps.insert(_enemyType, _enemyType);
 }
 
 State* AI::FindState(ENEMY_STATE _stateType) //스테이트를 가져오고 싶다면
 {
-	//if (state_maps.find(_stateType) != state_maps.end())
-	return state_maps[_stateType];
+	if (state_maps.find(_stateType) != state_maps.end())
+		return state_maps[_stateType];
 }
 
 void AI::UpdateState()
@@ -31,11 +37,12 @@ void AI::UpdateState()
 	curState->Update();
 }
 
-void AI::ChangeState(State* state)
+void AI::ChangeState(ENEMY_STATE _stateType)
 {
 	prevState = curState; //이전스테이트를 담아주고
 	prevState->ExitState(); //나가줌
 
+	State* state = FindState(_stateType);
 	curState = state; //현재스테이트를 담아주고
 	curState->EnterState(); //들어감
 

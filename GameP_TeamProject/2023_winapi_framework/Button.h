@@ -37,6 +37,5 @@ private:
 	Texture* off_tex;
 	Texture* on_tex;
 	Texture* cur_tex;
-	BUTTON_STATE* _curState;
 };
 

@@ -2,19 +2,23 @@
 #include "Test_Scene.h"
 #include "Button.h"
 #include "SceneMgr.h"
-
-void HandleChangedGameScene();
+#include "Enemy.h"
+#include "Melee_Enemy.h"
+#include "AI.h"
+#include "Idle_State.h"
 void Test_Scene::Init()
 {
 	Button* btn = new Button(Vec2(200, 200), Vec2(200, 100));
 	AddObject(btn, OBJECT_GROUP::UI);
 
+	Enemy* meleeEnemy = new Melee_Enemy;
+	AI* ai = new AI(meleeEnemy);
+	ai->AddState(ENEMY_STATE::IDLE, new Idle_State(ai));
+
+	ai->InitState(ENEMY_STATE::IDLE);
 	//btn->onReister = HandleChangedGameScene;
 }
 
-void HandleChangedGameScene() {
-	SceneMgr::GetInst()->LoadScene(L"Game_Scene");
-}
 void Test_Scene::Update()
 {
 	Scene::Update();

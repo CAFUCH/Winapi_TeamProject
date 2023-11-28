@@ -1,5 +1,6 @@
 #pragma once
 class AI;
+class Enemy;
 class State
 {
 public:
@@ -12,13 +13,9 @@ public:
 	virtual void ExitState() abstract;
 
 public:
-	void SetAI(AI* _ai) { m_pAI = _ai; }
-
-	const ENEMY_STATE& GetType() const { return m_eState; }
-	AI* GetAI() const { return m_pAI; }
 
 private:
 	ENEMY_STATE m_eState;
-	AI* m_pAI;
-	friend class AI;
+	//AI* m_pAI;
+	//Enemy* owner;
 };

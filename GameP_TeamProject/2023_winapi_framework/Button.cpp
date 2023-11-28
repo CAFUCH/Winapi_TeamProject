@@ -32,8 +32,6 @@ void Button::Update()
 {
 	Vec2 mousePos = KeyMgr::GetInst()->GetMousePos();
 
-
-
 	if (left <= mousePos.x
 		&& right >= mousePos.x
 		&& top <= mousePos.y
@@ -74,7 +72,7 @@ void Button::Render(HDC _dc)
 
 void Button::OnClickEnter() //Å¬¸¯ÇßÀ»¶§
 {
-	onReister();
+	//onReister();
 }
 void Button::OnClickStay() //²Ú ´­·¶À»¶§
 {
