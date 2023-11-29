@@ -18,8 +18,8 @@ HP::HP()
 	m_pOwner = m_pCurScene->GetGroupObject(OBJECT_GROUP::PLAYER);
 
 	//SetMaxHP(m_pOwner.front()->GetMaxHP());
-	SetMaxHP(m_pOwner[0]->GetMaxHP());
-	SetHP(m_fMaxHP);
+	//SetMaxHP(m_pOwner[0]->GetMaxHP());
+	//SetHP(m_fMaxHP);
 }
 
 HP::~HP()
@@ -28,8 +28,8 @@ HP::~HP()
 
 void HP::Update()
 {
-	SetPos({ m_pOwner[0]->GetPos().x
-		, m_pOwner[0]->GetPos().y - m_pOwner[0]->GetScale().y / 2});
+	//SetPos({ m_pOwner[0]->GetPos().x
+	//	, m_pOwner[0]->GetPos().y - m_pOwner[0]->GetScale().y / 2});
 }
 
 void HP::Render(HDC _dc)
