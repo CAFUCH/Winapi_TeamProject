@@ -16,6 +16,5 @@ public:
     virtual void Attack(Vec2 dir) override;
 
 private:
-    std::shared_ptr<Scene> m_pCurScene;
-    vector<Object*> m_pOwner;
+    //std::shared_ptr<Scene> m_pCurScene;
 };

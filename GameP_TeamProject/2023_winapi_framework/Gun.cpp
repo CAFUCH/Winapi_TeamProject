@@ -30,7 +30,6 @@ Gun::Gun()
 			Vec2(32.f, 32.f), Vec2(32.f, 0.f), 12, 5.f);
 	}
 
-	m_eElementType = ENTITY_ELEMENT_TYPE::NONE;
 	m_fDistance = 1000.f;
 
 	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
