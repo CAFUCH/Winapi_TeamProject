@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Player.h"
 #include "Weapon.h"
-#include "Scene.h"
+#include "HP.h"
 
 #include "ResMgr.h"
 #include "SceneMgr.h"
@@ -9,6 +9,8 @@
 #include "KeyMgr.h"
 #include "EventMgr.h"
 
+#include "UI.h"
+#include "Scene.h"
 #include "Object.h"
 #include "Texture.h"
 #include "Collider.h"
@@ -23,7 +25,6 @@ bool cmp1(std::pair<Vec2, double>& left, std::pair<Vec2, double>& right)
 Player::Player() 
 	: m_pTex(nullptr)
 {
-	
 	m_pTex = ResMgr::GetInst()->TexLoad(L"PlayerT", L"Texture\\lastPlayer.bmp");
 	
 	// 현재 씬 불러오기
@@ -88,12 +89,23 @@ Player::Player()
 
 	// 초기화
 	{
+		m_fHpMax = 30.f;
+		m_fHp = m_fHp;
+
 		m_curWeaponIdx = 0;
 		m_maxWeaponCnt = 3;
 		m_vecWeapon.resize(m_maxWeaponCnt);
+
+		m_fMoveSpeed = 150.f;		
 	}
 
-	m_fMoveSpeed = 150.f;
+	// HP 생성
+	{
+		Object* pHP = new HP;
+		pHP->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
+		pHP->SetScale({ 100.f, 100.f });
+		m_pCurScene->AddObject(pHP, OBJECT_GROUP::UI);
+	}
 }
 
 Player::~Player()
@@ -190,7 +202,7 @@ void Player::Update()
 		AutoAim();
 
 		// 현재 무기 사용
-		//m_curWeapon->Attack(m_vAttackDir);// 이거 어카지
+		m_curWeapon->Attack(m_vAttackDir);// 이거 어카지
 
 		// 현재 위치 초기화
 		m_vAttackDir = {0, 0};
@@ -240,7 +252,7 @@ void Player::AutoAim()
 	// 오름차순 정렬로 거리가 가장 작은 것을 앞으로 둔다 // 정렬 방법 바꾸자! -> 되긴함
 	std::sort(testDist.begin(), testDist.end(), cmp1);
 	// 가장 첫 값의 enemy 위치를 넘긴다.
-	m_vAttackDir = testDist.front().first;
+	m_vAttackDir = testDist[0].first;
 
 	// 위치와 거리 초기화
 	//testDist.clear();

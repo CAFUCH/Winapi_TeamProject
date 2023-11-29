@@ -10,9 +10,8 @@ public:
 	virtual void Init();
 	virtual void Update();
 	virtual void Render(HDC _dc);
-	void SetEnabled(bool value) {
-		enabled = value;
-	}
+	void SetEnabled(bool _value) { enabled = _value; }
+	bool GetEnabled() { return enabled; }
 protected:
 	bool enabled;
 };
