@@ -58,6 +58,7 @@ enum class ENTITY_ELEMENT_TYPE
 	// 물 불 전기?...
 };
 
+
 enum class WEAPON_TYPE
 {
 	KNIFE, GUN, END
@@ -69,6 +70,10 @@ enum class ENEMY_STATE
 	ATTACK,
 	WAIT,
 	CHASE,
+};
+enum class ENEMY_TYPE {
+	MELEE_ENEMY,
+	RANGE_ENEMY,
 };
 
 class Stat

@@ -9,7 +9,8 @@ class Melee_Enemy :
 public:
 	Melee_Enemy(int _idx);
 	~Melee_Enemy();
-
+public:
+	void SetOffTexture(Texture* _tex) { cur_tex = _tex; }
 public:
 	virtual void EnterCollision(Collider* _pOther) override;
 	virtual void StayCollision(Collider* _pOther)  override;
@@ -17,14 +18,10 @@ public:
 
 public:
 	void Update() override;
-	//void Render(HDC _dc) override;
-public:
-	const Player GetPlayer() const { _player; }
-	void SetPlayer(Player _p) { _player = _p; }
+	void Render(HDC _dc) override;
 private:
 	// sprite
-	Texture* m_pTex;
+	Texture* cur_tex;
 	Vec2 _playerPos;
-	Player _player;
 };
 

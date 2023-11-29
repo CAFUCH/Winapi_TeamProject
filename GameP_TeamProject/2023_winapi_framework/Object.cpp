@@ -7,6 +7,7 @@
 
 #include "Collider.h"
 #include "Animator.h"
+
 Object::Object()
 	: m_pCollider(nullptr)
 	, m_vPos{}
@@ -42,6 +43,7 @@ void Object::CreateAnimator()
 
 void Object::Update()
 {
+
 }
 
 void Object::FinalUpdate()
@@ -61,14 +63,17 @@ void Object::Render(HDC _dc)
 
 void Object::EnterCollision(Collider* _pOther)
 {
+
 }
 
 void Object::ExitCollision(Collider* _pOther)
 {
+
 }
 
 void Object::StayCollision(Collider* _pOther)
 {
+
 }
 
 void Object::Component_Render(HDC _dc)
