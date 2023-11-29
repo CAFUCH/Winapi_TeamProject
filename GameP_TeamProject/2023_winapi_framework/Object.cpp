@@ -7,7 +7,7 @@
 
 #include "Collider.h"
 #include "Animator.h"
-
+#include "Weapon.h"
 Object::Object()
 	: m_pCollider(nullptr)
 	, m_vPos{}
@@ -24,6 +24,11 @@ Object::~Object()
 		delete m_pCollider;
 	if (nullptr != m_pAnimator)
 		delete m_pAnimator;
+	for (Weapon* weapon : m_vecWeapon)
+	{
+		if (nullptr != weapon)
+			delete weapon;
+	}
 
 	// Entity는 소멸자에서 삭제하지 않는다.
 	// Entity는 체력에 따라 생존 여부가 결정되기 때문에 EventMgr에서 삭제를 지원해주고 잇다.!
@@ -41,9 +46,15 @@ void Object::CreateAnimator()
 	m_pAnimator->m_pOwner = this;
 }
 
+void Object::CreateWeapon(Weapon* _weapon)
+{
+	//m_pWeapon = new Weapon;
+	_weapon->m_pOwner = this;
+	m_vecWeapon.push_back(_weapon);
+}
+
 void Object::Update()
 {
-
 }
 
 void Object::FinalUpdate()
@@ -51,6 +62,11 @@ void Object::FinalUpdate()
 	// 콜라이더의 Update
 	if (m_pCollider)
 		m_pCollider->FinalUpdate();
+	for (Weapon* weapon : m_vecWeapon)
+	{
+		if (weapon)
+			weapon->Update();
+	}
 }
 
 void Object::Render(HDC _dc)
@@ -63,17 +79,14 @@ void Object::Render(HDC _dc)
 
 void Object::EnterCollision(Collider* _pOther)
 {
-
 }
 
 void Object::ExitCollision(Collider* _pOther)
 {
-
 }
 
 void Object::StayCollision(Collider* _pOther)
 {
-
 }
 
 void Object::Component_Render(HDC _dc)
@@ -83,6 +96,11 @@ void Object::Component_Render(HDC _dc)
 		m_pCollider->Render(_dc);
 	if (nullptr != m_pAnimator)
 		m_pAnimator->Render(_dc);
+	for (Weapon* weapon : m_vecWeapon)
+	{
+		if (nullptr != weapon)
+			weapon->Render(_dc);
+	}
 }
 
 void Object::SetDamage(float _damage)

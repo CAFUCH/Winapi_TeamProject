@@ -1,6 +1,7 @@
 #pragma once
 class Collider;
 class Animator;
+class Weapon;
 class Object
 {
 public:
@@ -37,10 +38,11 @@ public:
 	bool GetIsDead() const { return !m_IsAlive; }
 
 	float GetDamage() const { return m_fDamage; }
-	float GetDistance() const { return m_fDistance; }
+	//float GetDistance() const { return m_fDistance; }
 
 	Collider* GetCollider() const { return m_pCollider; }
 	Animator* GetAnimator() { return m_pAnimator; }
+
 
 private:
 	void SetDead() { m_IsAlive = false; }
@@ -49,6 +51,7 @@ private:
 public:
 	void CreateCollider();
 	void CreateAnimator();
+	void CreateWeapon(Weapon* _weapon);
 
 protected:
 	// 기본 정보
@@ -62,6 +65,8 @@ protected:
 	Collider* m_pCollider;
 	// 애니메이터
 	Animator* m_pAnimator;
+	// 무기
+	vector<Weapon*> m_vecWeapon;
 
 	// 엔티티 정보
 	// 생존
@@ -69,10 +74,8 @@ protected:
 	// 체력, 최대 체력
 	float m_fHp; float m_fHpMax;
 	// 공속, 이속
-	float m_fAttackSpeed; float m_fMoveSpeed;
+	float m_fMoveSpeed;
 	// 공격력, 회복력, 방어력
 	float m_fDamage; float m_fRecoverPower; float m_fDefensePower; float m_fCritical;
-	// 공격 거리, 공격 딜레이
-	float m_fDistance; float m_fDelay;
 };
 

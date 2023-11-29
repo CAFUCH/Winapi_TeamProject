@@ -87,6 +87,12 @@ Player::Player()
 		GetAnimator()->PlayAnim(L"Player_Idle_Front", true);
 	}
 
+	// 무기 생성
+	{
+		for (int i = 0; i < m_maxWeaponCnt; ++i)
+			CreateWeapon(new Weapon());
+	}
+
 	// 초기화
 	{
 		m_fHpMax = 30.f;
@@ -101,10 +107,10 @@ Player::Player()
 
 	// HP 생성
 	{
-		Object* pHP = new HP;
-		pHP->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
-		pHP->SetScale({ 100.f, 100.f });
-		m_pCurScene->AddObject(pHP, OBJECT_GROUP::UI);
+		//Object* pHP = new HP;
+		//pHP->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
+		//pHP->SetScale({ 100.f, 100.f });
+		//m_pCurScene->AddObject(pHP, OBJECT_GROUP::UI);
 	}
 }
 
@@ -191,12 +197,8 @@ void Player::Update()
 	// 공격
 	if (KEY_DOWN(KEY_TYPE::SPACE))
 	{
-		// 준용티쳐께 여쭤보자!
-		//////////m_vecWeapon = m_pCurScene->GetGroupObject(OBJECT_GROUP::WEAPON);
-		//m_curWeapon = m_vecWeapon[0];
-
-		m_vecWeapon = m_pCurScene->GetGroupObject(OBJECT_GROUP::WEAPON);
 		m_curWeapon = m_vecWeapon[0];
+		//m_curWeapon = m_vecWeapon[m_curWeaponIdx];
 
 		// 자동 조준
 		AutoAim();

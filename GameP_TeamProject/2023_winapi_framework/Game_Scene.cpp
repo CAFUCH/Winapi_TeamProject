@@ -15,18 +15,20 @@
 void Game_Scene::Init()
 {
 	// 플레이어 생성 및 초기화
-	Object* pPlayer = new Player;
-	pPlayer->SetPos((Vec2({ Core::GetInst()->GetResolution().x / 2, Core::GetInst()->GetResolution().y / 2 })));
-	pPlayer->SetScale(Vec2(100.f, 100.f));
-	AddObject(pPlayer, OBJECT_GROUP::PLAYER);
-
-	// 무기 생성 및 초기화
 	{
-		Object* pGun = new Gun;
-		pGun->SetPos((Vec2({ pPlayer->GetPos() })));
-		pGun->SetScale(Vec2(50.f, 50.f));
-		AddObject(pGun, OBJECT_GROUP::WEAPON);
+		Object* pPlayer = new Player;
+		pPlayer->SetPos((Vec2({ Core::GetInst()->GetResolution().x / 2, Core::GetInst()->GetResolution().y / 2 })));
+		pPlayer->SetScale(Vec2(100.f, 100.f));
+		AddObject(pPlayer, OBJECT_GROUP::PLAYER);
 	}
+
+	//// 무기 생성 및 초기화
+	//{
+	//	Object* pGun = new Gun;
+	//	pGun->SetPos((Vec2({ pPlayer->GetPos() })));
+	//	pGun->SetScale(Vec2(50.f, 50.f));
+	//	AddObject(pGun, OBJECT_GROUP::WEAPON);
+	//}
 
 	// 적 생성 및 초기화 (테스트 버전)
 	{
