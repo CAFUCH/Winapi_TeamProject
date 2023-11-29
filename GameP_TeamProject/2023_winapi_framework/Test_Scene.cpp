@@ -18,12 +18,12 @@ void Test_Scene::Init()
 {
 	//SetBkMode(Core::GetInst()->GetMainDC(), 0);
 
-	/*Button* playBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2),
+	Button* playBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2),
 		Vec2(200, 100));
 	playBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"PlayBtn_on", L"Texture\\PlayBtn_on.bmp"));
 	playBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"PlayBtn_off", L"Texture\\PlayBtn_off.bmp"));
 	playBtn->onReister = HandleSceneChangedGameScene;
-	AddObject(playBtn, OBJECT_GROUP::UI);*/
+	AddObject(playBtn, OBJECT_GROUP::UI);
 
 	/*
 	Button* expBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2),

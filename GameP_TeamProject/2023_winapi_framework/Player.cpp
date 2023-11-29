@@ -83,7 +83,7 @@ Player::Player()
 				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
 		}
 
-		m_strDir = { L"Front", Vec2(0, 1) };
+		m_strDir = L"Front";
 		GetAnimator()->PlayAnim(L"Player_Idle_Front", true);
 	}
 
@@ -107,11 +107,13 @@ Player::Player()
 
 	// HP 생성
 	{
-		//Object* pHP = new HP;
-		//pHP->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
-		//pHP->SetScale({ 100.f, 100.f });
-		//m_pCurScene->AddObject(pHP, OBJECT_GROUP::UI);
+		HP* pHP = new HP;
+		pHP->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
+		pHP->SetScale({ 100.f, 100.f });
+		m_pCurScene->AddObject(pHP, OBJECT_GROUP::UI);
 	}
+
+	m_velocity = { 0, 0 };
 }
 
 Player::~Player()
@@ -127,25 +129,25 @@ void Player::Update()
 	{
 		if (KEY_UP(KEY_TYPE::W))
 		{
-			//m_strDir = L"Back";
+			m_strDir = L"Back";
 			m_velocity.y = 0;
 			GetAnimator()->PlayAnim(L"Player_Idle_Back", true);
 		}
 		if (KEY_UP(KEY_TYPE::S))
 		{
-			//m_strDir = L"Front";
+			m_strDir = L"Front";
 			m_velocity.y = 0;
 			GetAnimator()->PlayAnim(L"Player_Idle_Front", true);
 		}
 		if (KEY_UP(KEY_TYPE::A))
 		{
-			//m_strDir = L"Left";
+			m_strDir = L"Left";
 			m_velocity.x = 0;
 			GetAnimator()->PlayAnim(L"Player_Idle_Left", true);
 		}
 		if (KEY_UP(KEY_TYPE::D))
 		{
-			//m_strDir = L"Right";
+			m_strDir = L"Right";
 			m_velocity.x = 0;
 			GetAnimator()->PlayAnim(L"Player_Idle_Right", true);
 		}
@@ -154,45 +156,35 @@ void Player::Update()
 	{
 		if (KEY_PRESS(KEY_TYPE::W))
 		{
-			m_strDir = { L"Back", Vec2(2, 1) };
-			//vPos.Normalize();
-			GetAnimator()->PlayAnim(L"Player_Walk_Back", true);
-			m_velocity.y = -m_fMoveSpeed;
-			m_velocity.Normalize();
-			//vPos.y -= m_fMoveSpeed * fDT;
+			m_strDir = L"Back";
+			m_velocity.y = -1;
+			GetAnimator()->PlayAnim(L"Player_Walk_Back", true);;
 		}
 		if (KEY_PRESS(KEY_TYPE::S))
 		{
-			m_strDir = { L"Front", Vec2(1, 2) };
-			//vPos.Normalize();
+			m_strDir = L"Front";
+			m_velocity.y = 1;
 			GetAnimator()->PlayAnim(L"Player_Walk_Front", true);
-			m_velocity.y = m_fMoveSpeed;
-			m_velocity.Normalize();
-			//vPos.y += m_fMoveSpeed * fDT;
 		}
 		if (KEY_PRESS(KEY_TYPE::A))
 		{
-			m_strDir = { L"Left", Vec2(1, 2) };
-			//vPos.Normalize();
+			m_strDir = L"Left";
+			m_velocity.x = -1;
 			GetAnimator()->PlayAnim(L"Player_Walk_Left", true);
-			m_velocity.x = -m_fMoveSpeed;
-			m_velocity.Normalize();
-			//vPos.x -= m_fMoveSpeed * fDT;
 		}
 		if (KEY_PRESS(KEY_TYPE::D))
 		{
-			m_strDir = { L"Right", Vec2(2, 1) };
-			//vPos.Normalize();
+			m_strDir = L"Right";
+			m_velocity.x = 1;
 			GetAnimator()->PlayAnim(L"Player_Walk_Right", true);
-			m_velocity.x = m_fMoveSpeed;
-			m_velocity.Normalize();
-			//vPos.x += m_fMoveSpeed * fDT;
 		}
 
-		//m_velocity.Normalize();
-
-		vPos = m_velocity * fDT;
-		;	}
+		if (m_velocity.x != 0 || m_velocity.y != 0)
+		{
+			m_velocity.Normalize();
+			vPos = vPos + Vec2{m_velocity.x * m_fMoveSpeed * fDT, m_velocity.y * m_fMoveSpeed * fDT};
+		}
+	}
 
 	// 공격
 	if (KEY_DOWN(KEY_TYPE::SPACE))
@@ -270,7 +262,7 @@ void Player::EnterCollision(Collider* _pOther)
 		// 데미지 받기
 		SetDamage(pOtherObj->GetDamage());
 		// Hit 애니메이션 실행
-		GetAnimator()->PlayAnim(L"Player_Hit_" + m_strDir.first, false);
+		GetAnimator()->PlayAnim(L"Player_Hit_" + m_strDir, false);
 	}
 }
 
@@ -280,5 +272,5 @@ void Player::StayCollision(Collider* _pOther)
 
 void Player::ExitCollision(Collider* _pOther)
 {
-	GetAnimator()->PlayAnim(L"Player_Idle_" + m_strDir.first, false);
+	GetAnimator()->PlayAnim(L"Player_Idle_" + m_strDir, false);
 }
