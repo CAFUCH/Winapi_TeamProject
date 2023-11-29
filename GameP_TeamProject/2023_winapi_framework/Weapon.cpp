@@ -11,6 +11,14 @@ Weapon::~Weapon()
 {
 }
 
+void Weapon::Update()
+{
+}
+
 void Weapon::Render(HDC _dc)
+{
+}
+
+void Weapon::Attack(Vec2 dir)
 {
 }

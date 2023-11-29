@@ -16,17 +16,17 @@ Knife::Knife()
 	// 이미지 불러오기
 	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Guns", L"Texture\\gun.bmp");
 
-	// 콜라이더 생성
-	CreateCollider();
-	// 콜라이더 사이즈 초기화
-	GetCollider()->SetScale(Vec2(50.f, 50.f)); 
+	//// 콜라이더 생성
+	//CreateCollider();
+	//// 콜라이더 사이즈 초기화
+	//GetCollider()->SetScale(Vec2(50.f, 50.f)); 
 
-	// 애니메이터 생성
-	CreateAnimator();
+	//// 애니메이터 생성
+	//CreateAnimator();
 
-	/*Knife Animation*/ {
+	///*Knife Animation*/ {
 
-	}
+	//}
 }
 
 Knife::~Knife()
@@ -39,7 +39,7 @@ void Knife::Attack(Vec2 dir)
 	// m_texture 이동 (공격 거리만큼 공격 속도로)
 
 
-	Vec2 vPos = GetPos();
-	// 기본적으로 조준한 방향으로 공속을 통해 이동한다... (총알이라는 가정하에 작성함)
-	vPos.x += dir.x * m_fAttackSpeed * fDT;
+	//Vec2 vPos = GetPos();
+	//// 기본적으로 조준한 방향으로 공속을 통해 이동한다... (총알이라는 가정하에 작성함)
+	//vPos.x += dir.x * m_fAttackSpeed * fDT;
 }

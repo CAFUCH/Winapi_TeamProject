@@ -107,10 +107,10 @@ Player::Player()
 
 	// HP »ý¼º
 	{
-		Object* pHP = new HP;
-		pHP->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
-		pHP->SetScale({ 100.f, 100.f });
-		m_pCurScene->AddObject(pHP, OBJECT_GROUP::UI);
+		//Object* pHP = new HP;
+		//pHP->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
+		//pHP->SetScale({ 100.f, 100.f });
+		//m_pCurScene->AddObject(pHP, OBJECT_GROUP::UI);
 	}
 }
 
