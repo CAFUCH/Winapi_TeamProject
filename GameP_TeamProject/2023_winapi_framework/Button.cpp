@@ -3,6 +3,9 @@
 #include "KeyMgr.h"
 #include "ResMgr.h"
 #include "Texture.h"
+
+typedef void(*myFuncDef)(void);
+
 Button::Button(Vec2 _pos, Vec2 _scale)
 	:on_tex(nullptr)
 	, off_tex(nullptr)
@@ -11,9 +14,6 @@ Button::Button(Vec2 _pos, Vec2 _scale)
 {
 	SetPos(_pos);
 	SetScale(_scale);
-
-	on_tex = ResMgr::GetInst()->TexLoad(L"gameStart_btn_on", L"Texture\\GameStart_btn_on.bmp");
-	off_tex = ResMgr::GetInst()->TexLoad(L"gameStart_btn_off", L"Texture\\GameStart_btn_off.bmp");
 
 	left = pos.x - (scale.x / 2);
 	right = pos.x + (scale.x / 2);
@@ -72,7 +72,7 @@ void Button::Render(HDC _dc)
 
 void Button::OnClickEnter() //클릭했을때
 {
-	//onReister();
+	((myFuncDef)onReister)(); //void 포인터는 이렇게 실행
 }
 void Button::OnClickStay() //꾹 눌렀을때
 {

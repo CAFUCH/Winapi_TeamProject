@@ -4,8 +4,8 @@ class Enemy;
 class State
 {
 public:
-	State();
-	virtual ~State();
+	State() = default;
+	virtual ~State() = default;
 
 public:
 	virtual void Update() abstract;

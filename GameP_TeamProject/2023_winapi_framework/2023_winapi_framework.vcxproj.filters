@@ -65,11 +65,14 @@
     <Filter Include="Engine\09. UI">
       <UniqueIdentifier>{64e14b59-80f9-4b4d-b42b-f335b18d9a3e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\04. Object\MainObject\Weapons">
-      <UniqueIdentifier>{5e95f08e-3e01-4b4d-a655-6bae22855769}</UniqueIdentifier>
+    <Filter Include="Engine\10.FSM">
+      <UniqueIdentifier>{95ccedd9-e732-4dbf-8938-f2ca0e37ce80}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\03. Manager\PoolMgr">
-      <UniqueIdentifier>{0e6bf1c2-1e5b-44da-898a-ff4ece0a727b}</UniqueIdentifier>
+    <Filter Include="Engine\10.FSM\State">
+      <UniqueIdentifier>{9de93b93-9d3d-4457-b967-5fb2726d6a9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object\MainObject\Enemy">
+      <UniqueIdentifier>{f80148ae-203e-4b79-abcb-c0993ed4ff93}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -157,18 +160,31 @@
     <ClInclude Include="UI.h">
       <Filter>Engine\09. UI</Filter>
     </ClInclude>
-    <ClInclude Include="Knife.h">
-      <Filter>Engine\04. Object\MainObject\Weapons</Filter>
+    <ClInclude Include="Gun.h" />
+    <ClInclude Include="Knife.h" />
+    <ClInclude Include="PoolMgr.h" />
+    <ClInclude Include="Test_Scene.h" />
+    <ClInclude Include="AI.h">
+      <Filter>Engine\10.FSM</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="Gun.h">
-      <Filter>Engine\04. Object\MainObject\Weapons</Filter>
+    <ClInclude Include="Button.h">
+      <Filter>Engine\09. UI</Filter>
     </ClInclude>
-    <ClInclude Include="Game_Scene.h">
-      <Filter>Engine\05. Scene\MainScene</Filter>
+    <ClInclude Include="Chase_State.h">
+      <Filter>Engine\10.FSM\State</Filter>
     </ClInclude>
-    <ClInclude Include="PoolMgr.h">
-      <Filter>Engine\03. Manager\PoolMgr</Filter>
+    <ClInclude Include="Game_Scene.h" />
+    <ClInclude Include="Idle_State.h">
+      <Filter>Engine\10.FSM\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Engine\10.FSM\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Engine\04. Object\MainObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Melee_Enemy.h">
+      <Filter>Engine\04. Object\MainObject\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -251,18 +267,31 @@
     <ClCompile Include="UI.cpp">
       <Filter>Engine\09. UI</Filter>
     </ClCompile>
-    <ClCompile Include="Knife.cpp">
-      <Filter>Engine\04. Object\MainObject\Weapons</Filter>
+    <ClCompile Include="Gun.cpp" />
+    <ClCompile Include="Knife.cpp" />
+    <ClCompile Include="PoolMgr.cpp" />
+    <ClCompile Include="Test_Scene.cpp" />
+    <ClCompile Include="AI.cpp">
+      <Filter>Engine\10.FSM</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="Gun.cpp">
-      <Filter>Engine\04. Object\MainObject\Weapons</Filter>
+    <ClCompile Include="Button.cpp">
+      <Filter>Engine\09. UI</Filter>
     </ClCompile>
-    <ClCompile Include="Game_Scene.cpp">
-      <Filter>Engine\05. Scene\MainScene</Filter>
+    <ClCompile Include="Chase_State.cpp">
+      <Filter>Engine\10.FSM\State</Filter>
     </ClCompile>
-    <ClCompile Include="PoolMgr.cpp">
-      <Filter>Engine\03. Manager\PoolMgr</Filter>
+    <ClCompile Include="Game_Scene.cpp" />
+    <ClCompile Include="Idle_State.cpp">
+      <Filter>Engine\10.FSM\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Engine\10.FSM\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Engine\04. Object\MainObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Melee_Enemy.cpp">
+      <Filter>Engine\04. Object\MainObject\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

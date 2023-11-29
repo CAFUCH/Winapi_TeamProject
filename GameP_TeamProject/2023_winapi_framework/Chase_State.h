@@ -1,11 +1,11 @@
 #pragma once
 #include "State.h"
-class Idle_State :
-	public State
+class Chase_State :
+    public State
 {
 public:
-	Idle_State(AI* _ai);
-	~Idle_State();
+	Chase_State(AI* _ai, float _speed);
+	~Chase_State();
 
 public:
 	virtual void Update() override;
@@ -14,7 +14,8 @@ public:
 
 private:
 	AI* ai;
-	float waitTime;
-	float m_fMaxDis;
-	//sf::Clock m_clock;
+	Enemy* owner;
+	float speed;
+	bool filpX;
 };
+

@@ -10,6 +10,9 @@ public:
 public:
 	void Update() override;
 	void Render(HDC _dc) override;
+public:
+	void SetOnTexture(Texture* _tex) { on_tex = _tex; }
+	void SetOffTexture(Texture* _tex) { off_tex = _tex; }
 protected:
 	void OnClickEnter();
 	void OnClickStay();
