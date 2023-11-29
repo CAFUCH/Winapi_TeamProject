@@ -7,7 +7,7 @@ class Melee_Enemy :
 	public Enemy
 {
 public:
-	Melee_Enemy();
+	Melee_Enemy(int _idx);
 	~Melee_Enemy();
 
 public:

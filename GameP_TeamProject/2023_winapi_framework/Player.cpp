@@ -22,11 +22,11 @@ bool cmp1(std::pair<Vec2, double>& left, std::pair<Vec2, double>& right)
 	return left.second < right.second;
 }
 
-Player::Player() 
+Player::Player()
 	: m_pTex(nullptr)
 {
 	m_pTex = ResMgr::GetInst()->TexLoad(L"PlayerT", L"Texture\\lastPlayer.bmp");
-	
+
 	// 현재 씬 불러오기
 	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
 
@@ -83,7 +83,7 @@ Player::Player()
 				Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
 		}
 
-		m_strDir = {L"Front", Vec2(0, 1)};
+		m_strDir = { L"Front", Vec2(0, 1) };
 		GetAnimator()->PlayAnim(L"Player_Idle_Front", true);
 	}
 
@@ -96,7 +96,7 @@ Player::Player()
 		m_maxWeaponCnt = 3;
 		m_vecWeapon.resize(m_maxWeaponCnt);
 
-		m_fMoveSpeed = 150.f;		
+		m_fMoveSpeed = 150.f;
 	}
 
 	// HP 생성
@@ -148,7 +148,7 @@ void Player::Update()
 	{
 		if (KEY_PRESS(KEY_TYPE::W))
 		{
-			m_strDir = { L"Back", Vec2(2, 1)};
+			m_strDir = { L"Back", Vec2(2, 1) };
 			//vPos.Normalize();
 			GetAnimator()->PlayAnim(L"Player_Walk_Back", true);
 			m_velocity.y = -m_fMoveSpeed;
@@ -157,7 +157,7 @@ void Player::Update()
 		}
 		if (KEY_PRESS(KEY_TYPE::S))
 		{
-			m_strDir = { L"Front", Vec2(1, 2)};
+			m_strDir = { L"Front", Vec2(1, 2) };
 			//vPos.Normalize();
 			GetAnimator()->PlayAnim(L"Player_Walk_Front", true);
 			m_velocity.y = m_fMoveSpeed;
@@ -166,7 +166,7 @@ void Player::Update()
 		}
 		if (KEY_PRESS(KEY_TYPE::A))
 		{
-			m_strDir = { L"Left", Vec2(1, 2)};
+			m_strDir = { L"Left", Vec2(1, 2) };
 			//vPos.Normalize();
 			GetAnimator()->PlayAnim(L"Player_Walk_Left", true);
 			m_velocity.x = -m_fMoveSpeed;
@@ -175,7 +175,7 @@ void Player::Update()
 		}
 		if (KEY_PRESS(KEY_TYPE::D))
 		{
-			m_strDir = { L"Right", Vec2(2, 1)};
+			m_strDir = { L"Right", Vec2(2, 1) };
 			//vPos.Normalize();
 			GetAnimator()->PlayAnim(L"Player_Walk_Right", true);
 			m_velocity.x = m_fMoveSpeed;
@@ -186,7 +186,7 @@ void Player::Update()
 		//m_velocity.Normalize();
 
 		vPos = m_velocity * fDT;
-;	}
+		;	}
 
 	// 공격
 	if (KEY_DOWN(KEY_TYPE::SPACE))
@@ -205,7 +205,7 @@ void Player::Update()
 		//m_curWeapon->Attack(m_vAttackDir);// 이거 어카지
 
 		// 현재 위치 초기화
-		m_vAttackDir = {0, 0};
+		m_vAttackDir = { 0, 0 };
 	}
 
 	// 무기 교체

@@ -17,22 +17,35 @@ void Test_Scene::Init()
 {
 	//SetBkMode(Core::GetInst()->GetMainDC(), 0);
 
-	Button* btn = new Button(Vec2(200, 200), Vec2(200, 100));
-	btn->onReister = HandleSceneChangedGameScene;
+	Button* playBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2),
+		Vec2(200, 100));
+	playBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"PlayBtn_on", L"Texture\\PlayBtn_on.bmp"));
+	playBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"PlayBtn_off", L"Texture\\PlayBtn_off.bmp"));
+	playBtn->onReister = HandleSceneChangedGameScene;
+	AddObject(playBtn, OBJECT_GROUP::UI);
 
-	btn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"PlayBtn_on", L"Texture\\PlayBtn_on.bmp"));
-	btn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"PlayBtn_off", L"Texture\\PlayBtn_off.bmp"));
+	Button* expBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2),
+		Vec2(200, 100));
+	expBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"PlayBtn_on", L"Texture\\PlayBtn_on.bmp"));
+	expBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"PlayBtn_off", L"Texture\\PlayBtn_off.bmp"));
+	expBtn->onReister = HandleSceneChangedGameScene;
+	AddObject(expBtn, OBJECT_GROUP::UI);
 
-	AddObject(btn, OBJECT_GROUP::UI);
+	Button* exit = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2),
+		Vec2(200, 100));
+	exit->SetOnTexture(ResMgr::GetInst()->TexLoad(L"PlayBtn_on", L"Texture\\PlayBtn_on.bmp"));
+	exit->SetOffTexture(ResMgr::GetInst()->TexLoad(L"PlayBtn_off", L"Texture\\PlayBtn_off.bmp"));
+	exit->onReister = HandleSceneChangedGameScene;
+	AddObject(exit, OBJECT_GROUP::UI);
 
 
-	Enemy* meleeEnemy = new Melee_Enemy;
+	/*Enemy* meleeEnemy = new Melee_Enemy;
 	AI* ai = new AI(meleeEnemy);
-	//ai->AddState(ENEMY_STATE::IDLE, std::make_shared<Idle_State>(ai));
-	//ai->AddState(ENEMY_STATE::IDLE, new Idle_State(ai));
-	//ai->AddState(ENEMY_STATE::CHASE, new Chase_State(ai, 3));
 
-	//ai->InitState(ENEMY_STATE::CHASE);
+	ai->AddState(ENEMY_STATE::IDLE, new Idle_State(ai));
+	ai->AddState(ENEMY_STATE::CHASE, new Chase_State(ai, 3));
+
+	ai->InitState(ENEMY_STATE::CHASE);*/
 }
 
 void Test_Scene::Update()
