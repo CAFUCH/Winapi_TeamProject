@@ -24,3 +24,8 @@ void Melee_Enemy::StayCollision(Collider* _pOther)
 void Melee_Enemy::ExitCollision(Collider* _pOther)
 {
 }
+
+void Melee_Enemy::Update()
+{
+
+}

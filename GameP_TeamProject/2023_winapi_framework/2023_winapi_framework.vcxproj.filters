@@ -162,6 +162,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Melee_Enemy.h" />
     <ClInclude Include="AI.h" />
+    <ClInclude Include="Chase_State.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2023_winapi_framework.rc">
@@ -254,5 +255,6 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Melee_Enemy.cpp" />
     <ClCompile Include="AI.cpp" />
+    <ClCompile Include="Chase_State.cpp" />
   </ItemGroup>
 </Project>

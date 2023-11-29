@@ -17,19 +17,12 @@ AI::~AI()
 
 void AI::InitState(ENEMY_STATE _enemyType)
 {
-	State* state = FindState(_enemyType);
-	curState = state;
+	curState = FindState(_enemyType);
 }
 
 void AI::AddState(ENEMY_STATE _enemyType, State* _state) //상태 추가
 {
-	state_maps.insert(_enemyType, _enemyType);
-}
-
-State* AI::FindState(ENEMY_STATE _stateType) //스테이트를 가져오고 싶다면
-{
-	if (state_maps.find(_stateType) != state_maps.end())
-		return state_maps[_stateType];
+	state_maps.insert({ _enemyType, _state });
 }
 
 void AI::UpdateState()
@@ -42,9 +35,14 @@ void AI::ChangeState(ENEMY_STATE _stateType)
 	prevState = curState; //이전스테이트를 담아주고
 	prevState->ExitState(); //나가줌
 
-	State* state = FindState(_stateType);
-	curState = state; //현재스테이트를 담아주고
+	curState = FindState(_stateType); //현재스테이트를 담아주고
 	curState->EnterState(); //들어감
 
 
+}
+
+State* AI::FindState(ENEMY_STATE _stateType)
+{
+	//if (state_maps.find(_stateType) != state_maps.end())
+	return state_maps[_stateType];
 }
