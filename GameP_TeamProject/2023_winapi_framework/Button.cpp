@@ -3,6 +3,9 @@
 #include "KeyMgr.h"
 #include "ResMgr.h"
 #include "Texture.h"
+
+typedef void(*myFuncDef)(void);
+
 Button::Button(Vec2 _pos, Vec2 _scale)
 	:on_tex(nullptr)
 	, off_tex(nullptr)
@@ -69,7 +72,7 @@ void Button::Render(HDC _dc)
 
 void Button::OnClickEnter() //클릭했을때
 {
-	//onReister();
+	((myFuncDef)onReister)(); //void 포인터는 이렇게 실행
 }
 void Button::OnClickStay() //꾹 눌렀을때
 {

@@ -37,8 +37,6 @@ void AI::ChangeState(ENEMY_STATE _stateType)
 
 	curState = FindState(_stateType); //현재스테이트를 담아주고
 	curState->EnterState(); //들어감
-
-
 }
 
 State* AI::FindState(ENEMY_STATE _stateType)
