@@ -186,6 +186,14 @@
     <ClInclude Include="Melee_Enemy.h">
       <Filter>Engine\04. Object\MainObject\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="AI.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Idle_State.h" />
+    <ClInclude Include="Melee_Enemy.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="Test_Scene.h" />
+    <ClInclude Include="ElementMgr.h" />
+    <ClInclude Include="HP.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2023_winapi_framework.rc">
@@ -293,5 +301,13 @@
     <ClCompile Include="Melee_Enemy.cpp">
       <Filter>Engine\04. Object\MainObject\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="AI.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Idle_State.cpp" />
+    <ClCompile Include="Melee_Enemy.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="Test_Scene.cpp" />
+    <ClCompile Include="ElementMgr.cpp" />
+    <ClCompile Include="HP.cpp" />
   </ItemGroup>
 </Project>

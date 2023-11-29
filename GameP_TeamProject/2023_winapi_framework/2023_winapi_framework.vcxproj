@@ -178,12 +178,14 @@
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="define.h" />
+    <ClInclude Include="ElementMgr.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="enums.h" />
     <ClInclude Include="EventMgr.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game_Scene.h" />
     <ClInclude Include="Gun.h" />
+    <ClInclude Include="HP.h" />
     <ClInclude Include="Idle_State.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="Knife.h" />
@@ -218,10 +220,12 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="ElementMgr.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventMgr.cpp" />
     <ClCompile Include="Game_Scene.cpp" />
     <ClCompile Include="Gun.cpp" />
+    <ClCompile Include="HP.cpp" />
     <ClCompile Include="Idle_State.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="Knife.cpp" />

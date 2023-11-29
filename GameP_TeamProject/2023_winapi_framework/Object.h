@@ -31,6 +31,9 @@ public:
 	const Vec2& GetScale() const { return m_vScale; }
 	void SetScale(Vec2 _vScale) { m_vScale = _vScale; }
 
+	const float GetMaxHP() const { return m_fHpMax; }
+	const float GetHP() const { return m_fHp; }
+
 	bool GetIsDead() const { return !m_IsAlive; }
 
 	float GetDamage() const { return m_fDamage; }
