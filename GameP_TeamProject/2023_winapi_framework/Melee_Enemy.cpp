@@ -5,7 +5,9 @@
 #include "Collider.h"
 #include "ResMgr.h"
 Melee_Enemy::Melee_Enemy(int _idx)
+	:m_pTex(nullptr)
 {
+	m_pTex = ResMgr::GetInst()->TexLoad(L"Melee_Enemy_1", L"Texture\\snake1.bmp");
 	CreateCollider();
 	// 콜라이더 사이즈 초기화
 	GetCollider()->SetScale(Vec2(50.f, 50.f)); // 상수 넣어주기
@@ -69,7 +71,3 @@ void Melee_Enemy::Update()
 	GetAnimator()->Update();
 }
 
-void Melee_Enemy::Render(HDC _dc)
-{
-
-}
