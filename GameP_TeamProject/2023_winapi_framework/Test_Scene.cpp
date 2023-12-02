@@ -40,7 +40,7 @@ void Test_Scene::Init()
 	exit->onReister = HandleSceneChangedGameScene;
 	AddObject(exit, OBJECT_GROUP::UI);*/
 
-	Melee_Enemy* meleeEnemy = new Melee_Enemy(1);
+	Melee_Enemy* meleeEnemy = new Melee_Enemy(7);
 	//meleeEnemy->SetTexure(ResMgr::GetInst()->TexLoad(L"Melee_Enemy_1", L"Texture\\snake1.bmp"));
 
 	meleeEnemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2));

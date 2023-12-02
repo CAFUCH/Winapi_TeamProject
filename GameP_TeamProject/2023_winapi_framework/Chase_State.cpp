@@ -20,10 +20,16 @@ Chase_State::~Chase_State()
 
 void Chase_State::Update()
 {
-	Vec2 vec = owner->GetPos();
-	vec.x += fDT * speed;
-	vec.y += fDT * speed;
-	owner->SetPos(vec);
+
+
+	Vec2 thisPos = owner->GetPos();
+	Vec2 pPos = owner->GetPlayer()->GetPos();
+
+	Vec2 dir = pPos - thisPos;
+	thisPos.x += fDT * speed * dir.x;
+	thisPos.y += fDT * speed * dir.y;
+
+	owner->SetPos(thisPos);
 
 	if (KEY_UP(KEY_TYPE::SPACE)) {
 		ai->ChangeState(ENEMY_STATE::IDLE);
