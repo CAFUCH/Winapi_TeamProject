@@ -46,12 +46,23 @@ void Object::CreateAnimator()
 	m_pAnimator->m_pOwner = this;
 }
 
-void Object::CreateWeapon(Weapon* _weapon)
+// 정확히는 weapon이라는 컴포넌트를 생성하는 애..
+void Object::CreateWeapon()
 {
-	//m_pWeapon = new Weapon;
-	_weapon->m_pOwner = this;
-	m_vecWeapon.push_back(_weapon);
+	m_vecWeapon.push_back(new Weapon(this));
+	// 똑같은데 걍 오너를 weapon쪽에서 설정하도록 해주는?
 }
+//void Object::CreateWeapon(Weapon* _weapon)
+//{
+//	_weapon->m_pOwner = this;
+//	m_vecWeapon.push_back(_weapon);
+//}
+//Weapon* Object::CreateWeapon(Weapon* _weapon)
+//{
+//	_weapon->m_pOwner = this;
+//	return _weapon;
+//	//m_vecWeapon.push_back(_weapon);
+//}
 
 void Object::Update()
 {

@@ -1,6 +1,7 @@
 #pragma once
 //#include "Object.h"
 class Object;
+class Weapon;
 class Scene
 {
 public:
@@ -17,13 +18,15 @@ public:
 	{
 		return m_vecObj[(UINT)_etype];
 	}
+	Weapon* GetWeapon(wstring _name) { return m_mWeapon[_name]; }
 public:
 	void AddObject(Object* _pObj, OBJECT_GROUP _eType)
 	{
 		m_vecObj[(UINT)_eType].push_back(_pObj);
 	}
-private:
+protected:
 //	Object*  m_obj;
 	vector<Object*> m_vecObj[(UINT)OBJECT_GROUP::END];
+	map<wstring, Weapon*> m_mWeapon;
 };
 

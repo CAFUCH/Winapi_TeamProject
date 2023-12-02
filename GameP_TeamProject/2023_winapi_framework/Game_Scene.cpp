@@ -3,6 +3,7 @@
 #include "Core.h"
 
 #include "Player.h"
+
 #include "Knife.h"
 #include "Gun.h"
 
@@ -22,13 +23,18 @@ void Game_Scene::Init()
 		AddObject(pPlayer, OBJECT_GROUP::PLAYER);
 	}
 
-	//// 무기 생성 및 초기화
-	//{
-	//	Object* pGun = new Gun;
-	//	pGun->SetPos((Vec2({ pPlayer->GetPos() })));
-	//	pGun->SetScale(Vec2(50.f, 50.f));
-	//	AddObject(pGun, OBJECT_GROUP::WEAPON);
-	//}
+	// 무기 생성 및 초기화
+	{
+		Weapon* pGun = new Gun;
+		pGun->SetPos((Vec2({ 0, 0 })));
+		pGun->SetScale(Vec2(50.f, 50.f));
+		m_mWeapon.insert({ L"Gun", pGun});
+
+		Weapon* pKnife = new Knife;
+		pKnife->SetPos((Vec2({ 0, 0 })));
+		pKnife->SetScale(Vec2(50.f, 50.f));
+		m_mWeapon.insert({ L"Knife", pKnife });
+	}
 
 	// 적 생성 및 초기화 (테스트 버전)
 	{
