@@ -42,6 +42,9 @@ public:
 
 	Collider* GetCollider() const { return m_pCollider; }
 	Animator* GetAnimator() { return m_pAnimator; }
+	Weapon* GetWeapon(int _idx) { return m_vecWeapon[_idx]; }
+	void SetWeapon(int _idx, Weapon* _weapon) { m_vecWeapon[_idx] = _weapon; }
+	//vector<Weapon*> GetWeapon() { return m_vecWeapon; }
 
 
 private:
@@ -51,7 +54,9 @@ private:
 public:
 	void CreateCollider();
 	void CreateAnimator();
-	void CreateWeapon(Weapon* _weapon);
+	void CreateWeapon();
+	//void CreateWeapon(Weapon* _weapon);
+	//Weapon* CreateWeapon(Weapon* _weapon);
 
 protected:
 	// 기본 정보
@@ -61,11 +66,13 @@ protected:
 	Vec2 m_vPos; 
 	// 크기
 	Vec2 m_vScale; 
+
+	// 얘네는 컴포넌트임!!!
 	// 콜라이더
 	Collider* m_pCollider;
 	// 애니메이터
 	Animator* m_pAnimator;
-	// 무기
+	// 무기 (정확히는 obj에게 달릴 weapon의 컴포넌트를 생성하고 담는 곳)
 	vector<Weapon*> m_vecWeapon;
 
 	// 엔티티 정보

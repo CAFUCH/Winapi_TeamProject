@@ -7,19 +7,24 @@
 #include "KeyMgr.h"
 
 #include "Texture.h"
-HP::HP()
+#include "Object.h"
+HP::HP(Object* _owner)
 	: m_pBackTex(nullptr)
 	, m_pFillTex(nullptr)
 {
 	m_pBackTex = ResMgr::GetInst()->TexLoad(L"PlayerBCHP", L"Texture\\UI-bcHP.bmp");
 	m_pFillTex = ResMgr::GetInst()->TexLoad(L"PlayerHP", L"Texture\\UI-fillHP.bmp");
 
-	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
-	m_pOwner = m_pCurScene->GetGroupObject(OBJECT_GROUP::PLAYER);
+	//m_pCurScene = SceneMgr::GetInst()->GetCurScene();
+	//m_pOwner = m_pCurScene->GetGroupObject(OBJECT_GROUP::PLAYER); // ¸ø ¹Þ¾Æ¿È
 
-	//SetMaxHP(m_pOwner.front()->GetMaxHP());
+	m_pOwner = _owner;
+
 	//SetMaxHP(m_pOwner[0]->GetMaxHP());
-	//SetHP(m_fMaxHP);
+	//SetHP(m_fMaxHP);	
+
+	SetMaxHP(20);
+	SetHP(m_fMaxHP);
 }
 
 HP::~HP()
@@ -30,6 +35,13 @@ void HP::Update()
 {
 	//SetPos({ m_pOwner[0]->GetPos().x
 	//	, m_pOwner[0]->GetPos().y - m_pOwner[0]->GetScale().y / 2});
+
+	SetPos({ m_pOwner->GetPos().x, m_pOwner->GetPos().y });
+
+	if (KEY_DOWN(KEY_TYPE::M))
+	{
+		SetHP(m_fHp--);
+	}
 }
 
 void HP::Render(HDC _dc)

@@ -35,10 +35,10 @@ private:
     // 최대 소지 개수, 현재 무기 인덱스
     int m_maxWeaponCnt; int m_curWeaponIdx;
 
-    // 현재 무기
+    // 현재 무기 (이자? 컴포넌트~)
     Weapon* m_curWeapon;
-    // 소지 무기
-    vector<Weapon*> m_vecWeapon;
+    //// 소지 무기 컴포넌트
+    //vector<Weapon*> m_vecWeapon;
 
     // 현재 씬 
     std::shared_ptr<Scene> m_pCurScene;

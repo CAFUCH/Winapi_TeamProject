@@ -2,11 +2,13 @@
 #include "UI.h"
 #include "Scene.h"
 class Texture;
+class Object;
 class HP :
 	public UI
 {
 public:
-	HP();
+	HP() = default;
+	HP(Object* _owner);
 	~HP();
 
 public:
@@ -14,11 +16,11 @@ public:
 	virtual void Render(HDC _dc) override;
 
 public:
-	const Vec2& GetPos() const { return m_vPos; }
-	void SetPos(Vec2 _vPos) { m_vPos = _vPos; }
+	//const Vec2& GetPos() const { return m_vPos; }
+	//void SetPos(Vec2 _vPos) { m_vPos = _vPos; }
 
-	const Vec2& GetScale() const { return m_vScale; }
-	void SetScale(Vec2 _vScale) { m_vScale = _vScale; }
+	//const Vec2& GetScale() const { return m_vScale; }
+	//void SetScale(Vec2 _vScale) { m_vScale = _vScale; }
 
 	void SetMaxHP(float _fMaxHp) { m_fMaxHP = _fMaxHp; }
 	void SetHP(float _fHp) { m_fCurHP = _fHp; }
@@ -29,10 +31,10 @@ private:
 	// Hp 이미지
 	Texture* m_pFillTex;
 
-	// 위치
-	Vec2 m_vPos;
-	// 크기
-	Vec2 m_vScale;
+	//// 위치
+	//Vec2 m_vPos;
+	//// 크기
+	//Vec2 m_vScale;
 
 	//
 	float m_fHPValue;
@@ -42,6 +44,7 @@ private:
 	float m_fMaxHP;
 
 	std::shared_ptr<Scene> m_pCurScene;
-	vector<Object*> m_pOwner;
+	//vector<Object*> m_pOwner;
+	Object* m_pOwner;
 };
 

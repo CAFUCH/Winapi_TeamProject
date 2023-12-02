@@ -30,12 +30,23 @@ Player::Player()
 	// 현재 씬 불러오기
 	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
 
-	// 콜라이더 생성
+	// 초기화
+	{
+		m_fHpMax = 30.f;
+		m_fHp = m_fHp;
+
+		m_curWeaponIdx = 0;
+		m_maxWeaponCnt = 3;
+
+		m_fMoveSpeed = 150.f;
+	}
+
+	// 콜라이더 컴포넌트 생성
 	CreateCollider();
 	// 콜라이더 사이즈 초기화
 	GetCollider()->SetScale(Vec2(50.f, 50.f)); // 상수 넣어주기
 
-	// 애니메이터 생성
+	// 애니메이터 컴포넌트 생성
 	CreateAnimator();
 	/*Player Animation*/ {
 		// Player Idle Animation
@@ -87,27 +98,16 @@ Player::Player()
 		GetAnimator()->PlayAnim(L"Player_Idle_Front", true);
 	}
 
-	// 무기 생성
+	// 무기 컴포넌트 생성
 	{
 		for (int i = 0; i < m_maxWeaponCnt; ++i)
-			CreateWeapon(new Weapon());
-	}
-
-	// 초기화
-	{
-		m_fHpMax = 30.f;
-		m_fHp = m_fHp;
-
-		m_curWeaponIdx = 0;
-		m_maxWeaponCnt = 3;
-		m_vecWeapon.resize(m_maxWeaponCnt);
-
-		m_fMoveSpeed = 150.f;
+			CreateWeapon();
+		//this->m_vecWeapon = GetWeapon();
 	}
 
 	// HP 생성
 	{
-		HP* pHP = new HP;
+		HP* pHP = new HP(this);
 		pHP->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
 		pHP->SetScale({ 100.f, 100.f });
 		m_pCurScene->AddObject(pHP, OBJECT_GROUP::UI);
@@ -185,18 +185,20 @@ void Player::Update()
 			vPos = vPos + Vec2{m_velocity.x * m_fMoveSpeed * fDT, m_velocity.y * m_fMoveSpeed * fDT};
 		}
 	}
-
+	if (KEY_DOWN(KEY_TYPE::N))
+		SetWeapon(0, m_pCurScene->GetWeapon(L"Gun"));
 	// 공격
-	if (KEY_DOWN(KEY_TYPE::SPACE))
+	if (KEY_DOWN(KEY_TYPE::SPACE) && m_curWeapon != NULL)
 	{
-		m_curWeapon = m_vecWeapon[0];
-		//m_curWeapon = m_vecWeapon[m_curWeaponIdx];
+		m_curWeapon = GetWeapon(0);
+		//m_curWeapon = m_vecWeapon[0];
+		//m_curWeapon = m_vecWeapon[m_curWeaponIdx]; // 원래 이거 써야함.. 지금은 무기가 하나ㅃㄲ에 업서..
 
 		// 자동 조준
 		AutoAim();
 
 		// 현재 무기 사용
-		//m_curWeapon->Attack(m_vAttackDir);// 이거 어카지
+		m_curWeapon->Attack(m_vAttackDir);// 이거 어카지
 
 		// 현재 위치 초기화
 		m_vAttackDir = { 0, 0 };
@@ -214,11 +216,16 @@ void Player::Update()
 		else if (m_curWeaponIdx >= m_maxWeaponCnt)
 			m_curWeaponIdx = 0;
 
-		m_curWeapon = m_vecWeapon[m_curWeaponIdx];
+		//m_curWeapon = GetWeapon(m_curWeaponIdx);
 	}
 
-	// 현재씬의 에너미를 가져온다.
-	m_vecEnemy = m_pCurScene->GetGroupObject(OBJECT_GROUP::MONSTER);
+	// 무기 선택 (테스트)
+	{
+		if (KEY_DOWN(KEY_TYPE::K))
+		{
+			m_curWeapon = GetWeapon(m_curWeaponIdx);
+		}
+	}
 
 	// 위치 저장하기
 	SetPos(vPos);
@@ -232,6 +239,9 @@ void Player::AutoAim()
 	Vec2 vPos = GetPos();
 	// *에너미의 위치와 거리
 	vector<std::pair<Vec2, double>> testDist;
+
+	// 현재씬의 에너미를 가져온다.
+	m_vecEnemy = m_pCurScene->GetGroupObject(OBJECT_GROUP::MONSTER);
 
 	for (size_t i = 0; i < m_vecEnemy.size(); ++i)
 	{

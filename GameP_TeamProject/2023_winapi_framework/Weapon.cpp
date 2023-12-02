@@ -1,10 +1,11 @@
 #include "pch.h"
 #include "Weapon.h"
 
-Weapon::Weapon()
+Weapon::Weapon(Object* _owner)
 	: m_pTex(nullptr)
 	, m_eElementType(ENTITY_ELEMENT_TYPE::NONE)
 {
+	m_pOwner = _owner;
 }
 
 Weapon::~Weapon()
