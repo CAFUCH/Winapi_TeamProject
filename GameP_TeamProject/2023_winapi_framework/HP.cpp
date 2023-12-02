@@ -37,6 +37,11 @@ void HP::Update()
 	//	, m_pOwner[0]->GetPos().y - m_pOwner[0]->GetScale().y / 2});
 
 	SetPos({ m_pOwner->GetPos().x, m_pOwner->GetPos().y });
+
+	if (KEY_DOWN(KEY_TYPE::M))
+	{
+		SetHP(m_fHp--);
+	}
 }
 
 void HP::Render(HDC _dc)
