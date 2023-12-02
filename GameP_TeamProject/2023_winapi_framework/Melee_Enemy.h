@@ -18,11 +18,13 @@ public:
 
 public:
 	void Update() override;
+
 private:
 	// sprite
 	//Texture* cur_tex;
 	// sprite
 	Texture* m_pTex;
 	Vec2 _playerPos;
+	
 };
 

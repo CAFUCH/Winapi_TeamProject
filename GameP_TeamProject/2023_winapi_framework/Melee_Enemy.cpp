@@ -4,10 +4,17 @@
 #include "Animator.h"
 #include "Collider.h"
 #include "ResMgr.h"
+
 Melee_Enemy::Melee_Enemy(int _idx)
 	:m_pTex(nullptr)
 {
-	m_pTex = ResMgr::GetInst()->TexLoad(L"Melee_Enemy_1", L"Texture\\snake1.bmp");
+	string pathname = "Texture\\snake.bmp";
+	pathname.insert(13, to_string(_idx));
+	wstring w_pathname;
+	w_pathname.assign(pathname.begin(), pathname.end());
+
+	m_pTex = ResMgr::GetInst()->TexLoad(L"Melee_Enemy" + _idx, w_pathname);
+
 	CreateCollider();
 	// 콜라이더 사이즈 초기화
 	GetCollider()->SetScale(Vec2(50.f, 50.f)); // 상수 넣어주기
@@ -69,5 +76,7 @@ void Melee_Enemy::ExitCollision(Collider* _pOther)
 void Melee_Enemy::Update()
 {
 	GetAnimator()->Update();
+
+	_ai->UpdateState();
 }
 

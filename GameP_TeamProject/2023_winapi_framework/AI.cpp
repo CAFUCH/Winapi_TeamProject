@@ -2,12 +2,13 @@
 #include "AI.h"
 #include "State.h"
 #include"Idle_State.h"
+#include"Enemy.h"
 AI::AI(Enemy* _onwer)
 	:owner(_onwer)
 	, curState(nullptr)
 	, prevState(nullptr)
 {
-
+	owner->SetAI(this);
 }
 
 AI::~AI()
@@ -41,6 +42,8 @@ void AI::ChangeState(ENEMY_STATE _stateType)
 
 State* AI::FindState(ENEMY_STATE _stateType)
 {
-	//if (state_maps.find(_stateType) != state_maps.end())
-	return state_maps[_stateType];
+	map<ENEMY_STATE, State*>::iterator iter = state_maps.find(_stateType);
+	if (iter == state_maps.end())
+		return nullptr;
+	return iter->second;
 }

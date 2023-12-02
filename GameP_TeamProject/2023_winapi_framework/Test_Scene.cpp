@@ -49,8 +49,10 @@ void Test_Scene::Init()
 
 	AI* ai = new AI(meleeEnemy);
 
+
+
 	ai->AddState(ENEMY_STATE::IDLE, new Idle_State(ai));
-	ai->AddState(ENEMY_STATE::CHASE, new Chase_State(ai, 300));
+	ai->AddState(ENEMY_STATE::CHASE, new Chase_State(ai, 3));
 
 	ai->InitState(ENEMY_STATE::CHASE);
 
