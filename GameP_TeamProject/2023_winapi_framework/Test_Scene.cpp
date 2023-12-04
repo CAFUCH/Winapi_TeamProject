@@ -42,12 +42,12 @@ void Test_Scene::Init()
 
 	//meleeEnemy->SetTexure(ResMgr::GetInst()->TexLoad(L"Melee_Enemy_1", L"Texture\\snake1.bmp"));
 
-	//Melee_Enemy* meleeEnemy = new Melee_Enemy(7);
-	//meleeEnemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2));
-	//meleeEnemy->SetScale(Vec2(64, 64));
-	//AddObject(meleeEnemy, OBJECT_GROUP::MONSTER);
+	/*Melee_Enemy* meleeEnemy = new Melee_Enemy(7);
+	meleeEnemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2));
+	meleeEnemy->SetScale(Vec2(64, 64));
+	AddObject(meleeEnemy, OBJECT_GROUP::MONSTER);
 
-	//AI* ai = new AI(meleeEnemy);
+	AI* ai = new AI(meleeEnemy);*/
 
 
 

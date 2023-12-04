@@ -45,11 +45,7 @@ void Chase_State::Update()
 	else if (dir.x < 0)//¿ÞÂÊ							
 		owner->GetAnimator()->PlayAnim(owner->ANIM_LEFT_HASH, true);
 
-	owner->SetPos(thisPos);
-
-	if (KEY_UP(KEY_TYPE::SPACE)) {
-		ai->ChangeState(ENEMY_STATE::IDLE);
-	}
+	 owner->SetPos(thisPos);
 }
 
 void Chase_State::EnterState()

@@ -13,6 +13,10 @@
 #include "ResMgr.h"
 #include "CollisionMgr.h"
 
+#include "Melee_Enemy.h"
+#include "Chase_State.h"
+#include "Idle_State.h"
+
 void Game_Scene::Init()
 {
 	// 플레이어 생성 및 초기화
@@ -28,7 +32,7 @@ void Game_Scene::Init()
 		Weapon* pGun = new Gun;
 		pGun->SetPos((Vec2({ 0, 0 })));
 		pGun->SetScale(Vec2(50.f, 50.f));
-		m_mWeapon.insert({ L"Gun", pGun});
+		m_mWeapon.insert({ L"Gun", pGun });
 
 		Weapon* pKnife = new Knife;
 		pKnife->SetPos((Vec2({ 0, 0 })));
@@ -38,20 +42,16 @@ void Game_Scene::Init()
 
 	// 적 생성 및 초기화 (테스트 버전)
 	{
-		Object* ptEnemy1 = new Player;
-		ptEnemy1->SetPos((Vec2({ 100.f, 100.f })));
-		ptEnemy1->SetScale(Vec2(100.f, 100.f));
-		AddObject(ptEnemy1, OBJECT_GROUP::MONSTER);
+		for (int i = 1; i <= 30; ++i) {
+			Melee_Enemy* enemy = new Melee_Enemy(i % 7 + 1, ENTITY_ELEMENT_TYPE::FIRE);
+			enemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 + rand() % 500, (int)WINDOW_HEIGHT / 2 + rand() % 400));
+			enemy->SetScale(Vec2(64, 64));
+			AddObject(enemy, OBJECT_GROUP::MONSTER);
 
-		Object* ptEnemy2 = new Player;
-		ptEnemy2->SetPos((Vec2({ 300.f, 100.f })));
-		ptEnemy2->SetScale(Vec2(100.f, 100.f));
-		AddObject(ptEnemy2, OBJECT_GROUP::MONSTER);
-
-		Object* ptEnemy3 = new Player;
-		ptEnemy3->SetPos((Vec2({ 500.f, 100.f })));
-		ptEnemy3->SetScale(Vec2(100.f, 100.f));
-		AddObject(ptEnemy3, OBJECT_GROUP::MONSTER);
+			AI* ai = new AI(enemy);
+			ai->AddState(ENEMY_STATE::CHASE, new Chase_State(ai, rand() % 100 + 5));
+			ai->InitState(ENEMY_STATE::CHASE);
+		}
 	}
 
 	// 사운드 세팅
