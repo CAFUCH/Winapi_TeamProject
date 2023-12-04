@@ -17,6 +17,8 @@
 #include "Chase_State.h"
 #include "Idle_State.h"
 
+#include "StageMgr.h"
+
 void Game_Scene::Init()
 {
 	// 플레이어 생성 및 초기화
@@ -42,7 +44,9 @@ void Game_Scene::Init()
 
 	// 적 생성 및 초기화 (테스트 버전)
 	{
-		for (int i = 1; i <= 30; ++i) {
+
+		StageMgr::GetInst()->EnemySpawn(.35f);
+		/*for (int i = 1; i <= 30; ++i) {
 			Melee_Enemy* enemy = new Melee_Enemy(i % 7 + 1, ENTITY_ELEMENT_TYPE::FIRE);
 			enemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 + rand() % 500, (int)WINDOW_HEIGHT / 2 + rand() % 400));
 			enemy->SetScale(Vec2(64, 64));
@@ -51,7 +55,7 @@ void Game_Scene::Init()
 			AI* ai = new AI(enemy);
 			ai->AddState(ENEMY_STATE::CHASE, new Chase_State(ai, rand() % 100 + 5));
 			ai->InitState(ENEMY_STATE::CHASE);
-		}
+		}*/
 	}
 
 	// 사운드 세팅

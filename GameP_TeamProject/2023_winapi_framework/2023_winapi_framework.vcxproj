@@ -201,6 +201,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneMgr.h" />
     <ClInclude Include="SelectGDI.h" />
+    <ClInclude Include="StageMgr.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Test_Scene.h" />
@@ -240,6 +241,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
     <ClCompile Include="SelectGDI.cpp" />
+    <ClCompile Include="StageMgr.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="Test_Scene.cpp" />
     <ClCompile Include="Texture.cpp" />
