@@ -25,7 +25,8 @@ bool cmp1(std::pair<Vec2, double>& left, std::pair<Vec2, double>& right)
 Player::Player()
 	: m_pTex(nullptr)
 {
-	m_pTex = ResMgr::GetInst()->TexLoad(L"PlayerT", L"Texture\\lastPlayer.bmp");
+	// 이미지 불러오기
+	m_pTex = ResMgr::GetInst()->TexLoad(L"PlayerT", L"Texture\\Player.bmp");
 
 	// 현재 씬 불러오기
 	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
@@ -104,7 +105,6 @@ Player::Player()
 
 	// HP 생성
 	{
-		//HP* pHP = new HP(this);
 		HP* pHP = new HP();
 		pHP->SetOwner(this);
 		pHP->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
@@ -187,11 +187,13 @@ void Player::Update()
 		}
 	}
 	if (KEY_DOWN(KEY_TYPE::N))
+	{
 		SetWeapon(0, m_pCurScene->GetWeapon(L"Gun"));
+		m_curWeapon = GetWeapon(0);
+	}
 	// 공격
 	if (KEY_DOWN(KEY_TYPE::SPACE) && m_curWeapon != NULL)
 	{
-		m_curWeapon = GetWeapon(0);
 		//m_curWeapon = m_vecWeapon[0];
 		//m_curWeapon = m_vecWeapon[m_curWeaponIdx]; // 원래 이거 써야함.. 지금은 무기가 하나ㅃㄲ에 업서..
 

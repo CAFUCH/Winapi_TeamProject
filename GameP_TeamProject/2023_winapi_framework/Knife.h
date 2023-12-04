@@ -9,5 +9,9 @@ public:
     ~Knife();
 
 public:
+    void Update() override;
+    void Render(HDC _dc) override;
+
+public:
     virtual void Attack(Vec2 dir) override;
 };
