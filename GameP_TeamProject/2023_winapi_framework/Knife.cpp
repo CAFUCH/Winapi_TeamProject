@@ -14,7 +14,7 @@
 Knife::Knife()
 {
 	// 이미지 불러오기
-	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Guns", L"Texture\\gun.bmp");
+	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Guns", L"Texture\\Bullet.bmp");
 
 	//// 콜라이더 생성
 	//CreateCollider();
@@ -31,6 +31,21 @@ Knife::Knife()
 
 Knife::~Knife()
 {
+}
+
+void Knife::Update()
+{
+	SetPos({ m_pOwner->GetPos().x, m_pOwner->GetPos().y });
+}
+
+void Knife::Render(HDC _dc)
+{
+	BitBlt(_dc
+		, (int)(m_vPos.x - m_vScale.x / 2)
+		, (int)(m_vPos.y - m_vScale.y / 2)
+		, m_pTex->GetWidth(), m_pTex->GetHeight()
+		, m_pTex->GetDC()
+		, 0, 0, SRCCOPY);
 }
 
 void Knife::Attack(Vec2 dir)

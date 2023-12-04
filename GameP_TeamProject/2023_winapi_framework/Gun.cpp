@@ -16,7 +16,7 @@
 Gun::Gun()
 {
 	// 이미지 불러오기
-	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Gun", L"Texture\\gun.bmp");
+	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Gun", L"Texture\\planem.bmp");
 
 	//// 콜라이더 생성
 	//CreateCollider();
@@ -47,6 +47,18 @@ void Gun::Update()
 
 	////if (KEY_UP(KEY_TYPE::O))
 	//	GetAnimator()->PlayAnim(L"Gun_Attack", true);
+
+	SetPos({ m_pOwner->GetPos().x, m_pOwner->GetPos().y });
+}
+
+void Gun::Render(HDC _dc)
+{
+	BitBlt(_dc
+		, (int)(GetPos().x - m_vScale.x / 2)
+		, (int)(GetPos().y - m_vScale.y / 2)
+		, m_pTex->GetWidth(), m_pTex->GetHeight()
+		, m_pTex->GetDC()
+		, 0, 0, SRCCOPY);
 }
 
 void Gun::Attack(Vec2 dir)

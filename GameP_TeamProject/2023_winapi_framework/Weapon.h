@@ -4,8 +4,7 @@ class Texture;
 class Weapon
 {
 public:
-    Weapon() = default;
-    Weapon(Object* _owner);
+    Weapon();
     ~Weapon();
 
 public:

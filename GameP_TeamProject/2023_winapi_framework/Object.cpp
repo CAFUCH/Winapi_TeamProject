@@ -50,8 +50,10 @@ void Object::CreateAnimator()
 // 정확히는 weapon이라는 컴포넌트를 생성하는 애..
 void Object::CreateWeapon()
 {
-	m_vecWeapon.push_back(new Weapon(this));
-	// 똑같은데 걍 오너를 weapon쪽에서 설정하도록 해주는?
+	Weapon* weapon = new Weapon;
+	weapon->m_pOwner = this;
+	// 잘 들어가는 것 같음...
+	m_vecWeapon.push_back(weapon);
 }
 //void Object::CreateWeapon(Weapon* _weapon)
 //{
