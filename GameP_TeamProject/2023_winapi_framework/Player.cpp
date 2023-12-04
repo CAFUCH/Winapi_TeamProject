@@ -32,9 +32,6 @@ Player::Player()
 
 	// 초기화
 	{
-		m_fHpMax = 30.f;
-		m_fHp = m_fHp;
-
 		m_curWeaponIdx = 0;
 		m_maxWeaponCnt = 3;
 
@@ -107,9 +104,13 @@ Player::Player()
 
 	// HP 생성
 	{
-		HP* pHP = new HP(this);
+		//HP* pHP = new HP(this);
+		HP* pHP = new HP();
+		pHP->SetOwner(this);
 		pHP->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
 		pHP->SetScale({ 100.f, 100.f });
+		pHP->SetMaxHP(20.f);
+		pHP->SetHP(pHP->GetMaxHP());
 		m_pCurScene->AddObject(pHP, OBJECT_GROUP::UI);
 	}
 
