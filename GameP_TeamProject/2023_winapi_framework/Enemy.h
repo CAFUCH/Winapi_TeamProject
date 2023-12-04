@@ -12,10 +12,10 @@ public:
 public:
 	//void Render(HDC _hdc) override;
 	public:
-	const Object* GetPlayer() const { _player; }
+	const Player* GetPlayer() const { return _player; }
 	void SetAI(AI* ai) { _ai = ai; }
 protected:
-	Object* _player;
+	Player* _player;
 	AI* _ai;
 };
 

@@ -18,12 +18,12 @@ void Test_Scene::Init()
 {
 	//SetBkMode(Core::GetInst()->GetMainDC(), 0);
 
-	/*Button* playBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2),
+	Button* playBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2),
 		Vec2(200, 100));
 	playBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"PlayBtn_on", L"Texture\\PlayBtn_on.bmp"));
 	playBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"PlayBtn_off", L"Texture\\PlayBtn_off.bmp"));
 	playBtn->onReister = HandleSceneChangedGameScene;
-	AddObject(playBtn, OBJECT_GROUP::UI);*/
+	AddObject(playBtn, OBJECT_GROUP::UI);
 
 	/*
 	Button* expBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2),
@@ -40,21 +40,21 @@ void Test_Scene::Init()
 	exit->onReister = HandleSceneChangedGameScene;
 	AddObject(exit, OBJECT_GROUP::UI);*/
 
-	Melee_Enemy* meleeEnemy = new Melee_Enemy(7);
 	//meleeEnemy->SetTexure(ResMgr::GetInst()->TexLoad(L"Melee_Enemy_1", L"Texture\\snake1.bmp"));
 
-	meleeEnemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2));
-	meleeEnemy->SetScale(Vec2(64, 64));
-	AddObject(meleeEnemy, OBJECT_GROUP::MONSTER);
+	//Melee_Enemy* meleeEnemy = new Melee_Enemy(7);
+	//meleeEnemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2));
+	//meleeEnemy->SetScale(Vec2(64, 64));
+	//AddObject(meleeEnemy, OBJECT_GROUP::MONSTER);
 
-	AI* ai = new AI(meleeEnemy);
+	//AI* ai = new AI(meleeEnemy);
 
 
 
-	ai->AddState(ENEMY_STATE::IDLE, new Idle_State(ai));
-	ai->AddState(ENEMY_STATE::CHASE, new Chase_State(ai, 3));
+	//ai->AddState(ENEMY_STATE::IDLE, new Idle_State(ai));
+	//ai->AddState(ENEMY_STATE::CHASE, new Chase_State(ai, 3));
 
-	ai->InitState(ENEMY_STATE::CHASE);
+	//ai->InitState(ENEMY_STATE::CHASE);
 
 }
 

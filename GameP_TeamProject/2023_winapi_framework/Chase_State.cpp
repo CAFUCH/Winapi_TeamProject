@@ -20,12 +20,11 @@ Chase_State::~Chase_State()
 
 void Chase_State::Update()
 {
-
-
 	Vec2 thisPos = owner->GetPos();
-	Vec2 pPos = owner->GetPlayer()->GetPos();
+	const Player* pObj = owner->GetPlayer();
+	Vec2 pPos = pObj->GetPos(); //ÀÌ°Å ¾È‰Î 
 
-	Vec2 dir = pPos - thisPos;
+	Vec2 dir = (pPos - thisPos).Normalize();
 	thisPos.x += fDT * speed * dir.x;
 	thisPos.y += fDT * speed * dir.y;
 

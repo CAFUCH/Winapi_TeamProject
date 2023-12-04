@@ -8,8 +8,9 @@
 
 const float SliceSize = 32.f;
 
-Melee_Enemy::Melee_Enemy(int _idx)
+Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type)
 	:m_pTex(nullptr)
+	, type(_type)
 {
 
 	SetBkMode(Core::GetInst()->GetMainDC(), 0);
@@ -88,6 +89,6 @@ void Melee_Enemy::Update()
 
 
 
-	
+
 }
 
