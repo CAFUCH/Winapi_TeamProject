@@ -4,11 +4,27 @@
 #include "Animator.h"
 #include "Collider.h"
 #include "ResMgr.h"
-Melee_Enemy::Melee_Enemy(int _idx)
+#include "Core.h"
+
+const float SliceSize = 32.f;
+
+Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type)
+	:m_pTex(nullptr)
+	, type(_type)
 {
+
+	SetBkMode(Core::GetInst()->GetMainDC(), 0);
+
+	string pathname = "Texture\\snake.bmp";
+	pathname.insert(13, to_string(_idx));
+	wstring w_pathname;
+	w_pathname.assign(pathname.begin(), pathname.end());
+
+	m_pTex = ResMgr::GetInst()->TexLoad(L"Melee_Enemy" + _idx, w_pathname);
+
 	CreateCollider();
 	// 콜라이더 사이즈 초기화
-	GetCollider()->SetScale(Vec2(50.f, 50.f)); // 상수 넣어주기
+	GetCollider()->SetScale(Vec2(SliceSize, SliceSize)); // 상수 넣어주기
 
 	// 애니메이터 생성
 	CreateAnimator();
@@ -16,9 +32,10 @@ Melee_Enemy::Melee_Enemy(int _idx)
 	/*Melee_Enemy Animation*/ {
 		// Melee_Enemy Idle Animation
 		{
-			GetAnimator()->CreateAnim(L"Melee_Enemy_Right" + _idx, m_pTex, Vec2(0.f, 0.f), Vec2(64.f, 64.f), Vec2(64.f, 0.f), 8, 0.2f);
-			GetAnimator()->CreateAnim(L"Melee_Enemy_Front" + _idx, m_pTex, Vec2(0.f, 64.f), Vec2(64.f, 64.f), Vec2(64.f, 0.f), 8, 0.2f);
-			GetAnimator()->CreateAnim(L"Melee_Enemy_Hit" + _idx, m_pTex, Vec2(0.f, 128.f), Vec2(64.f, 64.f), Vec2(64.f, 0.f), 8, 0.2f);
+			GetAnimator()->CreateAnim(L"Melee_Enemy_Right" + _idx, m_pTex, Vec2(0.f, 0.f), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
+			GetAnimator()->CreateAnim(L"Melee_Enemy_Front" + _idx, m_pTex, Vec2(0.f, SliceSize * 1), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
+			GetAnimator()->CreateAnim(L"Melee_Enemy_Back" + _idx, m_pTex, Vec2(0.f, SliceSize * 2), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
+			GetAnimator()->CreateAnim(L"Melee_Enemy_Left" + _idx, m_pTex, Vec2(0.f, SliceSize * 3), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
 		}
 		//// Melee_Enemy Walk Animation
 		//{
@@ -67,9 +84,11 @@ void Melee_Enemy::ExitCollision(Collider* _pOther)
 void Melee_Enemy::Update()
 {
 	GetAnimator()->Update();
+
+	_ai->UpdateState();
+
+
+
+
 }
 
-void Melee_Enemy::Render(HDC _dc)
-{
-
-}

@@ -2,7 +2,7 @@
 #include "Enemy.h"
 #include "AI.h"
 #include "Idle_State.h"
-
+#include "KeyMgr.h"
 Idle_State::Idle_State(AI* _ai)
 	: ai(_ai)
 {
@@ -16,7 +16,9 @@ Idle_State::~Idle_State()
 void Idle_State::Update()
 {
 	Enemy* pAI = ai->GetOnwer();
-
+	if (KEY_UP(KEY_TYPE::SPACE)) {
+		ai->ChangeState(ENEMY_STATE::CHASE);
+	}
 	//Enemy* enemy = GetAI()->GetEnemy();
 
   /*  Vector2f curpos = enemy->GetSprite().getPosition();

@@ -1,6 +1,8 @@
 #pragma once
 #include "Object.h"
 #include "Player.h"
+#include "AI.h"
+class Texture;
 class Enemy :
 	public Object
 {
@@ -8,12 +10,12 @@ public:
 	Enemy();
 	~Enemy();
 public:
-	const Player GetPlayer() const { _player; }
-	void SetPlayer(Player _p) { _player = _p; }
-public:
-	void SetTexure(Texture* _tex) { m_pTex = _tex; };
+	//void Render(HDC _hdc) override;
+	public:
+	const Player* GetPlayer() const { return _player; }
+	void SetAI(AI* ai) { _ai = ai; }
 protected:
-	Texture* m_pTex;
-	Player _player;
+	Player* _player;
+	AI* _ai;
 };
 

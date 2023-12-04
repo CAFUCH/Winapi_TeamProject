@@ -40,19 +40,21 @@ void Test_Scene::Init()
 	exit->onReister = HandleSceneChangedGameScene;
 	AddObject(exit, OBJECT_GROUP::UI);*/
 
-	Melee_Enemy* meleeEnemy = new Melee_Enemy(1);
-	meleeEnemy->SetOffTexture(ResMgr::GetInst()->TexLoad(L"Melee_Enemy_1", L"Texture\\snake1.bmp"));
+	//meleeEnemy->SetTexure(ResMgr::GetInst()->TexLoad(L"Melee_Enemy_1", L"Texture\\snake1.bmp"));
 
-	meleeEnemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2));
-	meleeEnemy->SetScale(Vec2(64, 64));
-	AddObject(meleeEnemy, OBJECT_GROUP::MONSTER);
+	//Melee_Enemy* meleeEnemy = new Melee_Enemy(7);
+	//meleeEnemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2));
+	//meleeEnemy->SetScale(Vec2(64, 64));
+	//AddObject(meleeEnemy, OBJECT_GROUP::MONSTER);
 
-	AI* ai = new AI(meleeEnemy);
+	//AI* ai = new AI(meleeEnemy);
 
-	ai->AddState(ENEMY_STATE::IDLE, new Idle_State(ai));
-	ai->AddState(ENEMY_STATE::CHASE, new Chase_State(ai, 3));
 
-	ai->InitState(ENEMY_STATE::CHASE);
+
+	//ai->AddState(ENEMY_STATE::IDLE, new Idle_State(ai));
+	//ai->AddState(ENEMY_STATE::CHASE, new Chase_State(ai, 3));
+
+	//ai->InitState(ENEMY_STATE::CHASE);
 
 }
 

@@ -15,6 +15,7 @@ Object::Object()
 	, m_IsAlive(true)
 	, m_pAnimator(nullptr)
 {
+
 }
 
 Object::~Object()

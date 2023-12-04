@@ -1,8 +1,17 @@
 #include "pch.h"
+#include "pch.h"
 #include "Chase_State.h"
 #include "AI.h"
 #include "Enemy.h"
 #include "Player.h"
+#include "TimeMgr.h"
+#include "KeyMgr.h"
+
+#include "Animation.h"
+#include "Animator.h"
+
+#include "Object.h"
+
 Chase_State::Chase_State(AI* _ai, float _speed)
 	:ai(_ai)
 	, speed(_speed)
@@ -17,7 +26,29 @@ Chase_State::~Chase_State()
 
 void Chase_State::Update()
 {
+	Vec2 thisPos = owner->GetPos();
+	const Player* pObj = owner->GetPlayer();
+	Vec2 pPos = pObj->GetPos(); //이거 안됌 
 
+	Vec2 dir = (pPos - thisPos).Normalize();
+
+	thisPos.x += fDT * speed * dir.x;
+	thisPos.y += fDT * speed * dir.y;
+
+	if (dir.x > 0) //오른쪽
+		owner->GetAnimator()->PlayAnim(L"Melee_Enemy_Right1", true);
+	else if (dir.x > 0)//왼쪽							
+		owner->GetAnimator()->PlayAnim(L"Melee_Enemy_Left1", true);
+	else if (dir.y > 0)//아래							
+		owner->GetAnimator()->PlayAnim(L"Melee_Enemy_Back1", true);
+	else if (dir.y < 0)//위								 
+		owner->GetAnimator()->PlayAnim(L"Melee_Enemy_Front1", true);
+
+	owner->SetPos(thisPos);
+
+	if (KEY_UP(KEY_TYPE::SPACE)) {
+		ai->ChangeState(ENEMY_STATE::IDLE);
+	}
 }
 
 void Chase_State::EnterState()
