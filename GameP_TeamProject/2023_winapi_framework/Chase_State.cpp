@@ -35,14 +35,15 @@ void Chase_State::Update()
 	thisPos.x += fDT * speed * dir.x;
 	thisPos.y += fDT * speed * dir.y;
 
-	if (dir.x > 0) //오른쪽
-		owner->GetAnimator()->PlayAnim(L"Melee_Enemy_Right1", true);
-	else if (dir.x > 0)//왼쪽							
-		owner->GetAnimator()->PlayAnim(L"Melee_Enemy_Left1", true);
-	else if (dir.y > 0)//아래							
-		owner->GetAnimator()->PlayAnim(L"Melee_Enemy_Back1", true);
-	else if (dir.y < 0)//위								 
-		owner->GetAnimator()->PlayAnim(L"Melee_Enemy_Front1", true);
+	//if (dir.y > 0)//아래	
+	//	owner->GetAnimator()->PlayAnim(owner->ANIM_FRONT_HASH, true);
+	//else if (dir.y < 0)//위				 
+	//	owner->GetAnimator()->PlayAnim(owner->ANIM_BACK_HASH, true);
+
+	 if (dir.x > 0 ) //오른쪽
+		owner->GetAnimator()->PlayAnim(owner->ANIM_RIGHT_HASH, true);
+	else if (dir.x < 0)//왼쪽							
+		owner->GetAnimator()->PlayAnim(owner->ANIM_LEFT_HASH, true);
 
 	owner->SetPos(thisPos);
 

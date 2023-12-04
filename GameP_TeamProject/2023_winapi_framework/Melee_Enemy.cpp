@@ -32,10 +32,15 @@ Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type)
 	/*Melee_Enemy Animation*/ {
 		// Melee_Enemy Idle Animation
 		{
-			GetAnimator()->CreateAnim(L"Melee_Enemy_Right" + _idx, m_pTex, Vec2(0.f, 0.f), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
-			GetAnimator()->CreateAnim(L"Melee_Enemy_Front" + _idx, m_pTex, Vec2(0.f, SliceSize * 1), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
-			GetAnimator()->CreateAnim(L"Melee_Enemy_Back" + _idx, m_pTex, Vec2(0.f, SliceSize * 2), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
-			GetAnimator()->CreateAnim(L"Melee_Enemy_Left" + _idx, m_pTex, Vec2(0.f, SliceSize * 3), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
+			ANIM_RIGHT_HASH = L"Melee_Enemy_Right" + _idx;
+			ANIM_LEFT_HASH =  L"Melee_Enemy_Left" + _idx;
+			ANIM_BACK_HASH =  L"Melee_Enemy_Back" + _idx;
+			ANIM_FRONT_HASH = L"Melee_Enemy_Front" + _idx;
+
+			GetAnimator()->CreateAnim(ANIM_RIGHT_HASH, m_pTex, Vec2(0.f, 0.f), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
+			GetAnimator()->CreateAnim(ANIM_FRONT_HASH, m_pTex, Vec2(0.f, SliceSize * 1), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
+			GetAnimator()->CreateAnim(ANIM_BACK_HASH, m_pTex, Vec2(0.f, SliceSize * 2), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
+			GetAnimator()->CreateAnim(ANIM_LEFT_HASH, m_pTex, Vec2(0.f, SliceSize * 3), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
 		}
 		//// Melee_Enemy Walk Animation
 		//{

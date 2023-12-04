@@ -11,9 +11,14 @@ public:
 	~Enemy();
 public:
 	//void Render(HDC _hdc) override;
-	public:
+public:
 	const Player* GetPlayer() const { return _player; }
 	void SetAI(AI* ai) { _ai = ai; }
+public:
+	wstring ANIM_RIGHT_HASH;
+	wstring ANIM_LEFT_HASH;
+	wstring ANIM_BACK_HASH;
+	wstring ANIM_FRONT_HASH;
 protected:
 	Player* _player;
 	AI* _ai;
