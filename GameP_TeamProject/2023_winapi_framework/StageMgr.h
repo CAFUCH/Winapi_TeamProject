@@ -8,17 +8,21 @@ public:
 	void Init();
 	void Update();
 public:
-	void NextStage();
-	void EnemySpawn(float delay);
+	void NextStage(int enemyCount, float spawnDelay);
 public:
 	const int GetCurStage() const
 	{
 		return curStage;
 	}
+
+private:
+	void EnemySpawn();
 private:
 	float curTime;
+	float spawnDelay;
 	int curStage;
-	map<int, vector<Enemy*>> vec_Obj;
-
+	int enemycount;
+	bool isStageStart;
+	bool allDead;
 };
 
