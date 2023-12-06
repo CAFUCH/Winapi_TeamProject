@@ -12,12 +12,13 @@
 #include "TimeMgr.h"
 
 const float SliceSize = 32.f;
-Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, int _damage, float _atkDelay)
+Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, float _damage, float _atkDelay)
 	:m_pTex(nullptr)
 	, type(_type)
 	, atkDelay(_atkDelay)
-	, damage(_damage)
 {
+	m_fDamage = _damage;
+
 	SetBkMode(Core::GetInst()->GetMainDC(), 0);
 
 	string pathname = "Texture\\snake.bmp";
@@ -63,14 +64,13 @@ void Melee_Enemy::EnterCollision(Collider* _pOther)
 
 void Melee_Enemy::StayCollision(Collider* _pOther)
 {
-	/*curTime += fDT;
+	curTime += fDT;
 
 	if (curTime >= atkDelay) {
-		auto obj = _pOther->GetObj().SetDamage(damage);
-		obj->
-
+		Object* obj = _pOther->GetObj();
+		obj->SetDamage(m_fDamage);
 		curTime = 0;
-	}*/
+	}
 }
 
 void Melee_Enemy::ExitCollision(Collider* _pOther)

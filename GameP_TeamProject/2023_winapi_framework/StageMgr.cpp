@@ -2,6 +2,7 @@
 #include "StageMgr.h"
 #include "SceneMgr.h"
 #include "Scene.h"
+#include "Core.h"
 
 #include "Melee_Enemy.h"
 #include "Chase_State.h"
@@ -21,28 +22,31 @@ void StageMgr::Update()
 	if (isStageStart) {
 		curTime += fDT;
 		if (curTime >= spawnDelay) {
-			EnemySpawn();
+			EnemySpawn(3);
 			curTime = 0;
-			--enemycount;
+			--spawnCount;
 		}
 	}
-	if (enemycount <= 0) {
+	if (spawnCount <= 0) {
 		isStageStart = false;
+		allDead = true;
 	}
+	//TextOut(Core::GetInst()->GetMainDC(), 100, 100, (LPCWSTR)enemycount, 1);
 }
 
-void StageMgr::NextStage(int _enemyCount, float _spawnDelay)
+void StageMgr::NextStage(int _spawnCount, float _spawnDelay)
 {
-	allDead = false;
 	++curStage;
-	enemycount = _enemyCount;
+	spawnCount = _spawnCount;
 	spawnDelay = _spawnDelay;
+
+	allDead = false;
 	isStageStart = true;
 }
 
-void StageMgr::EnemySpawn()
+void StageMgr::EnemySpawn(int eCount)
 {
-	for (int i = 1; i <= 15; ++i) {
+	for (int i = 1; i <= eCount; ++i) {
 
 		Melee_Enemy* enemy = new Melee_Enemy(i % 7 + 1, ENTITY_ELEMENT_TYPE::FIRE
 			, 100, 3, .3f);

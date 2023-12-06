@@ -16,12 +16,12 @@ public:
 	}
 
 private:
-	void EnemySpawn();
+	void EnemySpawn(int _eCount);
 private:
 	float curTime;
 	float spawnDelay;
 	int curStage;
-	int enemycount;
+	int spawnCount;
 	bool isStageStart;
 	bool allDead;
 };
