@@ -45,7 +45,7 @@ void Game_Scene::Init()
 	// 적 생성 및 초기화 (테스트 버전)
 	{
 
-		StageMgr::GetInst()->EnemySpawn(.35f);
+		StageMgr::GetInst()->NextStage(3, 3.f);
 		/*for (int i = 1; i <= 30; ++i) {
 			Melee_Enemy* enemy = new Melee_Enemy(i % 7 + 1, ENTITY_ELEMENT_TYPE::FIRE);
 			enemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 + rand() % 500, (int)WINDOW_HEIGHT / 2 + rand() % 400));

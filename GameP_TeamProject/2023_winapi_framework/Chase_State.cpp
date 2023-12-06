@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "pch.h"
 #include "Chase_State.h"
 #include "AI.h"
 #include "Enemy.h"
@@ -32,7 +31,8 @@ void Chase_State::Update()
 
 	Vec2 dir = (pPos - thisPos).Normalize();
 
-	thisPos.x += fDT * speed * dir.x;
+	if (pPos.Distance(thisPos, pPos) > (double).3f)
+		thisPos.x += fDT * speed * dir.x;
 	thisPos.y += fDT * speed * dir.y;
 
 	//if (dir.y > 0)//아래	
@@ -40,12 +40,12 @@ void Chase_State::Update()
 	//else if (dir.y < 0)//위				 
 	//	owner->GetAnimator()->PlayAnim(owner->ANIM_BACK_HASH, true);
 
-	 if (dir.x > 0 ) //오른쪽
+	if (dir.x > 0) //오른쪽
 		owner->GetAnimator()->PlayAnim(owner->ANIM_RIGHT_HASH, true);
 	else if (dir.x < 0)//왼쪽							
 		owner->GetAnimator()->PlayAnim(owner->ANIM_LEFT_HASH, true);
 
-	 owner->SetPos(thisPos);
+	owner->SetPos(thisPos);
 }
 
 void Chase_State::EnterState()

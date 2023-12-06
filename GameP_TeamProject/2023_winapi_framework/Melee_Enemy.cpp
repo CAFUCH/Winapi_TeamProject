@@ -6,13 +6,18 @@
 #include "ResMgr.h"
 #include "Core.h"
 
-const float SliceSize = 32.f;
+#include "HP.h"
+#include "Enemy.h"
 
-Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type)
+#include "TimeMgr.h"
+
+const float SliceSize = 32.f;
+Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, int _damage, float _atkDelay)
 	:m_pTex(nullptr)
 	, type(_type)
+	, atkDelay(_atkDelay)
+	, damage(_damage)
 {
-
 	SetBkMode(Core::GetInst()->GetMainDC(), 0);
 
 	string pathname = "Texture\\snake.bmp";
@@ -33,8 +38,8 @@ Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type)
 		// Melee_Enemy Idle Animation
 		{
 			ANIM_RIGHT_HASH = L"Melee_Enemy_Right" + _idx;
-			ANIM_LEFT_HASH =  L"Melee_Enemy_Left" + _idx;
-			ANIM_BACK_HASH =  L"Melee_Enemy_Back" + _idx;
+			ANIM_LEFT_HASH = L"Melee_Enemy_Left" + _idx;
+			ANIM_BACK_HASH = L"Melee_Enemy_Back" + _idx;
 			ANIM_FRONT_HASH = L"Melee_Enemy_Front" + _idx;
 
 			GetAnimator()->CreateAnim(ANIM_RIGHT_HASH, m_pTex, Vec2(0.f, 0.f), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
@@ -42,27 +47,6 @@ Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type)
 			GetAnimator()->CreateAnim(ANIM_BACK_HASH, m_pTex, Vec2(0.f, SliceSize * 2), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
 			GetAnimator()->CreateAnim(ANIM_LEFT_HASH, m_pTex, Vec2(0.f, SliceSize * 3), Vec2(SliceSize, SliceSize), Vec2(SliceSize, 0.f), 8, 0.2f);
 		}
-		//// Melee_Enemy Walk Animation
-		//{
-		//	GetAnimator()->CreateAnim(L"Melee_Enemy_Walk_Front", m_pTex, Vec2(0.f, 512.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
-		//	GetAnimator()->CreateAnim(L"Melee_Enemy_Walk_Right", m_pTex, Vec2(0.f, 640.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
-		//	GetAnimator()->CreateAnim(L"Melee_Enemy_Walk_Left", m_pTex, Vec2(0.f, 768.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
-		//	GetAnimator()->CreateAnim(L"Melee_Enemy_Walk_Back", m_pTex, Vec2(0.f, 896.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
-		//}
-		//// Melee_Enemy Hit Animation
-		//{
-		//	GetAnimator()->CreateAnim(L"Melee_Enemy_Hit_Front", m_pTex, Vec2(0.f, 1024.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 2, 0.2f);
-		//	GetAnimator()->CreateAnim(L"Melee_Enemy_Hit_Right", m_pTex, Vec2(0.f, 1152.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 2, 0.2f);
-		//	GetAnimator()->CreateAnim(L"Melee_Enemy_Hit_Left", m_pTex, Vec2(0.f, 1280.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 2, 0.2f);
-		//	GetAnimator()->CreateAnim(L"Melee_Enemy_Hitk_Back", m_pTex, Vec2(0.f, 1408.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 2, 0.2f);
-		//}
-		//// Melee_Enemy Die Animationgj 
-		//{
-		//	GetAnimator()->CreateAnim(L"Melee_Enemy_Die_Front", m_pTex, Vec2(0.f, 1536.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
-		//	GetAnimator()->CreateAnim(L"Melee_Enemy_Die_Right", m_pTex, Vec2(0.f, 1664.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
-		//	GetAnimator()->CreateAnim(L"Melee_Enemy_Die_Left", m_pTex, Vec2(0.f, 1792.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
-		//	GetAnimator()->CreateAnim(L"Melee_Enemy_Die_Back", m_pTex, Vec2(0.f, 1920.f), Vec2(128.f, 128.f), Vec2(128.f, 0.f), 4, 0.2f);
-		//}
 
 		GetAnimator()->PlayAnim(L"Melee_Enemy_Front" + _idx, true);
 	}
@@ -74,12 +58,19 @@ Melee_Enemy::~Melee_Enemy()
 
 void Melee_Enemy::EnterCollision(Collider* _pOther)
 {
-
+	curTime = atkDelay;
 }
 
 void Melee_Enemy::StayCollision(Collider* _pOther)
 {
+	/*curTime += fDT;
 
+	if (curTime >= atkDelay) {
+		auto obj = _pOther->GetObj().SetDamage(damage);
+		obj->
+
+		curTime = 0;
+	}*/
 }
 
 void Melee_Enemy::ExitCollision(Collider* _pOther)
