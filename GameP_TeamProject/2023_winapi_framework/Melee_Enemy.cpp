@@ -12,6 +12,7 @@
 #include "TimeMgr.h"
 
 const float SliceSize = 32.f;
+
 Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, float _damage, float _atkDelay)
 	:m_pTex(nullptr)
 	, type(_type)

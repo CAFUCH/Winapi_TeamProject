@@ -288,6 +288,8 @@ void Player::EnterCollision(Collider* _pOther)
 
 void Player::StayCollision(Collider* _pOther)
 {
+	auto obj = _pOther->GetObj();
+	obj->SetDamage(100);
 }
 
 void Player::ExitCollision(Collider* _pOther)

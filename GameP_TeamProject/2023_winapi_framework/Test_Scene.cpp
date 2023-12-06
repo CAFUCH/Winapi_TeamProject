@@ -7,7 +7,7 @@
 #include "AI.h"
 #include "Idle_State.h"
 #include "ResMgr.h"
-#include "Chase_State.h"
+#include "Chase_State_Melee.h"
 #include "Core.h"
 
 void HandleSceneChangedGameScene() {

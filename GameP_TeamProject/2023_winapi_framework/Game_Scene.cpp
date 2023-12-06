@@ -14,11 +14,13 @@
 #include "CollisionMgr.h"
 
 #include "Melee_Enemy.h"
-#include "Chase_State.h"
+#include "Chase_State_Melee.h"
 #include "Idle_State.h"
 
 #include "StageMgr.h"
 
+
+void ddd();
 void Game_Scene::Init()
 {
 	// 플레이어 생성 및 초기화
@@ -44,20 +46,8 @@ void Game_Scene::Init()
 
 	// 적 생성 및 초기화 (테스트 버전)
 	{
-
-		StageMgr::GetInst()->NextStage(3, 3.f);
-		/*for (int i = 1; i <= 30; ++i) {
-			Melee_Enemy* enemy = new Melee_Enemy(i % 7 + 1, ENTITY_ELEMENT_TYPE::FIRE);
-			enemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 + rand() % 500, (int)WINDOW_HEIGHT / 2 + rand() % 400));
-			enemy->SetScale(Vec2(64, 64));
-			AddObject(enemy, OBJECT_GROUP::MONSTER);
-
-			AI* ai = new AI(enemy);
-			ai->AddState(ENEMY_STATE::CHASE, new Chase_State(ai, rand() % 100 + 5));
-			ai->InitState(ENEMY_STATE::CHASE);
-		}*/
+		StageMgr::GetInst()->NextStage(5, 3, 3.f, ddd);
 	}
-
 	// 사운드 세팅
 	//ResMgr::GetInst()->Play(L"BGM");
 
@@ -65,7 +55,12 @@ void Game_Scene::Init()
 	CollisionMgr::GetInst()->CheckGroup(OBJECT_GROUP::PLAYER, OBJECT_GROUP::MONSTER);
 	CollisionMgr::GetInst()->CheckGroup(OBJECT_GROUP::WEAPON, OBJECT_GROUP::MONSTER);
 }
-
+void ddd() {
+	//일단 보류
+	StageMgr::GetInst()->NextStage(5, 3, 3.f, ddd);
+	/*wstring ws = to_wstring(10);
+	TextOut(Core::GetInst()->GetMainDC(), 400, 100, ws.c_str(), ws.length());*/
+}
 void Game_Scene::Update()
 {
 	Scene::Update();
