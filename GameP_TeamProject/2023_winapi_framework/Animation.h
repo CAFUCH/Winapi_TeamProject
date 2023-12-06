@@ -20,6 +20,7 @@ public:
 
 public:
 	void Update();
+	//bool Update();
 	void Render(HDC _dc);
 
 public:
@@ -30,6 +31,8 @@ public:
 public:
 	const wstring& GetName() const { return m_strName; }
 	void SetName(wstring _name) { m_strName = _name; }
+
+	const bool& GetIsAnima() const { return m_isAnim; }
 
 	void SetFrameOffset(int _index, Vec2 _offset) { m_vecAnimFrame[_index].vOffset = _offset; }
 
@@ -53,5 +56,7 @@ private:
 	float m_fAccTime;
 	// 반복 횟수
 	int m_repeatcnt; 
+	// 현재 진행이 끝났는지
+	bool m_isAnim;
 };
 

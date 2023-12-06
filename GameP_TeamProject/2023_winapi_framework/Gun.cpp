@@ -43,12 +43,12 @@ Gun::~Gun()
 
 void Gun::Update()
 {
-	//SetPos({ m_pOwner->GetPos().x - 100, m_pOwner->GetPos().y });
+	SetPos({ m_pOwner->GetPos().x - 100, m_pOwner->GetPos().y });
 
 	////if (KEY_UP(KEY_TYPE::O))
 	//	GetAnimator()->PlayAnim(L"Gun_Attack", true);
 
-	SetPos({ m_pOwner->GetPos().x, m_pOwner->GetPos().y });
+	//SetPos({ m_pOwner->GetPos().x, m_pOwner->GetPos().y });
 }
 
 void Gun::Render(HDC _dc)

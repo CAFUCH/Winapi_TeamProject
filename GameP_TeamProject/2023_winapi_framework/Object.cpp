@@ -51,21 +51,10 @@ void Object::CreateAnimator()
 void Object::CreateWeapon()
 {
 	Weapon* weapon = new Weapon;
-	weapon->m_pOwner = this;
+	//weapon->m_pOwner = this;
 	// 잘 들어가는 것 같음...
 	m_vecWeapon.push_back(weapon);
 }
-//void Object::CreateWeapon(Weapon* _weapon)
-//{
-//	_weapon->m_pOwner = this;
-//	m_vecWeapon.push_back(_weapon);
-//}
-//Weapon* Object::CreateWeapon(Weapon* _weapon)
-//{
-//	_weapon->m_pOwner = this;
-//	return _weapon;
-//	//m_vecWeapon.push_back(_weapon);
-//}
 
 void Object::Update()
 {

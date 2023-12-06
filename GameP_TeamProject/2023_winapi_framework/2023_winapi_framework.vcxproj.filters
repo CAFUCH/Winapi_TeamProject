@@ -195,6 +195,7 @@
       <Filter>Engine\07. Component</Filter>
     </ClInclude>
     <ClInclude Include="StageMgr.h" />
+    <ClInclude Include="Particle.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2023_winapi_framework.rc">
@@ -311,5 +312,6 @@
       <Filter>Engine\07. Component</Filter>
     </ClCompile>
     <ClCompile Include="StageMgr.cpp" />
+    <ClCompile Include="Particle.cpp" />
   </ItemGroup>
 </Project>

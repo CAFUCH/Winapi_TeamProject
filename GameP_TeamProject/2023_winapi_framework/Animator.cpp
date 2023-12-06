@@ -62,3 +62,8 @@ void Animator::PlayAnim(const wstring& _strName, bool _bRepeat, int _repeatcnt)
 	m_IsRepeat = _bRepeat;
 	m_repeatcnt = _repeatcnt;
 }
+
+bool Animator::IsAnim()
+{
+	return m_pCurAnim->GetIsAnima();
+}

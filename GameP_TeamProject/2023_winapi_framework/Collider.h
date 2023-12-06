@@ -24,14 +24,17 @@ public:
 	const Vec2& GetFinalPos() const 
 	{ return m_vFinalPos; }
 	const UINT& GetID() const { return m_ID; }
-	const Object* GetObj() const { return m_pOwner; }
+	Object* GetObj() const { return m_pOwner; }
 private:
 	UINT m_check;
 	Object* m_pOwner;
 	Vec2 m_vOffsetPos; // 오프셋
 	Vec2 m_vFinalPos; // 파이널 위치
 	Vec2 m_vScale; // 크기
+
 	friend class Object;
+	friend class Weapon;
+
 	UINT m_ID; // 충돌체 ID값
 	static UINT m_sNextID;
 };

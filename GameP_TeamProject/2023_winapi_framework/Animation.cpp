@@ -19,7 +19,11 @@ Animation::~Animation()
 void Animation::Update()
 {
 	if (m_pAnimator->GetRepeatcnt() <= 0)
+	{
+		m_isAnim = false;
 		return;
+	}
+	m_isAnim = true;
 	m_fAccTime += fDT;
 	// 누적한 시간이 내가 이 프레임에 진행한 시간을 넘어섰냐?
 	if (m_fAccTime >= m_vecAnimFrame[m_CurFrame].fDuration)
@@ -37,6 +41,29 @@ void Animation::Update()
 
 	}
 }
+
+//bool Animation::Update()
+//{
+//	if (m_pAnimator->GetRepeatcnt() <= 0)
+//		return true;
+//	m_fAccTime += fDT;
+//	// 누적한 시간이 내가 이 프레임에 진행한 시간을 넘어섰냐?
+//	if (m_fAccTime >= m_vecAnimFrame[m_CurFrame].fDuration)
+//	{
+//		// 일단 모은 시간에서 현재 진행한 시간을 빼고
+//		m_fAccTime -= m_vecAnimFrame[m_CurFrame].fDuration;
+//		++m_CurFrame; // 다음프레임으로 옮기기
+//		if (m_CurFrame >= m_vecAnimFrame.size()) // 한바퀴 돌게하고싶어
+//		{
+//			if (!m_pAnimator->GetRepeat())
+//				m_pAnimator->SetRepeatcnt();
+//			m_CurFrame = 0;
+//			m_fAccTime = 0.f;
+//		}
+//
+//	}
+//	return false;
+//}
 
 void Animation::Render(HDC _dc)
 {
