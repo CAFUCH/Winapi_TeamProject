@@ -24,6 +24,8 @@ public:
 	// 애니메이션 플레이 함수
 	void PlayAnim(const wstring& _strName, bool _bRepeat, int _repeatcnt = 1);
 
+	bool IsAnim();
+
 public:
 	Object* GetObj() const { return m_pOwner; }
 	const bool& GetRepeat() const { return m_IsRepeat; }
@@ -39,6 +41,7 @@ private:
 	Animation* m_pCurAnim;
 
 	friend class Object;
+	friend class Weapon;
 
 	// 반복
 	bool	m_IsRepeat;

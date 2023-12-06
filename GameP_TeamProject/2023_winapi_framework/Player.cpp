@@ -188,8 +188,12 @@ void Player::Update()
 	}
 	if (KEY_DOWN(KEY_TYPE::N))
 	{
+		GetAnimator()->PlayAnim(L"Player_Hit_" + m_strDir, false);
+		if (GetAnimator()->IsAnim())
+			assert(1 == 0);
 		SetWeapon(0, m_pCurScene->GetWeapon(L"Gun"));
 		m_curWeapon = GetWeapon(0);
+		m_curWeapon->SetOwner(this);
 	}
 	// 공격
 	if (KEY_DOWN(KEY_TYPE::SPACE) && m_curWeapon != NULL)
@@ -267,13 +271,14 @@ void Player::AutoAim()
 
 void Player::EnterCollision(Collider* _pOther)
 {
-	const Object* pOtherObj = _pOther->GetObj();
+	Object* pOtherObj = _pOther->GetObj();
 
 	// 플레이어 충돌한 오브젝트 (적, 적 무기, 떨어뜨리는 코인(?))
 	if (pOtherObj->GetName() == L"Enemy" || pOtherObj->GetName() == L"Enemy_Bullet")
 	{
 		// 데미지 받기
 		SetDamage(pOtherObj->GetDamage());
+		pOtherObj->SetDamage(m_fDamage);
 		// Hit 애니메이션 실행
 		GetAnimator()->PlayAnim(L"Player_Hit_" + m_strDir, false);
 	}

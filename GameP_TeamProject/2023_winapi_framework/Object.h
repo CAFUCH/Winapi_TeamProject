@@ -20,7 +20,6 @@ public:
 
 	void Component_Render(HDC _dc);
 
-	void SetDamage(float _damage);
 
 public:
 	const wstring& GetName() const { return m_strName; }
@@ -40,14 +39,14 @@ public:
 	bool GetIsDead() const { return !m_IsAlive; }
 
 	float GetDamage() const { return m_fDamage; }
+	void SetDamage(float _damage);
 	//float GetDistance() const { return m_fDistance; }
 
 	Collider* GetCollider() const { return m_pCollider; }
 	Animator* GetAnimator() { return m_pAnimator; }
 	Weapon* GetWeapon(int _idx) { return m_vecWeapon[_idx]; }
-	void SetWeapon(int _idx, Weapon* _weapon) { m_vecWeapon[_idx] = _weapon; }
-	//vector<Weapon*> GetWeapon() { return m_vecWeapon; }
-
+	void SetWeapon(int _idx, Weapon* _weapon) 
+	{ m_vecWeapon[_idx] = _weapon; }
 
 private:
 	void SetDead() { m_IsAlive = false; }
@@ -57,8 +56,6 @@ public:
 	void CreateCollider();
 	void CreateAnimator();
 	void CreateWeapon();
-	//void CreateWeapon(Weapon* _weapon);
-	//Weapon* CreateWeapon(Weapon* _weapon);
 
 protected:
 	// 기본 정보

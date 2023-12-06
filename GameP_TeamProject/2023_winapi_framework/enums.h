@@ -58,10 +58,14 @@ enum class ENTITY_ELEMENT_TYPE
 	// 물 불 전기?...
 };
 
-
 enum class WEAPON_TYPE
 {
 	KNIFE, GUN, END
+};
+
+enum class PARTICLE_TYPE
+{
+	ATTACK, HIT, WATHER_ELEM, FIRE_ELEM, ELECT_ELEM, END
 };
 
 enum class ENEMY_STATE

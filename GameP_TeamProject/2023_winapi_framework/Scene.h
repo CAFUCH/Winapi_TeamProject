@@ -24,6 +24,10 @@ public:
 	{
 		m_vecObj[(UINT)_eType].push_back(_pObj);
 	}
+	map<wstring, Weapon*>& GetMapWeapon()
+	{
+		return m_mWeapon;
+	}
 protected:
 //	Object*  m_obj;
 	vector<Object*> m_vecObj[(UINT)OBJECT_GROUP::END];

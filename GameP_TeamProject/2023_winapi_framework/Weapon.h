@@ -1,6 +1,8 @@
 #pragma once
 class Object;
 class Texture;
+class Collider;
+class Animator;
 class Weapon
 {
 public:
@@ -21,8 +23,16 @@ public:
     const Vec2& GetScale() const { return m_vScale; }
     void SetScale(Vec2 _vScale) { m_vScale = _vScale; }
 
+    Collider* GetCollider() const { return m_pCollider; }
+    Animator* GetAnimator() { return m_pAnimator; }
+
 public:
     float GetDistance() const { return m_fDistance; }
+    void SetOwner(Object* _owner) { m_pOwner = _owner; }
+
+public:
+    void CreateCollider();
+    void CreateAnimator();
 
 protected:
     // 현재 객체
@@ -39,6 +49,11 @@ protected:
     Vec2 m_vPos;
     // 크기
     Vec2 m_vScale;
+
+    // 콜라이더
+    Collider* m_pCollider;
+    // 애니메이터
+    Animator* m_pAnimator;
 
     // 공격 거리, 공격 딜레이
     float m_fDistance; float m_fDelay;
