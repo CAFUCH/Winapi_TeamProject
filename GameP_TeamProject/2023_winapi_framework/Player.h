@@ -38,7 +38,7 @@ private:
     // 현재 무기 (이자? 컴포넌트~)
     Weapon* m_curWeapon;
     // 현재 파티클
-    Particle* m_pParticle;
+    //Particle* m_pParticle;
 
     // 현재 씬 
     std::shared_ptr<Scene> m_pCurScene;

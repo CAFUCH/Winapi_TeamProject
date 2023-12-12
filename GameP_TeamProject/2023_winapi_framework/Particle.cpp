@@ -19,14 +19,15 @@ Particle::Particle(PARTICLE_TYPE _type)
 	switch (m_eType)
 	{
 	case PARTICLE_TYPE::ATTACK:
-		lifeTime = 3.f;
-		m_animName = L"Effect_DieBlood";
-		m_pTex = ResMgr::GetInst()->TexLoad(L"Effect_Hit", L"Texture\\Effect_DieBlood.bmp");
-		// 여기가 문제같음,, 플레이어 이미지랑 애니메이션 넣으면 잘 됨
-		GetAnimator()->CreateAnim(L"Effect_DieBlood", m_pTex, Vec2(0.f, 0.f),
-			Vec2(200.f, 200.f), Vec2(200.f, 0.f), 24, 0.035f);
 		break;
 	case PARTICLE_TYPE::HIT:
+		m_animName = L"Effect_DieBlood";
+		m_pTex = ResMgr::GetInst()->TexLoad(L"Effect_Hit", L"Texture\\Effect_DieBlood.bmp");
+		GetAnimator()->CreateAnim(L"Effect_DieBlood", m_pTex, Vec2(0.f, 0.f),
+			Vec2(200.f, 200.f), Vec2(200.f, 0.f), 24, 0.035f);
+		lifeTime = 0.84f;
+		m_x = 5;
+		m_y = 7.5f;
 		break;
 	case PARTICLE_TYPE::WATHER_ELEM:
 		break;
@@ -37,9 +38,9 @@ Particle::Particle(PARTICLE_TYPE _type)
 	case PARTICLE_TYPE::END:
 		assert(m_eType == PARTICLE_TYPE::END);
 		break;
-	default:
-		break;
 	}
+	
+	// 실행할 애니메이션 호출
 	GetAnimator()->PlayAnim(m_animName, false);
 }
 
@@ -50,10 +51,8 @@ Particle::~Particle()
 void Particle::Update()
 {
 	// 파티클의 주인을 따라다닌다.
-	SetPos({ m_pOwner->GetPos().x, m_pOwner->GetPos().y });
+	SetPos({ m_pOwner->GetPos().x + m_x, m_pOwner->GetPos().y + m_y });
 
-	if (KEY_DOWN(KEY_TYPE::SPACE))
-		GetAnimator()->PlayAnim(m_animName, false);
 	// 시간이 지나면 삭제된다.
 	curTime += fDT;
 	if (curTime >= lifeTime)

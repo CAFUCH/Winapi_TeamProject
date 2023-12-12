@@ -44,7 +44,6 @@ Player::Player()
 
 		// 이동 속도
 		m_fMoveSpeed = 150.f;
-
 		// 위치 초기화
 		m_velocity = { 0, 0 };
 
@@ -265,16 +264,13 @@ void Player::Update()
 		SetHP(GetHP() - 1);
 		// 파티클 생성
 		{
-			m_pParticle = new Particle(PARTICLE_TYPE::ATTACK);
+			Particle* m_pParticle = new Particle(PARTICLE_TYPE::HIT);
 			m_pParticle->SetOwner(this);
 			m_pParticle->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
 			m_pParticle->SetScale({ 100.f, 100.f });
 			m_pCurScene->AddObject(m_pParticle, OBJECT_GROUP::PARTICLE);
 		}
 	}
-
-	//if (m_pParticle != nullptr)
-	//	m_pParticle->Update();
 
 	// 애니메이션 실행
 	GetAnimator()->Update();
@@ -338,6 +334,15 @@ void Player::EnterCollision(Collider* _pOther)
 		pOtherObj->SetDamage(m_fDamage);
 		// Hit 애니메이션 실행
 		GetAnimator()->PlayAnim(L"Player_Hit_" + m_strDir, false);
+
+		// Hit 파티클 생성
+		{
+			Particle* m_pParticle = new Particle(PARTICLE_TYPE::HIT);
+			m_pParticle->SetOwner(this);
+			m_pParticle->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
+			m_pParticle->SetScale({ 100.f, 100.f });
+			m_pCurScene->AddObject(m_pParticle, OBJECT_GROUP::PARTICLE);
+		}
 	}
 }
 

@@ -22,6 +22,7 @@ private:
     Object* m_pOwner;
     wstring m_animName;
     float curTime, lifeTime;
+    float m_x, m_y;
 
     friend Object;
 };
