@@ -9,9 +9,9 @@ private:
     friend class ResMgr;
 public:
     void Load(const wstring& _strFilePath);
-    const LONG& GetWidth() const { return (m_bitInfo.bmWidth); }
-    const LONG& GetHeight() const { return (m_bitInfo.bmHeight); }
-    const HDC& GetDC() const { return m_hDC; }
+    LONG& GetWidth() { return (m_bitInfo.bmWidth); }
+    LONG& GetHeight() { return (m_bitInfo.bmHeight); }
+    HDC& GetDC() { return m_hDC; }
 private:
     HBITMAP m_hBit;
     HDC     m_hDC;

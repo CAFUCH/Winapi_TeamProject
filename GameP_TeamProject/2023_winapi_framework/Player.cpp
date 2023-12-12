@@ -2,6 +2,8 @@
 #include "Player.h"
 #include "Weapon.h"
 #include "HP.h"
+#include "Particle.h"
+//#include "Camera.h"
 
 #include "ResMgr.h"
 #include "SceneMgr.h"
@@ -33,10 +35,20 @@ Player::Player()
 
 	// 초기화
 	{
+		// 현재 무기 인덱스
 		m_curWeaponIdx = 0;
+		// 소지 무기 개수
 		m_maxWeaponCnt = 3;
 
+		// 이동 속도
 		m_fMoveSpeed = 150.f;
+
+		// 위치 초기화
+		m_velocity = { 0, 0 };
+
+		// 체력 초기화
+		SetMaxHP(20.f);
+		SetHP(GetMaxHP());
 	}
 
 	// 콜라이더 컴포넌트 생성
@@ -100,7 +112,6 @@ Player::Player()
 	{
 		for (int i = 0; i < m_maxWeaponCnt; ++i)
 			CreateWeapon();
-		//this->m_vecWeapon = GetWeapon();
 	}
 
 	// HP 생성
@@ -109,12 +120,10 @@ Player::Player()
 		pHP->SetOwner(this);
 		pHP->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
 		pHP->SetScale({ 100.f, 100.f });
-		pHP->SetMaxHP(20.f);
-		pHP->SetHP(pHP->GetMaxHP());
+		pHP->SetMaxHP(GetMaxHP());
+		pHP->SetHP(GetHP());
 		m_pCurScene->AddObject(pHP, OBJECT_GROUP::UI);
 	}
-
-	m_velocity = { 0, 0 };
 }
 
 Player::~Player()
@@ -186,20 +195,34 @@ void Player::Update()
 			vPos = vPos + Vec2{m_velocity.x * m_fMoveSpeed * fDT, m_velocity.y * m_fMoveSpeed * fDT};
 		}
 	}
+
+	// 무기 스왑 테스트
 	if (KEY_DOWN(KEY_TYPE::N))
 	{
-		GetAnimator()->PlayAnim(L"Player_Hit_" + m_strDir, false);
-		if (GetAnimator()->IsAnim())
-			assert(1 == 0);
+		//GetAnimator()->PlayAnim(L"Player_Hit_" + m_strDir, false);
+		//if (GetAnimator()->IsAnim())
+		//	assert(1 == 0);
+
+		//m_pCurScene->GetWeapon(L"Gun")->SetOwner(this);
+		//m_pCurScene->GetWeapon(L"Knife")->SetOwner(this);
+		//m_pCurScene->GetWeapon(L"Bomb")->SetOwner(this);
+		// 
+		//m_pCurScene->GetWeapon(L"Gun")->SetEnable(true);
+		//SetWeapon(0, m_pCurScene->GetWeapon(L"Gun"));
+		//SetWeapon(1, m_pCurScene->GetWeapon(L"Knife"));
+		//SetWeapon(2, m_pCurScene->GetWeapon(L"Bomb"));
+
+		//m_curWeapon = GetWeapon(0);
+		//m_curWeapon->SetOwner(this);
+
 		SetWeapon(0, m_pCurScene->GetWeapon(L"Gun"));
-		m_curWeapon = GetWeapon(0);
-		m_curWeapon->SetOwner(this);
+		SetWeapon(1, m_pCurScene->GetWeapon(L"Knife"));
+		SetWeapon(2, m_pCurScene->GetWeapon(L"Bomb"));
 	}
+
 	// 공격
 	if (KEY_DOWN(KEY_TYPE::SPACE) && m_curWeapon != NULL)
-	{
-		//m_curWeapon = m_vecWeapon[0];
-		//m_curWeapon = m_vecWeapon[m_curWeaponIdx]; // 원래 이거 써야함.. 지금은 무기가 하나ㅃㄲ에 업서..
+	{		 
 
 		// 자동 조준
 		AutoAim();
@@ -223,50 +246,82 @@ void Player::Update()
 		else if (m_curWeaponIdx >= m_maxWeaponCnt)
 			m_curWeaponIdx = 0;
 
-		//m_curWeapon = GetWeapon(m_curWeaponIdx);
+		m_curWeapon = GetWeapon(m_curWeaponIdx);
+		m_curWeapon->SetOwner(this);
 	}
 
-	// 무기 선택 (테스트)
+	//// 무기 선택 (테스트)
+	//{
+	//	if (KEY_DOWN(KEY_TYPE::K))
+	//	{
+	//		m_curWeapon = GetWeapon(m_curWeaponIdx);
+	//	}
+	//}
+
+	if (KEY_DOWN(KEY_TYPE::M))
 	{
-		if (KEY_DOWN(KEY_TYPE::K))
+		SetHP(GetHP() - 1);
+		// 파티클 생성
 		{
-			m_curWeapon = GetWeapon(m_curWeaponIdx);
+			m_pParticle = new Particle(PARTICLE_TYPE::ATTACK);
+			m_pParticle->SetOwner(this);
+			m_pParticle->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
+			m_pParticle->SetScale({ 100.f, 100.f });
+			m_pCurScene->AddObject(m_pParticle, OBJECT_GROUP::PARTICLE);
 		}
 	}
 
-	// 위치 저장하기
-	SetPos(vPos);
+	//if (m_pParticle != nullptr)
+	//	m_pParticle->Update();
+
 	// 애니메이션 실행
 	GetAnimator()->Update();
+
+	// 무기 실행
+	if (m_curWeapon != nullptr)
+		m_curWeapon->Update();
+
+	// 위치 저장하기
+	SetPos(vPos);
+}
+
+void Player::Render(HDC _dc)
+{
+	Component_Render(_dc);
+
+	if (m_curWeapon != nullptr)
+		m_curWeapon->Render(_dc);
 }
 
 void Player::AutoAim()
 {
 	// 위치 받아오기
 	Vec2 vPos = GetPos();
-	// *에너미의 위치와 거리
-	vector<std::pair<Vec2, double>> testDist;
-
+	
 	// 현재씬의 에너미를 가져온다.
 	m_vecEnemy = m_pCurScene->GetGroupObject(OBJECT_GROUP::MONSTER);
 
+	// 모든 적을 검사
 	for (size_t i = 0; i < m_vecEnemy.size(); ++i)
 	{
-		// 공격 범위 밖에 있다면 검사하지 않는다
+		// 공격 범위 밖에 있다면 넣지 않는다.
 		if (m_curWeapon->GetDistance() < m_vPos.Distance(GetPos(), m_vecEnemy[i]->GetPos()))
 			continue;
-		// 가장 가까운 적 찾기
+		// 공격 범위 안에 있다면 대상에 넣는다.
 		else
-			testDist.push_back({ m_vecEnemy[i]->GetPos(), m_vPos.Distance(GetPos(), m_vecEnemy[i]->GetPos()) });
+			m_vecEnemyDist.push_back({ m_vecEnemy[i]->GetPos(), m_vPos.Distance(GetPos(), m_vecEnemy[i]->GetPos()) });
 	}
 
 	// 오름차순 정렬로 거리가 가장 작은 것을 앞으로 둔다 // 정렬 방법 바꾸자! -> 되긴함
-	std::sort(testDist.begin(), testDist.end(), cmp1);
-	// 가장 첫 값의 enemy 위치를 넘긴다.
-	m_vAttackDir = testDist[0].first;
+	std::sort(m_vecEnemyDist.begin(), m_vecEnemyDist.end(), cmp1);
+
+	// 가장 가까운 적의 위치를 저장한다.
+	if (!m_vecEnemyDist.empty())
+		m_vAttackDir = m_vecEnemyDist.front().first;
 
 	// 위치와 거리 초기화
-	//testDist.clear();
+	m_vecEnemy.clear();
+	m_vecEnemyDist.clear();
 }
 
 void Player::EnterCollision(Collider* _pOther)

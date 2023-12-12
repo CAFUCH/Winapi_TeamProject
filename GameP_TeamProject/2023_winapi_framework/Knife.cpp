@@ -14,7 +14,7 @@
 Knife::Knife()
 {
 	// 이미지 불러오기
-	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Guns", L"Texture\\Bullet.bmp");
+	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Knife", L"Texture\\Bullet.bmp");
 
 	//// 콜라이더 생성
 	//CreateCollider();
@@ -26,6 +26,8 @@ Knife::Knife()
 
 	///*Knife Animation*/ {
 
+	m_fDistance = 100.f;
+
 	//}
 }
 
@@ -35,7 +37,7 @@ Knife::~Knife()
 
 void Knife::Update()
 {
-	SetPos({ m_pOwner->GetPos().x, m_pOwner->GetPos().y });
+	SetPos({ m_pOwner->GetPos().x - 100, m_pOwner->GetPos().y });
 }
 
 void Knife::Render(HDC _dc)

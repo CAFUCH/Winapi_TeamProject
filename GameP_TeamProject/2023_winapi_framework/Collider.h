@@ -16,24 +16,29 @@ public:
 	void ExitCollision(Collider* _pOther);
 	void StayCollision(Collider* _pOther);
 public:
+	const Vec2& GetScale() const { return m_vScale; }
 	void SetScale(Vec2 _vScale) { m_vScale = _vScale; }
+
+	const Vec2& GetOffSetPos() const { return m_vOffsetPos; }
 	void SetOffSetPos(Vec2 _vOffsetPos) 
 	{ m_vOffsetPos = _vOffsetPos; }
-	const Vec2& GetScale() const { return m_vScale; }
-	const Vec2& GetOffSetPos() const { return m_vOffsetPos; }
-	const Vec2& GetFinalPos() const 
-	{ return m_vFinalPos; }
+
+	const Vec2& GetFinalPos() { return m_vFinalPos; }
+	void SetFinalPos(Vec2 _vOffsetPos) { m_vOffsetPos = _vOffsetPos; }
+
 	const UINT& GetID() const { return m_ID; }
 	Object* GetObj() const { return m_pOwner; }
+
 private:
 	UINT m_check;
 	Object* m_pOwner;
+	//T* m_pOwner;
 	Vec2 m_vOffsetPos; // 오프셋
 	Vec2 m_vFinalPos; // 파이널 위치
 	Vec2 m_vScale; // 크기
 
 	friend class Object;
-	friend class Weapon;
+	//friend class Weapon;
 
 	UINT m_ID; // 충돌체 ID값
 	static UINT m_sNextID;

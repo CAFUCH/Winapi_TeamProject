@@ -8,6 +8,7 @@
 #include "Collider.h"
 #include "Animator.h"
 #include "Weapon.h"
+#include "Particle.h"
 Object::Object()
 	: m_pCollider(nullptr)
 	, m_vPos{}
@@ -56,6 +57,12 @@ void Object::CreateWeapon()
 	m_vecWeapon.push_back(weapon);
 }
 
+void Object::CreateParticle(PARTICLE_TYPE _eType)
+{
+	Particle* particle = new Particle(_eType);
+	particle->m_pOwner = this;
+}
+
 void Object::Update()
 {
 }
@@ -65,11 +72,11 @@ void Object::FinalUpdate()
 	// 콜라이더의 Update
 	if (m_pCollider)
 		m_pCollider->FinalUpdate();
-	for (Weapon* weapon : m_vecWeapon)
-	{
-		if (weapon)
-			weapon->Update();
-	}
+	//for (Weapon* weapon : m_vecWeapon)
+	//{
+	//	if (weapon && weapon->GetEnable())
+	//		weapon->Update();
+	//}
 }
 
 void Object::Render(HDC _dc)
@@ -99,11 +106,11 @@ void Object::Component_Render(HDC _dc)
 		m_pCollider->Render(_dc);
 	if (nullptr != m_pAnimator)
 		m_pAnimator->Render(_dc);
-	for (Weapon* weapon : m_vecWeapon)
-	{
-		if (nullptr != weapon)
-			weapon->Render(_dc);
-	}
+	//for (Weapon* weapon : m_vecWeapon)
+	//{
+	//	if (nullptr != weapon && !weapon->GetEnable())
+	//		weapon->Render(_dc);
+	//}
 }
 
 void Object::SetDamage(float _damage)

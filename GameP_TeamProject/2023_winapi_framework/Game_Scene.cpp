@@ -1,11 +1,13 @@
 #include "pch.h"
 #include "Game_Scene.h"
 #include "Core.h"
+#include "Camera.h"
 
 #include "Player.h"
 
-#include "Knife.h"
 #include "Gun.h"
+#include "Knife.h"
+#include "Bomb.h"
 
 #include "Object.h"
 
@@ -27,19 +29,26 @@ void Game_Scene::Init()
 		pPlayer->SetPos((Vec2({ Core::GetInst()->GetResolution().x / 2, Core::GetInst()->GetResolution().y / 2 })));
 		pPlayer->SetScale(Vec2(100.f, 100.f));
 		AddObject(pPlayer, OBJECT_GROUP::PLAYER);
+
+		Camera::GetInst()->SetTarget(pPlayer);
 	}
 
 	// 무기 생성 및 초기화
 	{
 		Weapon* pGun = new Gun;
 		pGun->SetPos((Vec2({ 0, 0 })));
-		pGun->SetScale(Vec2(50.f, 50.f));
+		pGun->SetScale(Vec2(150.f, 150.f));
 		m_mWeapon.insert({ L"Gun", pGun });
 
 		Weapon* pKnife = new Knife;
 		pKnife->SetPos((Vec2({ 0, 0 })));
 		pKnife->SetScale(Vec2(50.f, 50.f));
 		m_mWeapon.insert({ L"Knife", pKnife });
+
+		Weapon* pBomb = new Bomb;
+		pBomb->SetPos((Vec2({ 0, 0 })));
+		pBomb->SetScale(Vec2(50.f, 50.f));
+		m_mWeapon.insert({ L"Bomb", pBomb });
 	}
 
 	// 적 생성 및 초기화 (테스트 버전)
@@ -60,6 +69,7 @@ void Game_Scene::Init()
 
 	// 사운드 세팅
 	//ResMgr::GetInst()->Play(L"BGM");
+
 
 	//출동 세팅
 	CollisionMgr::GetInst()->CheckGroup(OBJECT_GROUP::MONSTER, OBJECT_GROUP::PLAYER);

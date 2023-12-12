@@ -2,6 +2,7 @@
 class Collider;
 class Animator;
 class Weapon;
+class Particle;
 class Object
 {
 public:
@@ -56,6 +57,7 @@ public:
 	void CreateCollider();
 	void CreateAnimator();
 	void CreateWeapon();
+	void CreateParticle(PARTICLE_TYPE _eType);
 
 protected:
 	// 기본 정보
@@ -73,6 +75,8 @@ protected:
 	Animator* m_pAnimator;
 	// 무기 (정확히는 obj에게 달릴 weapon의 컴포넌트를 생성하고 담는 곳)
 	vector<Weapon*> m_vecWeapon;
+	// ㅋㅋ 파티클임
+	Particle* m_pParticle;
 
 	// 엔티티 정보
 	// 생존

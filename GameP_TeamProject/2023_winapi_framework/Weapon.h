@@ -26,6 +26,9 @@ public:
     Collider* GetCollider() const { return m_pCollider; }
     Animator* GetAnimator() { return m_pAnimator; }
 
+    const bool& GetEnable() const { return m_setActive; }
+    void SetEnable(bool _value) { m_setActive = _value; }
+
 public:
     float GetDistance() const { return m_fDistance; }
     void SetOwner(Object* _owner) { m_pOwner = _owner; }
@@ -58,5 +61,7 @@ protected:
     // 공격 거리, 공격 딜레이
     float m_fDistance; float m_fDelay;
     float m_fAttackSpeed;
+
+    bool m_setActive;
 };
 

@@ -16,7 +16,7 @@ public:
 
 public:
     void Update() override;
-    //void Render(HDC _dc) override;
+    void Render(HDC _dc) override;
     void AutoAim();
 
 public:
@@ -37,12 +37,14 @@ private:
 
     // 현재 무기 (이자? 컴포넌트~)
     Weapon* m_curWeapon;
-    //// 소지 무기 컴포넌트
-    //vector<Weapon*> m_vecWeapon;
+    // 현재 파티클
+    Particle* m_pParticle;
 
     // 현재 씬 
     std::shared_ptr<Scene> m_pCurScene;
     // 현재 씬의 적
     vector<Object*> m_vecEnemy;
+    // 현재 씬의 적과의 거리
+    vector<std::pair<Vec2, double>> m_vecEnemyDist;
 };
 

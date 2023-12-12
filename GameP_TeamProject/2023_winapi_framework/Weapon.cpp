@@ -21,20 +21,6 @@ void Weapon::Update()
 
 void Weapon::Render(HDC _dc)
 {
-	//TransparentBlt(_dc
-	//	, (int)(m_vPos.x - m_vScale.x / 2)
-	//	, (int)(m_vPos.y - m_vScale.y / 2)
-	//	, m_pTex->GetWidth(), m_pTex->GetHeight()
-	//	, m_pTex->GetDC()
-	//	, 0, 0, m_pTex->GetWidth(), m_pTex->GetHeight()
-	//	, RGB(255, 0, 255));
-
-	//BitBlt(_dc
-	//	, (int)(m_vPos.x - m_vScale.x / 2)
-	//	, (int)(m_vPos.y - m_vScale.y / 2)
-	//	, m_pTex->GetWidth(), m_pTex->GetHeight()
-	//	, m_pTex->GetDC()
-	//	, 0, 0, SRCCOPY);
 }
 
 void Weapon::Attack(Vec2 dir)
@@ -44,7 +30,7 @@ void Weapon::Attack(Vec2 dir)
 void Weapon::CreateCollider()
 {
 	m_pCollider = new Collider;
-	//m_pCollider->m_pOwner = this;
+	m_pCollider->SetFinalPos(GetPos());
 }
 
 void Weapon::CreateAnimator()

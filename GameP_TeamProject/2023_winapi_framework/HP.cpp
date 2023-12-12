@@ -8,12 +8,16 @@
 
 #include "Texture.h"
 #include "Object.h"
+
+#include "Camera.h"
 HP::HP()
 	: m_pBackTex(nullptr)
 	, m_pFillTex(nullptr)
 {
 	m_pBackTex = ResMgr::GetInst()->TexLoad(L"PlayerBCHP", L"Texture\\UI_HP-BcFill.bmp");
 	m_pFillTex = ResMgr::GetInst()->TexLoad(L"PlayerHP", L"Texture\\UI_HP-Fill.bmp");
+	//SetMaxHP(m_pOwner->GetMaxHP());
+	//SetHP(m_pOwner->GetMaxHP());
 }
 
 HP::~HP()
@@ -22,17 +26,14 @@ HP::~HP()
 
 void HP::Update()
 {
-
+	SetHP(m_pOwner->GetHP());
 	SetPos({ m_pOwner->GetPos().x, m_pOwner->GetPos().y });
-
-	if (KEY_DOWN(KEY_TYPE::M))
-	{
-		SetHP(GetHP() - 1);
-	}
 }
 
 void HP::Render(HDC _dc)
 {
+	m_vPos = Camera::GetInst()->GetRenderPos(m_vPos);
+
 	 TransparentBlt(_dc
 		 , (int)(m_vPos.x - m_pBackTex->GetWidth() / 2)
 		 , (int)(m_vPos.y - m_vScale.y / 2)

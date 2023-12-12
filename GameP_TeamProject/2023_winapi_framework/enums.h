@@ -29,6 +29,7 @@ enum class OBJECT_GROUP
 	MONSTER,
 	BULLET,
 	UI,
+	PARTICLE,
 	END = 30
 };
 
