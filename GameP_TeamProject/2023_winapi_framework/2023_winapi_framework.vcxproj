@@ -171,11 +171,13 @@
     <ClInclude Include="AI.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
+    <ClInclude Include="Attack_State_Range.h" />
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Chase_State.h" />
+    <ClInclude Include="Chase_State_Melee.h" />
+    <ClInclude Include="Chase_State_Range.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="Core.h" />
@@ -198,6 +200,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PoolMgr.h" />
+    <ClInclude Include="Range_Enemy.h" />
     <ClInclude Include="Res.h" />
     <ClInclude Include="ResMgr.h" />
     <ClInclude Include="Resource.h" />
@@ -218,11 +221,13 @@
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="Attack_State_Range.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Chase_State.cpp" />
+    <ClCompile Include="Chase_State_Melee.cpp" />
+    <ClCompile Include="Chase_State_Range.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="Core.cpp" />
@@ -242,6 +247,7 @@
     <ClCompile Include="PathMgr.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PoolMgr.cpp" />
+    <ClCompile Include="Range_Enemy.cpp" />
     <ClCompile Include="Res.cpp" />
     <ClCompile Include="ResMgr.cpp" />
     <ClCompile Include="Scene.cpp" />

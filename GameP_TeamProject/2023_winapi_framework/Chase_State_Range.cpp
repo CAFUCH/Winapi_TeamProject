@@ -11,6 +11,7 @@
 
 #include "Object.h"
 #include "Core.h"
+
 Chase_State_Range::Chase_State_Range(AI* _ai, float _speed)
 	:ai(_ai)
 	, speed(_speed)
@@ -20,6 +21,7 @@ Chase_State_Range::Chase_State_Range(AI* _ai, float _speed)
 
 Chase_State_Range::~Chase_State_Range()
 {
+
 }
 
 void Chase_State_Range::Update()
