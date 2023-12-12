@@ -55,7 +55,7 @@ void Game_Scene::Init()
 	CollisionMgr::GetInst()->CheckGroup(OBJECT_GROUP::PLAYER, OBJECT_GROUP::MONSTER);
 	CollisionMgr::GetInst()->CheckGroup(OBJECT_GROUP::WEAPON, OBJECT_GROUP::MONSTER);
 }
-void ddd() {
+void ddd() { 
 	//일단 보류
 	StageMgr::GetInst()->NextStage(5, 3, 3.f, ddd);
 	/*wstring ws = to_wstring(10);
