@@ -2,6 +2,7 @@
 #include "Animation.h"
 #include "Animator.h"
 #include "Object.h"
+#include "Weapon.h"
 #include "Texture.h"
 #include "TimeMgr.h"
 #include "Camera.h"
@@ -68,8 +69,12 @@ void Animation::Update()
 
 void Animation::Render(HDC _dc)
 {
-	Object* pObj = m_pAnimator->GetObj();
-	Vec2 vPos = pObj->GetPos();
+	Vec2 vPos;
+
+	if (m_pAnimator->GetObj() != nullptr)
+		vPos = m_pAnimator->GetObj()->GetPos();
+	if (m_pAnimator->GetWeapon() != nullptr)
+		vPos = m_pAnimator->GetWeapon()->GetPos();
 
 	vPos = vPos + m_vecAnimFrame[m_CurFrame].vOffset;
 	vPos = Camera::GetInst()->GetRenderPos(vPos);
@@ -101,5 +106,4 @@ void Animation::Create(Texture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep,
 		m_vecAnimFrame.push_back(tAnimFrame({ _vLT + _vStep * i,
 			_vSliceSize, _fDuration,{0.f,0.f} }));
 	}
-
 }

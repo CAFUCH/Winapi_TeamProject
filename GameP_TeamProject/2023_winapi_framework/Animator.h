@@ -1,5 +1,6 @@
 #pragma once
 class Object;
+class Weapon;
 class Texture;
 class Animation;
 class Animator
@@ -27,14 +28,16 @@ public:
 	bool IsAnim();
 
 public:
-	Object* GetObj() const { return m_pOwner; }
+	Object* GetObj() const { return m_pObjOwner; }
+	Weapon* GetWeapon() const { return m_pWeaOwner; }
 	const bool& GetRepeat() const { return m_IsRepeat; }
 	const int& GetRepeatcnt() const { return m_repeatcnt; }
 	void SetRepeatcnt() { --m_repeatcnt; }
 
 private:
 	// 현재 객체
-	Object* m_pOwner;
+	Object* m_pObjOwner;
+	Weapon* m_pWeaOwner;
 	// 객체 가지고 있는 animation들
 	map<wstring, Animation*> m_mapAnim;
 	// 현재 animation

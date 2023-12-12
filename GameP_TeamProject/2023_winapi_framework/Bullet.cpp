@@ -13,7 +13,7 @@
 #include "Animator.h"
 #include "Animation.h"
 
-Gun::Gun()
+Bullet::Bullet()
 {
 	// 이미지 불러오기
 	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Gun", L"Texture\\gun.bmp");
@@ -35,22 +35,22 @@ Gun::Gun()
 	m_fDelay = 0.3f;
 }
 
-Gun::~Gun()
+Bullet::~Bullet()
 {
 }
 
-void Gun::Update()
+void Bullet::Update()
 {
 	SetPos({ m_pOwner->GetPos().x - 100, m_pOwner->GetPos().y });
 	GetAnimator()->Update();
 }
 
-void Gun::Render(HDC _dc)
+void Bullet::Render(HDC _dc)
 {
 	Component_Render(_dc);
 }
 
-void Gun::Attack(Vec2 dir)
+void Bullet::Attack(Vec2 dir)
 {
 	GetAnimator()->PlayAnim(L"Gun_Attack", false);
 

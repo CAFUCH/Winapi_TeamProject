@@ -2,12 +2,12 @@
 #include "Weapon.h"
 #include "Scene.h"
 class Texture;
-class Gun :
+class Bullet :
     public Weapon
 {
 public:
-    Gun();
-    ~Gun();
+    Bullet();
+    ~Bullet();
 
 public:
     void Update() override;
@@ -19,3 +19,4 @@ public:
 private:
     Texture* m_pBullet;
 };
+

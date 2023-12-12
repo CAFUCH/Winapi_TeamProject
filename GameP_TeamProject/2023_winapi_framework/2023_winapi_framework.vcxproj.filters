@@ -167,9 +167,6 @@
     <ClInclude Include="Button.h">
       <Filter>Engine\09. UI</Filter>
     </ClInclude>
-    <ClInclude Include="Chase_State.h">
-      <Filter>Engine\10.FSM\State</Filter>
-    </ClInclude>
     <ClInclude Include="Game_Scene.h" />
     <ClInclude Include="Idle_State.h">
       <Filter>Engine\10.FSM\State</Filter>
@@ -198,6 +195,11 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Attack_State_Range.h" />
+    <ClInclude Include="Chase_State_Melee.h" />
+    <ClInclude Include="Chase_State_Range.h" />
+    <ClInclude Include="Range_Enemy.h" />
+    <ClInclude Include="Bullet.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2023_winapi_framework.rc">
@@ -286,9 +288,6 @@
     <ClCompile Include="Button.cpp">
       <Filter>Engine\09. UI</Filter>
     </ClCompile>
-    <ClCompile Include="Chase_State.cpp">
-      <Filter>Engine\10.FSM\State</Filter>
-    </ClCompile>
     <ClCompile Include="Game_Scene.cpp" />
     <ClCompile Include="Idle_State.cpp">
       <Filter>Engine\10.FSM\State</Filter>
@@ -317,5 +316,10 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Attack_State_Range.cpp" />
+    <ClCompile Include="Chase_State_Melee.cpp" />
+    <ClCompile Include="Chase_State_Range.cpp" />
+    <ClCompile Include="Range_Enemy.cpp" />
+    <ClCompile Include="Bullet.cpp" />
   </ItemGroup>
 </Project>

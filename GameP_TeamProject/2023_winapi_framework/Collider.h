@@ -1,5 +1,6 @@
 #pragma once
 class Object;
+class Weapon;
 
 class Collider
 {
@@ -27,18 +28,19 @@ public:
 	void SetFinalPos(Vec2 _vOffsetPos) { m_vOffsetPos = _vOffsetPos; }
 
 	const UINT& GetID() const { return m_ID; }
-	Object* GetObj() const { return m_pOwner; }
+	Object* GetObj() const { return m_pObjOwner; }
+	Weapon* GetWeapon() const { return m_pWeaOwner; }
 
 private:
 	UINT m_check;
-	Object* m_pOwner;
-	//T* m_pOwner;
+	Object* m_pObjOwner;
+	Weapon* m_pWeaOwner;
 	Vec2 m_vOffsetPos; // 오프셋
 	Vec2 m_vFinalPos; // 파이널 위치
 	Vec2 m_vScale; // 크기
 
 	friend class Object;
-	//friend class Weapon;
+	friend class Weapon;
 
 	UINT m_ID; // 충돌체 ID값
 	static UINT m_sNextID;
