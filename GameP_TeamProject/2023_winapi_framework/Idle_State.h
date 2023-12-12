@@ -17,5 +17,6 @@ private:
 	float waitTime;
 	float curTime;
 	float m_fMaxDis;
+	Enemy* owner;
 	//sf::Clock m_clock;
 };

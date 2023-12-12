@@ -30,8 +30,8 @@ void Chase_State_Range::Update()
 	const Player* pObj = owner->GetPlayer();
 	Vec2 pPos = pObj->GetPos();
 
-	Vec2 dir = (pPos - thisPos).Normalize();
 
+	Vec2 dir = (pPos - thisPos).Normalize();
 	if (pPos.Distance(thisPos, pPos) > 300.f) {
 		thisPos.x += fDT * speed * dir.x;
 		thisPos.y += fDT * speed * dir.y;
@@ -43,7 +43,7 @@ void Chase_State_Range::Update()
 
 	if (dir.x > 0) //¿À¸¥ÂÊ
 		owner->GetAnimator()->PlayAnim(owner->ANIM_RIGHT_HASH, true);
-	else if (dir.x < 0)//¿ÞÂÊ							
+	else if(dir.x < 0)
 		owner->GetAnimator()->PlayAnim(owner->ANIM_LEFT_HASH, true);
 
 	owner->SetPos(thisPos);
