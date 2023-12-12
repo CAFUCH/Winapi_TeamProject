@@ -28,8 +28,8 @@ enum class OBJECT_GROUP
 	WEAPON,
 	MONSTER,
 	BULLET,
-	UI,
 	PARTICLE,
+	UI,
 	END = 30
 };
 
