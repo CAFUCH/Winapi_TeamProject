@@ -4,7 +4,7 @@ class Idle_State :
 	public State
 {
 public:
-	Idle_State(AI* _ai);
+	Idle_State(AI* _ai,float _waitTime);
 	~Idle_State();
 
 public:
@@ -15,6 +15,7 @@ public:
 private:
 	AI* ai;
 	float waitTime;
+	float curTime;
 	float m_fMaxDis;
 	//sf::Clock m_clock;
 };

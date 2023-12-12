@@ -10,6 +10,7 @@
 #include "Animator.h"
 
 #include "Object.h"
+#include "Core.h"
 Chase_State_Range::Chase_State_Range(AI* _ai, float _speed)
 	:ai(_ai)
 	, speed(_speed)
@@ -29,7 +30,7 @@ void Chase_State_Range::Update()
 
 	Vec2 dir = (pPos - thisPos).Normalize();
 
-	if (pPos.Distance(thisPos, pPos) > (double)5.f) {
+	if (pPos.Distance(thisPos, pPos) > 300.f) {
 		thisPos.x += fDT * speed * dir.x;
 		thisPos.y += fDT * speed * dir.y;
 	}

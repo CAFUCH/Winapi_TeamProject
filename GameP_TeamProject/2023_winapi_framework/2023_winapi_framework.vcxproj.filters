@@ -197,6 +197,8 @@
     <ClInclude Include="StageMgr.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Chase_State_Range.h" />
+    <ClInclude Include="Range_Enemy.h" />
+    <ClInclude Include="Attack_State_Melee.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2023_winapi_framework.rc">
@@ -315,5 +317,7 @@
     <ClCompile Include="StageMgr.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Chase_State_Range.cpp" />
+    <ClCompile Include="Range_Enemy.cpp" />
+    <ClCompile Include="Attack_State_Melee.cpp" />
   </ItemGroup>
 </Project>
