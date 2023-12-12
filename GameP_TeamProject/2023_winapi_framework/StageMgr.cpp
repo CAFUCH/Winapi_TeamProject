@@ -67,25 +67,26 @@ void StageMgr::NextStage(int _enemyCount, int _spawnCount, float _spawnDelay, vo
 void StageMgr::EnemySpawn(int eCount)
 {
 	for (int i = 1; i <= eCount; ++i) {
-		//Melee_Enemy* enemy = new Melee_Enemy(i % 7 + 1, ENTITY_ELEMENT_TYPE::FIRE
-		//	, 100, .01f, 3.f);
 
-		//enemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 + rand() % 500, (int)WINDOW_HEIGHT / 2 + rand() % 400));
-		//enemy->SetScale(Vec2(64, 64));
-		//SceneMgr::GetInst()->GetCurScene()->AddObject(enemy, OBJECT_GROUP::MONSTER);
+	/*	Melee_Enemy* enemy = new Melee_Enemy(i % 7 + 1, ENTITY_ELEMENT_TYPE::FIRE
+			, 100, .01f, 3.f);
 
-		//AI* ai = new AI(enemy);
-		//ai->AddState(ENEMY_STATE::CHASE, new Chase_State_Melee(ai, rand() % 100 + 5));
-		//ai->InitState(ENEMY_STATE::CHASE);
+		enemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 + rand() % 500, (int)WINDOW_HEIGHT / 2 + rand() % 400));
+		enemy->SetScale(Vec2(64, 64));
+		SceneMgr::GetInst()->GetCurScene()->AddObject(enemy, OBJECT_GROUP::MONSTER);
+
+		AI* ai = new AI(enemy);
+		ai->AddState(ENEMY_STATE::CHASE, new Chase_State_Melee(ai, rand() % 100 + 5));
+		ai->InitState(ENEMY_STATE::CHASE);
 
 
-		//HP* pHP = new HP();
-		//pHP->SetOwner(enemy);
-		//pHP->SetPos({ enemy->GetPos().x, enemy->GetPos().y - enemy->GetScale().y / 2 });
-		//pHP->SetScale({ 100.f, 100.f });
-		//pHP->SetMaxHP(20.f);
-		//pHP->SetHP(pHP->GetMaxHP());
-		//SceneMgr::GetInst()->GetCurScene()->AddObject(pHP, OBJECT_GROUP::UI);
+		HP* pHP = new HP();
+		pHP->SetOwner(enemy);
+		pHP->SetPos({ enemy->GetPos().x, enemy->GetPos().y - enemy->GetScale().y / 2 });
+		pHP->SetScale({ 100.f, 100.f });
+		pHP->SetMaxHP(20.f);
+		pHP->SetHP(pHP->GetMaxHP());
+		SceneMgr::GetInst()->GetCurScene()->AddObject(pHP, OBJECT_GROUP::UI);*/
 
 		//원거리-------------------------------------------------------------------------------------
 
@@ -100,7 +101,7 @@ void StageMgr::EnemySpawn(int eCount)
 		ai2->AddState(ENEMY_STATE::CHASE, new Chase_State_Range(ai2, rand() % 100 + 5));
 		ai2->AddState(ENEMY_STATE::IDLE, new Idle_State(ai2, 2.f));
 		ai2->AddState(ENEMY_STATE::ATTACK, new Attack_State_Range(ai2)); //댐지, 기다리는 시간
-		ai2->InitState(ENEMY_STATE::CHASE);
+		ai2->InitState(ENEMY_STATE::IDLE);
 
 
 		HP* pHP2 = new HP();
