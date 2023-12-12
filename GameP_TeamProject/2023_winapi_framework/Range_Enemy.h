@@ -3,12 +3,12 @@
 #include "Object.h"
 #include "Player.h"
 class Texture;
-class Melee_Enemy :
-	public Enemy
+class Range_Enemy :
+    public Enemy
 {
 public:
-	Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, float _damage, float _atkDelay);
-	~Melee_Enemy();
+	Range_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, float _damage, float _atkDelay);
+	~Range_Enemy();
 public:
 	//void SetOffTexture(Texture* _tex) { cur_tex = _tex; }
 public:
@@ -28,6 +28,5 @@ private:
 	Texture* m_pTex;
 	Vec2 _playerPos;
 	ENTITY_ELEMENT_TYPE type;
-
 };
 

@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Chase_State.h"
+#include "Chase_State_Range.h"
 #include "AI.h"
 #include "Enemy.h"
 #include "Player.h"
@@ -10,35 +10,34 @@
 #include "Animator.h"
 
 #include "Object.h"
-
-Chase_State::Chase_State(AI* _ai, float _speed)
+#include "Core.h"
+Chase_State_Range::Chase_State_Range(AI* _ai, float _speed)
 	:ai(_ai)
 	, speed(_speed)
 {
 	owner = ai->GetOnwer();
 }
 
-Chase_State::~Chase_State()
+Chase_State_Range::~Chase_State_Range()
 {
-
 }
 
-void Chase_State::Update()
+void Chase_State_Range::Update()
 {
 	Vec2 thisPos = owner->GetPos();
 	const Player* pObj = owner->GetPlayer();
-	Vec2 pPos = pObj->GetPos(); //이거 안됌 
+	Vec2 pPos = pObj->GetPos();
 
 	Vec2 dir = (pPos - thisPos).Normalize();
 
-	if (pPos.Distance(thisPos, pPos) > (double).3f)
+	if (pPos.Distance(thisPos, pPos) > 300.f) {
 		thisPos.x += fDT * speed * dir.x;
-	thisPos.y += fDT * speed * dir.y;
-
-	//if (dir.y > 0)//아래	
-	//	owner->GetAnimator()->PlayAnim(owner->ANIM_FRONT_HASH, true);
-	//else if (dir.y < 0)//위				 
-	//	owner->GetAnimator()->PlayAnim(owner->ANIM_BACK_HASH, true);
+		thisPos.y += fDT * speed * dir.y;
+	}
+	else
+	{
+		ai->ChangeState(ENEMY_STATE::IDLE);
+	}
 
 	if (dir.x > 0) //오른쪽
 		owner->GetAnimator()->PlayAnim(owner->ANIM_RIGHT_HASH, true);
@@ -48,12 +47,10 @@ void Chase_State::Update()
 	owner->SetPos(thisPos);
 }
 
-void Chase_State::EnterState()
+void Chase_State_Range::EnterState()
 {
-
 }
 
-void Chase_State::ExitState()
+void Chase_State_Range::ExitState()
 {
-
 }

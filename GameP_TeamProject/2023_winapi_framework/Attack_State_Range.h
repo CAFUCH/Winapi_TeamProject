@@ -1,11 +1,11 @@
 #pragma once
 #include "State.h"
-class Chase_State :
-	public State
+class Attack_State_Range :
+    public State
 {
 public:
-	Chase_State(AI* _ai, float _speed);
-	~Chase_State();
+	Attack_State_Range(AI* _ai);
+	~Attack_State_Range();
 
 public:
 	void Update() override;
@@ -15,7 +15,7 @@ public:
 private:
 	AI* ai;
 	Enemy* owner;
-	float speed;
-	bool filpX;
+	float waitTime;
+	float curTime;
 };
 

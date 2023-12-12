@@ -27,6 +27,8 @@ bool cmp1(std::pair<Vec2, double>& left, std::pair<Vec2, double>& right)
 Player::Player()
 	: m_pTex(nullptr)
 {
+	m_fHp = 30;
+	m_fHpMax = 30;
 	// 이미지 불러오기
 	m_pTex = ResMgr::GetInst()->TexLoad(L"PlayerT", L"Texture\\Player.bmp");
 
@@ -192,7 +194,7 @@ void Player::Update()
 		if (m_velocity.x != 0 || m_velocity.y != 0)
 		{
 			m_velocity.Normalize();
-			vPos = vPos + Vec2{m_velocity.x * m_fMoveSpeed * fDT, m_velocity.y * m_fMoveSpeed * fDT};
+			vPos = vPos + Vec2{ m_velocity.x * m_fMoveSpeed * fDT, m_velocity.y * m_fMoveSpeed * fDT };
 		}
 	}
 
@@ -341,6 +343,8 @@ void Player::EnterCollision(Collider* _pOther)
 
 void Player::StayCollision(Collider* _pOther)
 {
+	auto obj = _pOther->GetObj();
+	obj->SetDamage(100);
 }
 
 void Player::ExitCollision(Collider* _pOther)

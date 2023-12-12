@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "EventMgr.h"
 #include "Object.h"
+#include "StageMgr.h"
+
 void EventMgr::Update()
 {
 	for (size_t i = 0; i < m_vecDead.size(); ++i)
@@ -22,6 +24,10 @@ void EventMgr::DeleteObject(Object* _pObj)
 	eve.eEve = EVENT_TYPE::DELETE_OBJECT;
 	eve.Obj = _pObj;
 	m_vecEvent.push_back(eve);
+
+	if (_pObj->GetName() == L"Enemy") {
+		StageMgr::GetInst()->enemyCountInWave--;
+	}
 }
 
 void EventMgr::Excute(const tEvent& _eve)
@@ -34,7 +40,7 @@ void EventMgr::Excute(const tEvent& _eve)
 		pDeadObj->SetDead();
 		m_vecDead.push_back(pDeadObj);
 	}
-		break;
+	break;
 	case EVENT_TYPE::CREATE_OBJECT:
 		break;
 	case EVENT_TYPE::SCENE_CHANGE:

@@ -17,8 +17,8 @@ public:
 public:
 	wstring ANIM_RIGHT_HASH;
 	wstring ANIM_LEFT_HASH;
-	wstring ANIM_BACK_HASH;
-	wstring ANIM_FRONT_HASH;
+	wstring ANIM_RIGHT_HIT_HASH;
+	wstring ANIM_LEFT_HIT_HASH;
 protected:
 	Player* _player;
 	AI* _ai;
