@@ -191,6 +191,7 @@
     <ClInclude Include="Gun.h" />
     <ClInclude Include="HP.h" />
     <ClInclude Include="Idle_State.h" />
+    <ClInclude Include="Intro_Scene.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="Knife.h" />
     <ClInclude Include="Melee_Enemy.h" />
@@ -238,6 +239,7 @@
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="HP.cpp" />
     <ClCompile Include="Idle_State.cpp" />
+    <ClCompile Include="Intro_Scene.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="Knife.cpp" />
     <ClCompile Include="main.cpp" />
