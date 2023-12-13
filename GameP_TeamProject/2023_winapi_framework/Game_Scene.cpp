@@ -3,6 +3,8 @@
 #include "Core.h"
 #include "Camera.h"
 
+#include "ResMgr.h"
+
 #include "Player.h"
 
 #include "Gun.h"
@@ -21,8 +23,19 @@
 
 #include "StageMgr.h"
 
+#include "Panel.h"
+#include "Button.h"
 
-void ddd();
+vector<UI*> Game_Scene::m_ui;
+
+void OnPanel() {
+	Game_Scene::SetActive_Panel(true);
+}
+void OffPanel() {
+	StageMgr::GetInst()->NextStage(3, 3, 0.1f, OnPanel);
+	Game_Scene::SetActive_Panel(false);
+}
+
 void Game_Scene::Init()
 {
 	// 플레이어 생성 및 초기화
@@ -53,9 +66,44 @@ void Game_Scene::Init()
 		m_mWeapon.insert({ L"Bomb", pBomb });
 	}
 
+	Panel* bg = new Panel();
+	bg->SetTexture(ResMgr::GetInst()->TexLoad(L"Select_Panel", L"Texture\\Select_Panel.bmp"));
+
+	AddObject(bg, OBJECT_GROUP::Panel);
+	Game_Scene::AddUI(bg);
+
+	Button* gunBtn = new Button(Vec2(300, 400),
+		Vec2(350, 500));
+	gunBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"GunBtn_on", L"Texture\\GunBtn_hover.bmp"));
+	gunBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"GunBtn_off", L"Texture\\GunBtn.bmp"));
+	gunBtn->onReister = OffPanel;
+
+	AddObject(gunBtn, OBJECT_GROUP::UI);
+	Game_Scene::AddUI(gunBtn);
+
+	Button* knifeBtn = new Button(Vec2((int)WINDOW_WIDTH / 2, 400),
+		Vec2(350, 500));
+	knifeBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"KnifeBtn_on", L"Texture\\KnifeBtn_hover.bmp"));
+	knifeBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"KnifeBtn_off", L"Texture\\KnifeBtn.bmp"));
+	knifeBtn->onReister = OffPanel;
+
+	AddObject(knifeBtn, OBJECT_GROUP::UI);
+	Game_Scene::AddUI(knifeBtn);
+
+	Button* bombBtn = new Button(Vec2((int)WINDOW_WIDTH - 300, 400),
+		Vec2(350, 500));
+	bombBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"BombBtn_on", L"Texture\\BombBtn_hover.bmp"));
+	bombBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"BombBtn_off", L"Texture\\BombBtn.bmp"));
+	bombBtn->onReister = OffPanel;
+	AddObject(bombBtn, OBJECT_GROUP::UI);
+	Game_Scene::AddUI(bombBtn);
+
+	Game_Scene::SetActive_Panel(false); //판넬 지우기
+
+
 	// 적 생성 및 초기화 (테스트 버전)
 	{
-		StageMgr::GetInst()->NextStage(5, 3, 3.f, ddd);
+		StageMgr::GetInst()->NextStage(1, 1, 0.f, OnPanel);
 	}
 	// 사운드 세팅
 	//ResMgr::GetInst()->Play(L"BGM");
@@ -65,12 +113,6 @@ void Game_Scene::Init()
 	CollisionMgr::GetInst()->CheckGroup(OBJECT_GROUP::PLAYER, OBJECT_GROUP::MONSTER);
 	CollisionMgr::GetInst()->CheckGroup(OBJECT_GROUP::WEAPON, OBJECT_GROUP::MONSTER);
 }
-void ddd() { 
-	//일단 보류
-	StageMgr::GetInst()->NextStage(5, 3, 3.f, ddd);
-	/*wstring ws = to_wstring(10);
-	TextOut(Core::GetInst()->GetMainDC(), 400, 100, ws.c_str(), ws.length());*/
-}
 void Game_Scene::Update()
 {
 	Scene::Update();
@@ -79,6 +121,7 @@ void Game_Scene::Update()
 void Game_Scene::Render(HDC _dc)
 {
 	Scene::Render(_dc);
+
 }
 
 void Game_Scene::Release()

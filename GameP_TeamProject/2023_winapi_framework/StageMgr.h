@@ -30,6 +30,7 @@ private:
 	bool isStageStart;
 	bool allDead;
 
+
 	void* action;
 };
 

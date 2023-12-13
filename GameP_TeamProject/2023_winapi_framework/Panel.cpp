@@ -20,11 +20,14 @@ void Panel::Update()
 
 void Panel::Render(HDC _dc)
 {
-	if (nullptr != tex) {
-		float Width = tex->GetWidth();
-		float Height = tex->GetHeight();
+	if (enabled == true) {
 
-		BitBlt(_dc, 0, 0, (int)Width, (int)Height, tex->GetDC(), 0, 0, SRCCOPY);
+		if (nullptr != tex) {
+			float Width = tex->GetWidth();
+			float Height = tex->GetHeight();
+
+			BitBlt(_dc, 0, 0, (int)Width, (int)Height, tex->GetDC(), 0, 0, SRCCOPY);
+		}
 	}
 }
 

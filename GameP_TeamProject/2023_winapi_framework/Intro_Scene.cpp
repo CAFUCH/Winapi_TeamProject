@@ -41,8 +41,8 @@ void Intro_Scene::Init()
 
 	Button* exitBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2 + 250),
 		Vec2(350, 120));
-	exitBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"BackBtn_on", L"Texture\\ExitBtn_hover.bmp"));
-	exitBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"BackBtn_off", L"Texture\\ExitBtn.bmp"));
+	exitBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"ExitBtn_on", L"Texture\\ExitBtn_hover.bmp"));
+	exitBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"ExitBtn_off", L"Texture\\ExitBtn.bmp"));
 	exitBtn->onReister = HandleSceneChangedExit;
 	AddObject(exitBtn, OBJECT_GROUP::UI);
 

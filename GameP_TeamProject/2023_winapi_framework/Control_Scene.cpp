@@ -11,7 +11,7 @@ void HandleSceneChangedIntroScene() {
 	SceneMgr::GetInst()->LoadScene(L"Intro_Scene");
 }
 void HandleSceneChangedNextScene() {
-	SceneMgr::GetInst()->LoadScene(L"Control_Scene");
+	SceneMgr::GetInst()->LoadScene(L"Explain_Scene");
 }
 
 void Control_Scene::Init()

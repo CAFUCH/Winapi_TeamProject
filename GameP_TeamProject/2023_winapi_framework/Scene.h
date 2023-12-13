@@ -1,12 +1,15 @@
 #pragma once
 //#include "Object.h"
+
+class UI;
 class Object;
 class Weapon;
 class Scene
 {
+
 public:
 	Scene();
-	virtual ~Scene();	
+	virtual ~Scene();
 	// Init(), Update(), Render(), Release();
 	virtual void Init() abstract;
 	virtual void Update();
@@ -29,7 +32,7 @@ public:
 		return m_mWeapon;
 	}
 protected:
-//	Object*  m_obj;
+	//	Object*  m_obj;
 	vector<Object*> m_vecObj[(UINT)OBJECT_GROUP::END];
 	map<wstring, Weapon*> m_mWeapon;
 };
