@@ -178,6 +178,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Chase_State_Melee.h" />
     <ClInclude Include="Chase_State_Range.h" />
+    <ClInclude Include="Clear_Scene.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="Control_Scene.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="EventMgr.h" />
     <ClInclude Include="Explain_Scene.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="GameOver_Scene.h" />
     <ClInclude Include="Game_Scene.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="HP.h" />
@@ -232,6 +234,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Chase_State_Melee.cpp" />
     <ClCompile Include="Chase_State_Range.cpp" />
+    <ClCompile Include="Clear_Scene.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="Control_Scene.cpp" />
@@ -240,6 +243,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventMgr.cpp" />
     <ClCompile Include="Explain_Scene.cpp" />
+    <ClCompile Include="GameOver_Scene.cpp" />
     <ClCompile Include="Game_Scene.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="HP.cpp" />
