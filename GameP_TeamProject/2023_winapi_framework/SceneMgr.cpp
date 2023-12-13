@@ -1,14 +1,17 @@
 #include "pch.h"
 #include "SceneMgr.h"
+
 #include "Game_Scene.h"
 #include "Test_Scene.h"
 #include "Intro_Scene.h"
+#include "Control_Scene.h"
 void SceneMgr::Init()
 {
 	m_pCurScene = nullptr;
 	// ¾À µî·Ï
 	RegisterScene(L"Game_Scene", std::make_shared<Game_Scene>());
 	RegisterScene(L"Intro_Scene", std::make_shared<Intro_Scene>());
+	RegisterScene(L"Control_Scene", std::make_shared<Control_Scene>());
 	// Ã¹ ¾À ÁöÁ¤
 	LoadScene(L"Intro_Scene");
 }

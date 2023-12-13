@@ -44,7 +44,7 @@ void StageMgr::Update()
 		}
 	}
 	wstring ws = to_wstring(enemyCountInWave);
-	TextOut(Core::GetInst()->GetMainDC(), 100, 100, ws.c_str(), ws.length());
+	//TextOut(Core::GetInst()->GetMainDC(), 100, 100, ws.c_str(), ws.length());
 }
 
 void StageMgr::NextStage(int _enemyCount, int _spawnCount, float _spawnDelay, void* (_action))

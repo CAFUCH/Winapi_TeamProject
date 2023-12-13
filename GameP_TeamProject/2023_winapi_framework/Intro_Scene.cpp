@@ -5,36 +5,47 @@
 #include "Texture.h"
 #include "SceneMgr.h"
 #include "ResMgr.h"
-
+#include "Panel.h"
 
 void HandleSceneChangedGameScene() {
-	//페이드하면 좋을듯
 	SceneMgr::GetInst()->LoadScene(L"Game_Scene");
+}
+void HandleSceneChangedExplainScene() {
+	SceneMgr::GetInst()->LoadScene(L"Control_Scene");
+}
+void HandleSceneChangedExit() {
+	exit(0);
 }
 void Intro_Scene::Init()
 {
-	intro_tex = ResMgr::GetInst()->TexLoad(L"Intro_Panel", L"Texture\\Intro_Panel.bmp");
 
-	Button* playBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2),
+	Panel* bg = new Panel();
+	bg->SetTexture(ResMgr::GetInst()->TexLoad(L"Intro_Panel", L"Texture\\Intro_Panel.bmp"));
+
+	AddObject(bg, OBJECT_GROUP::Panel);
+
+	Button* playBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2 - 50),
 		Vec2(350, 120));
 	playBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"StartBtn_on", L"Texture\\StartBtn_hover.bmp"));
 	playBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"StartBtn_off", L"Texture\\StartBtn.bmp"));
 	playBtn->onReister = HandleSceneChangedGameScene;
 	AddObject(playBtn, OBJECT_GROUP::UI);
 
-	Button* settingBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2 + 120),
+	Button* explainBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2 + 100),
 		Vec2(350, 120));
-	settingBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"SettingBtn_on", L"Texture\\SettingBtn_hover.bmp"));
-	settingBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"SettingBtn_off", L"Texture\\SettingBtn.bmp"));
-	settingBtn->onReister = HandleSceneChangedGameScene;
-	AddObject(settingBtn, OBJECT_GROUP::UI);
+	explainBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"SettingBtn_on", L"Texture\\SettingBtn_hover.bmp"));
+	explainBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"SettingBtn_off", L"Texture\\SettingBtn.bmp"));
+	explainBtn->onReister = HandleSceneChangedExplainScene;
+	AddObject(explainBtn, OBJECT_GROUP::UI);
 
-	Button* exitBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2 + 240),
+
+	Button* exitBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT / 2 + 250),
 		Vec2(350, 120));
 	exitBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"BackBtn_on", L"Texture\\ExitBtn_hover.bmp"));
 	exitBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"BackBtn_off", L"Texture\\ExitBtn.bmp"));
-	exitBtn->onReister = HandleSceneChangedGameScene;
+	exitBtn->onReister = HandleSceneChangedExit;
 	AddObject(exitBtn, OBJECT_GROUP::UI);
+
 }
 
 void Intro_Scene::Update()
@@ -45,11 +56,6 @@ void Intro_Scene::Update()
 void Intro_Scene::Render(HDC _dc)
 {
 	Scene::Render(_dc);
-
-	float Width = intro_tex->GetWidth();
-	float Height = intro_tex->GetHeight();
-
-	BitBlt(_dc, 0, 0, (int)Width, (int)Height, intro_tex->GetDC(),0,0, SRCCOPY);
 }
 
 void Intro_Scene::Release()

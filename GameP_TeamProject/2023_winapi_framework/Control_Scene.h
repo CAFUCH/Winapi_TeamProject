@@ -1,7 +1,6 @@
 #pragma once
 #include "Scene.h"
-class Texture;
-class Intro_Scene :
+class Control_Scene :
     public Scene
 {
     virtual void Init() override;

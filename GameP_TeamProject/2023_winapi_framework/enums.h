@@ -29,6 +29,7 @@ enum class OBJECT_GROUP
 	MONSTER,
 	BULLET,
 	PARTICLE,
+	Panel,
 	UI,
 	END = 30
 };

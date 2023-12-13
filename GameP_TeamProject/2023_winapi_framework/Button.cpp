@@ -60,14 +60,17 @@ void Button::Render(HDC _dc)
 	//버튼을 그려줌
 	Vec2 vPos = GetPos();
 	Vec2 vScale = GetScale();
-	int Width = cur_tex->GetWidth();
-	int Height = cur_tex->GetHeight();
-	////ELLIPSE_RENDER(vPos.x, vPos.y, vScale.x, vScale.y, _dc);
-	TransparentBlt(_dc
-		, (int)(vPos.x - vScale.x / 2)
-		, (int)(vPos.y - vScale.y / 2)
-		, Width, Height, cur_tex->GetDC()
-		, 0, 0, Width, Height, RGB(255, 0, 255));
+
+	if (nullptr != cur_tex) {
+		int Width = cur_tex->GetWidth();
+		int Height = cur_tex->GetHeight();
+		////ELLIPSE_RENDER(vPos.x, vPos.y, vScale.x, vScale.y, _dc);
+		TransparentBlt(_dc
+			, (int)(vPos.x - vScale.x / 2)
+			, (int)(vPos.y - vScale.y / 2)
+			, Width, Height, cur_tex->GetDC()
+			, 0, 0, Width, Height, RGB(255, 0, 255));
+	}
 }
 
 void Button::OnClickEnter() //클릭했을때

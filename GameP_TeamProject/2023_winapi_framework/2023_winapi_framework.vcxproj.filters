@@ -200,6 +200,8 @@
     <ClInclude Include="Chase_State_Range.h" />
     <ClInclude Include="Range_Enemy.h" />
     <ClInclude Include="Intro_Scene.h" />
+    <ClInclude Include="Panel.h" />
+    <ClInclude Include="Control_Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2023_winapi_framework.rc">
@@ -321,5 +323,7 @@
     <ClCompile Include="Chase_State_Range.cpp" />
     <ClCompile Include="Range_Enemy.cpp" />
     <ClCompile Include="Intro_Scene.cpp" />
+    <ClCompile Include="Panel.cpp" />
+    <ClCompile Include="Control_Scene.cpp" />
   </ItemGroup>
 </Project>
