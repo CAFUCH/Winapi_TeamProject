@@ -6,9 +6,6 @@ class ElementMgr
 	SINGLE(ElementMgr);
 
 public:
-	const float T(ENTITY_ELEMENT_TYPE _this, ENTITY_ELEMENT_TYPE _other, float _damage)
-	{
-		//if ()
-	}
+	const float Elemenet(ENTITY_ELEMENT_TYPE _this, ENTITY_ELEMENT_TYPE _other, float _damage);
 };
 

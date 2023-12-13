@@ -1,15 +1,15 @@
 #include "pch.h"
 #include "EventMgr.h"
 #include "Object.h"
+#include "Weapon.h"
 #include "StageMgr.h"
-
 void EventMgr::Update()
 {
-	for (size_t i = 0; i < m_vecDead.size(); ++i)
+	for (size_t i = 0; i < m_vecObjDead.size(); ++i)
 	{
-		delete m_vecDead[i];
+		delete m_vecObjDead[i];
 	}
-	m_vecDead.clear();
+	m_vecObjDead.clear();
 
 	for (size_t i = 0; i < m_vecEvent.size(); ++i)
 	{
@@ -30,15 +30,36 @@ void EventMgr::DeleteObject(Object* _pObj)
 	}
 }
 
+void EventMgr::DeleteWeapon(Weapon* _pWea)
+{
+	tEvent eve = {};
+	eve.eEve = EVENT_TYPE::DELETE_OBJECT;
+	eve.Wea = _pWea;
+	m_vecEvent.push_back(eve);
+
+	if (_pWea->GetName() == L"Bullet") {
+		StageMgr::GetInst()->enemyCountInWave--;
+	}
+}
+
 void EventMgr::Excute(const tEvent& _eve)
 {
 	switch (_eve.eEve)
 	{
 	case EVENT_TYPE::DELETE_OBJECT:
 	{
-		Object* pDeadObj = _eve.Obj;
-		pDeadObj->SetDead();
-		m_vecDead.push_back(pDeadObj);
+		if (_eve.Obj != nullptr)
+		{
+			Object* pDeadObj = _eve.Obj;
+			pDeadObj->SetDead();
+			m_vecObjDead.push_back(pDeadObj);
+		}
+		if (_eve.Wea != nullptr)
+		{
+			Weapon* pDeadWea = _eve.Wea;
+			pDeadWea->SetDead();
+			m_vecWeaDead.push_back(pDeadWea);
+		}
 	}
 	break;
 	case EVENT_TYPE::CREATE_OBJECT:

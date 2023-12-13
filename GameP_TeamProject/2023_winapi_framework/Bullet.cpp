@@ -1,38 +1,41 @@
 #include "pch.h"
-#include "Gun.h"
+#include "Bullet.h"
 #include "Scene.h"
 
 #include "ResMgr.h"
 #include "SceneMgr.h"
 #include "TimeMgr.h"
 #include "KeyMgr.h"
+#include "EventMgr.h"
+#include "ElementMgr.h"
 
 #include "Object.h"
 #include "Texture.h"
+#include "Particle.h"
 #include "Collider.h"
 #include "Animator.h"
 #include "Animation.h"
 
-Bullet::Bullet()
+Bullet::Bullet(wstring _name, Vec2 dir, Vec2 pos, Vec2 scale)
 {
 	// 이미지 불러오기
-	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Gun", L"Texture\\gun.bmp");
+	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Bullet", L"Texture\\" + _name + L".bmp");
+	// 방향 초기화
+	m_vDir = dir;
+	// 이름 초기화
+	SetName(_name);
+	// 위치 초기화
+	SetPos(pos);
+	// 크기 초기화
+	SetScale(scale);
+	// 속도 초기화
+	m_fAttackSpeed = 300.f;
 
-	// 콜라이더 생성
-	CreateCollider();
-	// 콜라이더 사이즈 초기화
-	GetCollider()->SetScale(Vec2(50.f, 50.f));
+	m_fcurTime = 0.f;
+	m_fLifeTime = 3.f;
 
-	// 애니메이터 생성
-	CreateAnimator();
-	/*Gun Animation*/ {
-		GetAnimator()->CreateAnim(L"Gun_Attack", m_pTex, Vec2(0.f, 0.f),
-			Vec2(64.f, 32.f), Vec2(64.f, 0.f), 12, 0.025f);
-		GetAnimator()->PlayAnim(L"Gun_Attack", false);
-	}
-
-	m_fDistance = 500.f;
-	m_fDelay = 0.3f;
+	// 현재 씬 불러오기
+	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
 }
 
 Bullet::~Bullet()
@@ -41,24 +44,60 @@ Bullet::~Bullet()
 
 void Bullet::Update()
 {
-	SetPos({ m_pOwner->GetPos().x - 100, m_pOwner->GetPos().y });
-	GetAnimator()->Update();
+	m_fcurTime += fDT;
+	if (m_fcurTime >= m_fLifeTime)
+		EventMgr::GetInst()->DeleteWeapon(this);
+
+	m_vPos = GetPos();
+	//m_vDir.Normalize();
+	//SetPos(m_vPos
+	//	+ Vec2{ m_vDir.x * m_fAttackSpeed * fDT, m_vDir.y * m_fAttackSpeed * fDT });
+	SetPos(m_vDir);
 }
 
 void Bullet::Render(HDC _dc)
 {
-	Component_Render(_dc);
+	TransparentBlt(_dc, (int)(m_vPos.x - m_vScale.x / 2)
+		, (int)(m_vPos.y - m_vScale.y / 2)
+		, m_pTex->GetWidth() * (m_vScale.x / 100)
+		, m_pTex->GetHeight() * (m_vScale.y / 100)
+		, m_pTex->GetDC(), 0, 0, m_pTex->GetWidth()
+		, m_pTex->GetHeight(), RGB(255, 0, 255));
+}
+
+void Bullet::EnterCollision(Collider* _pOther)
+{
+	Object* pOtherObj = _pOther->GetObj();
+
+	// 총알과 충돌한 것이 적 오브젝트라면
+	if (pOtherObj->GetName() == L"Enemy")
+	{
+		// 상성 효과
+		m_fDamage = ElementMgr::GetInst()->Elemenet
+		(this->m_eElement, pOtherObj->m_eElement, pOtherObj->GetDamage());
+
+		// 데미지 주기
+		pOtherObj->SetDamage(m_fDamage);
+
+		// Hit 파티클 생성
+		{
+			m_pCurScene->AddObject
+				(pOtherObj->CreateParticle(PARTICLE_TYPE::HIT)
+				, OBJECT_GROUP::PARTICLE);
+		}
+
+		delete this;
+	}
+}
+
+void Bullet::ExitCollision(Collider* _pOther)
+{
+}
+
+void Bullet::StayCollision(Collider* _pOther)
+{
 }
 
 void Bullet::Attack(Vec2 dir)
 {
-	GetAnimator()->PlayAnim(L"Gun_Attack", false);
-
-	// if (공격 쿨타임이 지났다면)
-	// m_texture 이동 (공격 거리만큼 공격 속도로)
-	//GetAnimator()->PlayAnim(L"Weapon_Gun", false);
-
-	//Vec2 vPos = GetPos();
-	//// 기본적으로 조준한 방향으로 공속을 통해 이동한다... (총알이라는 가정하에 작성함)
-	//vPos.x += dir.x * m_fAttackSpeed * fDT;
 }

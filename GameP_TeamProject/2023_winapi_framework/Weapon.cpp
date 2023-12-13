@@ -7,7 +7,7 @@
 
 Weapon::Weapon()
 	: m_pTex(nullptr)
-	, m_eElementType(ENTITY_ELEMENT_TYPE::NONE)
+	, m_eElement(ENTITY_ELEMENT_TYPE::END)
 	, m_pCollider(nullptr)
 	, m_pAnimator(nullptr)
 {

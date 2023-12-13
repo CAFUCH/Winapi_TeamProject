@@ -229,7 +229,8 @@ void Player::Update()
 		AutoAim();
 
 		// 현재 무기 사용
-		m_curWeapon->Attack(m_vAttackDir);// 이거 어카지
+		if (m_vAttackDir.x != 0 || m_vAttackDir.y != 0)
+			m_curWeapon->Attack(m_vAttackDir);// 이거 어카지
 
 		// 현재 위치 초기화
 		m_vAttackDir = { 0, 0 };

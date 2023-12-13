@@ -57,12 +57,6 @@ void Object::CreateWeapon()
 	m_vecWeapon.push_back(weapon);
 }
 
-void Object::CreateParticle(PARTICLE_TYPE _eType)
-{
-	Particle* particle = new Particle(_eType);
-	particle->m_pOwner = this;
-}
-
 void Object::Update()
 {
 }
@@ -120,5 +114,14 @@ void Object::SetDamage(float _damage)
 	}
 	else
 		m_fHp -= _damage;
+}
+
+Particle* Object::CreateParticle(PARTICLE_TYPE _type)
+{
+	Particle* m_pParticle = new Particle(PARTICLE_TYPE::HIT);
+	m_pParticle->SetOwner(this);
+	m_pParticle->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
+	m_pParticle->SetScale({ 100.f, 100.f });
+	return m_pParticle;
 }
 

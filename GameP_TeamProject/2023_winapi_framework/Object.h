@@ -21,7 +21,6 @@ public:
 
 	void Component_Render(HDC _dc);
 
-
 public:
 	const wstring& GetName() const { return m_strName; }
 	void SetName(wstring _name) { m_strName = _name; }
@@ -57,7 +56,8 @@ public:
 	void CreateCollider();
 	void CreateAnimator();
 	void CreateWeapon();
-	void CreateParticle(PARTICLE_TYPE _eType);
+	Particle* CreateParticle(PARTICLE_TYPE _eType);
+	ENTITY_ELEMENT_TYPE m_eElement;
 
 protected:
 	// 기본 정보
@@ -67,6 +67,7 @@ protected:
 	Vec2 m_vPos; 
 	// 크기
 	Vec2 m_vScale; 
+	// 원소
 
 	// 얘네는 컴포넌트임!!!
 	// 콜라이더

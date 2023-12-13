@@ -2,6 +2,7 @@
 #include "Weapon.h"
 #include "Scene.h"
 class Texture;
+class Bullet;
 class Gun :
     public Weapon
 {
@@ -18,4 +19,5 @@ public:
 
 private:
     Texture* m_pBullet;
+    std::vector<Bullet*> bullets;
 };

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Gun.h"
+#include "Bullet.h"
 #include "Scene.h"
 
 #include "ResMgr.h"
@@ -43,22 +44,29 @@ void Gun::Update()
 {
 	SetPos({ m_pOwner->GetPos().x - 100, m_pOwner->GetPos().y });
 	GetAnimator()->Update();
+
+	for (Bullet* bullet : bullets)
+	{
+		if (bullet != nullptr)
+			bullet->Update();
+	}
 }
 
 void Gun::Render(HDC _dc)
 {
+	for (Bullet* bullet : bullets)
+	{
+		if (bullet != nullptr)
+			bullet->Render(_dc);
+	}
+
 	Component_Render(_dc);
 }
 
 void Gun::Attack(Vec2 dir)
 {
 	GetAnimator()->PlayAnim(L"Gun_Attack", false);
-
-	// if (공격 쿨타임이 지났다면)
-	// m_texture 이동 (공격 거리만큼 공격 속도로)
-	//GetAnimator()->PlayAnim(L"Weapon_Gun", false);
-
-	//Vec2 vPos = GetPos();
-	//// 기본적으로 조준한 방향으로 공속을 통해 이동한다... (총알이라는 가정하에 작성함)
-	//vPos.x += dir.x * m_fAttackSpeed * fDT;
+	bullets.push_back(new Bullet(L"Bullet", dir
+		, { GetPos().x , GetPos().y }
+		, { 100, 100 }));
 }

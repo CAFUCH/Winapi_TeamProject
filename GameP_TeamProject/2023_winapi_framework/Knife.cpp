@@ -14,20 +14,12 @@
 Knife::Knife()
 {
 	// 이미지 불러오기
-	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Knife", L"Texture\\Bullet.bmp");
+	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Knife", L"Texture\\Knife.bmp");
 
 	// 콜라이더 생성
 	CreateCollider();
 	// 콜라이더 사이즈 초기화
 	GetCollider()->SetScale(Vec2(50.f, 50.f));
-
-	// 애니메이터 생성
-	CreateAnimator();
-	/*Knife Animation*/ {
-		GetAnimator()->CreateAnim(L"Knife_Attack", m_pTex, Vec2(0.f, 0.f),
-			Vec2(64.f, 32.f), Vec2(64.f, 0.f), 12, 0.025f);
-		GetAnimator()->PlayAnim(L"Knife_Attack", false);
-	}
 
 	m_fDistance = 250.f;
 	m_fDelay = 0.3f;
@@ -40,11 +32,17 @@ Knife::~Knife()
 void Knife::Update()
 {
 	SetPos({ m_pOwner->GetPos().x - 100, m_pOwner->GetPos().y });
-	GetAnimator()->Update();
 }
 
 void Knife::Render(HDC _dc)
 {
+	TransparentBlt(_dc, (int)(m_vPos.x - m_vScale.x / 2)
+		, (int)(m_vPos.y - m_vScale.y / 2)
+		, m_pTex->GetWidth() * (m_vScale.x / 100)
+		, m_pTex->GetHeight() * (m_vScale.y / 100)
+		, m_pTex->GetDC(), 0, 0, m_pTex->GetWidth()
+		, m_pTex->GetHeight(), RGB(255, 0, 255));
+
 	Component_Render(_dc);
 }
 
