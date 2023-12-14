@@ -21,6 +21,7 @@ public:
 
 public:
     const Player GetPlayer() const { this; }
+    //const std::shared_ptr<Scene> GetCurScene() const { m_pCurScene; }
 
 private:
     // sprite

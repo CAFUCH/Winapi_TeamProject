@@ -2,7 +2,8 @@
 #include "Animator.h"
 #include "Animation.h"
 Animator::Animator()
-	: m_pOwner(nullptr)
+	: m_pObjOwner(nullptr)
+	, m_pWeaOwner(nullptr)
 	, m_pCurAnim(nullptr)
 	, m_IsRepeat(false)
 {

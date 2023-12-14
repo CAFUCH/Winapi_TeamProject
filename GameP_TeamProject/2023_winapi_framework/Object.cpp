@@ -11,10 +11,10 @@
 #include "Particle.h"
 Object::Object()
 	: m_pCollider(nullptr)
+	, m_pAnimator(nullptr)
 	, m_vPos{}
 	, m_vScale{}
 	, m_IsAlive(true)
-	, m_pAnimator(nullptr)
 {
 
 }
@@ -39,13 +39,13 @@ Object::~Object()
 void Object::CreateCollider()
 {
 	m_pCollider = new Collider;
-	m_pCollider->m_pOwner = this;
+	m_pCollider->m_pObjOwner = this;
 }
 
 void Object::CreateAnimator()
 {
 	m_pAnimator = new Animator;
-	m_pAnimator->m_pOwner = this;
+	m_pAnimator->m_pObjOwner = this;
 }
 
 // 정확히는 weapon이라는 컴포넌트를 생성하는 애..
@@ -55,12 +55,6 @@ void Object::CreateWeapon()
 	//weapon->m_pOwner = this;
 	// 잘 들어가는 것 같음...
 	m_vecWeapon.push_back(weapon);
-}
-
-void Object::CreateParticle(PARTICLE_TYPE _eType)
-{
-	Particle* particle = new Particle(_eType);
-	particle->m_pOwner = this;
 }
 
 void Object::Update()
@@ -81,9 +75,6 @@ void Object::FinalUpdate()
 
 void Object::Render(HDC _dc)
 {
-	// 기본적인 Render (독립적으로 렌더하고 싶은 obj가 있다면 해당 객체에서 렌더하자)
-	// 해당 Obj가 포함된 Scene의 Render에서 m_vObj 백터에 담겨 호출된다.
-	//RECT_RENDER(m_vPos.x, m_vPos.y, m_vScale.x, m_vScale.y, _dc);
 	Component_Render(_dc);
 }
 
@@ -123,5 +114,14 @@ void Object::SetDamage(float _damage)
 	}
 	else
 		m_fHp -= _damage;
+}
+
+Particle* Object::CreateParticle(PARTICLE_TYPE _type)
+{
+	Particle* m_pParticle = new Particle(PARTICLE_TYPE::HIT);
+	m_pParticle->SetOwner(this);
+	m_pParticle->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
+	m_pParticle->SetScale({ 100.f, 100.f });
+	return m_pParticle;
 }
 

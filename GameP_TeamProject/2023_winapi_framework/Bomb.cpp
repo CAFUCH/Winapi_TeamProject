@@ -15,9 +15,25 @@
 
 Bomb::Bomb()
 {
-	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Bomb", L"Texture\\jiwoo.bmp");
-	isAttack = false;
+	// 이미지 불러오기
+	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Bomb", L"Texture\\Bullet.bmp");
+
+	// 콜라이더 생성
+	CreateCollider();
+	// 콜라이더 사이즈 초기화
+	GetCollider()->SetScale(Vec2(50.f, 50.f));
+
+	// 애니메이터 생성
+	CreateAnimator();
+	/*Bomb Animation*/ {
+		GetAnimator()->CreateAnim(L"Bomb_Attack", m_pTex, Vec2(0.f, 0.f),
+			Vec2(64.f, 32.f), Vec2(64.f, 0.f), 12, 0.025f);
+		GetAnimator()->PlayAnim(L"Bomb_Attack", false);
+	}
+
 	m_fDistance = 1000.f;
+	m_fDelay = 0.3f;
+	isAttack = false;
 }
 
 Bomb::~Bomb()
@@ -26,21 +42,24 @@ Bomb::~Bomb()
 
 void Bomb::Update()
 {
-	if (isAttack == false)
+	if (isAttack == true)
+	{
+		// 공격 할 것?..
+	}
+	else
 		SetPos({ m_pOwner->GetPos().x - 100, m_pOwner->GetPos().y });
+
+	GetAnimator()->Update();
 }
 
 void Bomb::Render(HDC _dc)
 {
-	BitBlt(_dc
-		, (int)(GetPos().x - m_vScale.x / 2)
-		, (int)(GetPos().y - m_vScale.y / 2)
-		, m_pTex->GetWidth(), m_pTex->GetHeight()
-		, m_pTex->GetDC()
-		, 0, 0, SRCCOPY);
+	Component_Render(_dc);
 }
 
 void Bomb::Attack(Vec2 dir)
 {
+	GetAnimator()->PlayAnim(L"Bomb_Attack", false);
+
 	isAttack = true;
 }

@@ -2,6 +2,7 @@
 #include "Weapon.h"
 #include "Scene.h"
 class Texture;
+class Bullet;
 class Gun :
     public Weapon
 {
@@ -17,5 +18,6 @@ public:
     virtual void Attack(Vec2 dir) override;
 
 private:
-    //std::shared_ptr<Scene> m_pCurScene;
+    Texture* m_pBullet;
+    std::vector<Bullet*> bullets;
 };
