@@ -72,7 +72,7 @@ void StageMgr::EnemySpawn(int eCount)
 
 		if (curStage >= 3 && random == 1) {
 
-			Range_Enemy* enemy2 = new Range_Enemy(i % 2 + 1, ENTITY_ELEMENT_TYPE::FIRE, 100, .01f, 3.f);
+			Range_Enemy* enemy2 = new Range_Enemy(i % 2 + 1, ENTITY_ELEMENT_TYPE::FIRE, 20, .01f, 3.f);
 
 			enemy2->SetPos(Vec2((int)WINDOW_WIDTH / 2 + rand() % 500, (int)WINDOW_HEIGHT / 2 + rand() % 400));
 			enemy2->SetScale(Vec2(64, 64));
@@ -95,7 +95,7 @@ void StageMgr::EnemySpawn(int eCount)
 		}
 		else {
 			Melee_Enemy* enemy = new Melee_Enemy(i % 7 + 1, ENTITY_ELEMENT_TYPE::FIRE
-				, 100, .01f, 3.f);
+				, 20, .01f, 3.f);
 
 			enemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 + rand() % 500, (int)WINDOW_HEIGHT / 2 + rand() % 400));
 			enemy->SetScale(Vec2(64, 64));

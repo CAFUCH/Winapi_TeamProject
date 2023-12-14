@@ -20,6 +20,9 @@ Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, float _da
 	, type(_type)
 	, atkDelay(_atkDelay)
 {
+	SetMaxHP(_hp);
+	SetHP(GetMaxHP());
+
 	m_fDamage = _damage;
 
 	SetBkMode(Core::GetInst()->GetMainDC(), 0);
