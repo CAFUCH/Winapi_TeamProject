@@ -27,6 +27,9 @@
 #include "Button.h"
 
 vector<UI*> Game_Scene::m_ui;
+int Game_Scene::gunCnt = 0;
+int Game_Scene::knifeCnt = 0;
+int Game_Scene::bombCnt = 0;
 
 void OnPanel() {
 	Game_Scene::SetActive_Panel(true);
@@ -34,6 +37,27 @@ void OnPanel() {
 void OffPanel() {
 	StageMgr::GetInst()->NextStage(3, 3, 0.1f, OnPanel);
 	Game_Scene::SetActive_Panel(false);
+}
+
+void OnGun() {
+	if (Game_Scene::gunCnt == 0) {
+		//얻는 무기 코드
+	}
+
+	Game_Scene::bombCnt++;
+	OffPanel();
+}
+void OnKnife() {
+	if (Game_Scene::knifeCnt == 0) {
+		//얻는 무기 코드
+	}
+	OffPanel();
+}
+void OnBomb() {
+	if (Game_Scene::bombCnt == 0) {
+		//얻는 무기 코드
+	}
+	OffPanel();
 }
 
 void Game_Scene::Init()
@@ -76,7 +100,7 @@ void Game_Scene::Init()
 		Vec2(350, 500));
 	gunBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"GunBtn_on", L"Texture\\GunBtn_hover.bmp"));
 	gunBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"GunBtn_off", L"Texture\\GunBtn.bmp"));
-	gunBtn->onReister = OffPanel;
+	gunBtn->onReister = OnGun;
 
 	AddObject(gunBtn, OBJECT_GROUP::UI);
 	Game_Scene::AddUI(gunBtn);
@@ -85,7 +109,7 @@ void Game_Scene::Init()
 		Vec2(350, 500));
 	knifeBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"KnifeBtn_on", L"Texture\\KnifeBtn_hover.bmp"));
 	knifeBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"KnifeBtn_off", L"Texture\\KnifeBtn.bmp"));
-	knifeBtn->onReister = OffPanel;
+	knifeBtn->onReister = OnKnife;
 
 	AddObject(knifeBtn, OBJECT_GROUP::UI);
 	Game_Scene::AddUI(knifeBtn);
@@ -94,7 +118,7 @@ void Game_Scene::Init()
 		Vec2(350, 500));
 	bombBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"BombBtn_on", L"Texture\\BombBtn_hover.bmp"));
 	bombBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"BombBtn_off", L"Texture\\BombBtn.bmp"));
-	bombBtn->onReister = OffPanel;
+	bombBtn->onReister = OnBomb;
 	AddObject(bombBtn, OBJECT_GROUP::UI);
 	Game_Scene::AddUI(bombBtn);
 
@@ -121,6 +145,11 @@ void Game_Scene::Update()
 void Game_Scene::Render(HDC _dc)
 {
 	Scene::Render(_dc);
+
+	SetBkMode(_dc, 0);
+
+	wstring ws = to_wstring(StageMgr::GetInst()->enemyCountInWave);
+	TextOut(Core::GetInst()->GetMainDC(), 100, 100, ws.c_str(), ws.length());
 
 }
 

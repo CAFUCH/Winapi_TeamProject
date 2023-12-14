@@ -37,3 +37,4 @@ protected:
 	map<wstring, Weapon*> m_mWeapon;
 };
 
+	

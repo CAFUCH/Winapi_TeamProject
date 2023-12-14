@@ -7,7 +7,7 @@
 
 void GoIntroScene() {
 	SceneMgr::GetInst()->LoadScene(L"Intro_Scene");
-}
+}	
 
 void GameOver_Scene::Init()
 {

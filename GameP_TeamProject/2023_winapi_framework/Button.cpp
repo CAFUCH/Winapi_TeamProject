@@ -30,29 +30,33 @@ Button::~Button()
 
 void Button::Update()
 {
-	Vec2 mousePos = KeyMgr::GetInst()->GetMousePos();
 
-	if (left <= mousePos.x
-		&& right >= mousePos.x
-		&& top <= mousePos.y
-		&& bottom >= mousePos.y)  //버튼 안에 있나 확인
-	{
-		cur_tex = on_tex;
+	if (enabled) {
+		Vec2 mousePos = KeyMgr::GetInst()->GetMousePos();
 
-		KEY_STATE state = KeyMgr::GetInst()->GetKey(KEY_TYPE::LBUTTON);
-		if (state == KEY_STATE::DOWN) {
-			OnClickEnter();
+		if (left <= mousePos.x
+			&& right >= mousePos.x
+			&& top <= mousePos.y
+			&& bottom >= mousePos.y)  //버튼 안에 있나 확인
+		{
+			cur_tex = on_tex;
+
+			KEY_STATE state = KeyMgr::GetInst()->GetKey(KEY_TYPE::LBUTTON);
+			if (state == KEY_STATE::DOWN) {
+				OnClickEnter();
+			}
+			else if (state == KEY_STATE::PRESS) {
+				OnClickStay();
+			}
+			else if (state == KEY_STATE::UP) {
+				OnClickExit();
+			}
 		}
-		else if (state == KEY_STATE::PRESS) {
-			OnClickStay();
-		}
-		else if (state == KEY_STATE::UP) {
-			OnClickExit();
+		else {
+			cur_tex = off_tex;
 		}
 	}
-	else {
-		cur_tex = off_tex;
-	}
+
 
 }
 void Button::Render(HDC _dc)
@@ -75,8 +79,8 @@ void Button::Render(HDC _dc)
 				, 0, 0, Width, Height, RGB(255, 0, 255));
 		}
 	}
-	}
-		
+}
+
 
 void Button::OnClickEnter() //클릭했을때
 {

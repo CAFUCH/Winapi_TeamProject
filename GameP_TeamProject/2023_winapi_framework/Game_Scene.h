@@ -27,6 +27,10 @@ public:
 	//Weapon* GetWeapon(wstring _name) { return m_mWeapon[_name]; }
 private:
 	static vector<UI*> m_ui;
+public:
+	static int gunCnt;
+	static int knifeCnt;
+	static int bombCnt;
 	// 얘네는 컴포넌트가 아니라 진짜 무기임
 	/*map<wstring, Weapon*> m_mWeapon;*/
 	//vector<Weapon*> m_vecWeapon;
