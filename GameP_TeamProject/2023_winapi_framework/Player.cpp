@@ -230,7 +230,7 @@ void Player::Update()
 
 		// 현재 무기 사용
 		if (m_vAttackDir.x != 0 || m_vAttackDir.y != 0)
-			m_curWeapon->Attack(m_vAttackDir);// 이거 어카지
+			m_curWeapon->Attack(m_vAttackDir);
 
 		// 현재 위치 초기화
 		m_vAttackDir = { 0, 0 };
@@ -331,8 +331,9 @@ void Player::EnterCollision(Collider* _pOther)
 	if (pOtherObj->GetName() == L"Enemy" || pOtherObj->GetName() == L"Enemy_Bullet")
 	{
 		// 데미지 받기
-		SetDamage(pOtherObj->GetDamage());
-		pOtherObj->SetDamage(m_fDamage);
+		//SetDamage(pOtherObj->GetDamage());
+		//pOtherObj->SetDamage(m_fDamage);
+		EventMgr::GetInst()->DeleteObject(_pOther->GetObj());
 		// Hit 애니메이션 실행
 		GetAnimator()->PlayAnim(L"Player_Hit_" + m_strDir, false);
 
@@ -349,8 +350,8 @@ void Player::EnterCollision(Collider* _pOther)
 
 void Player::StayCollision(Collider* _pOther)
 {
-	auto obj = _pOther->GetObj();
-	obj->SetDamage(100);
+	//auto obj = _pOther->GetObj();
+	//obj->SetDamage(100);
 }
 
 void Player::ExitCollision(Collider* _pOther)

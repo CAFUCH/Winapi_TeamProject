@@ -23,6 +23,7 @@ public:
 
 public:
     const bool& GetIsErase() { return m_IsErase; }
+
 private:
     Texture* m_pBullet;
     Vec2 m_vDir;

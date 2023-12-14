@@ -32,6 +32,9 @@ Gun::Gun()
 		GetAnimator()->PlayAnim(L"Gun_Attack", false);
 	}
 
+	// 현재 씬 불러오기
+	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
+
 	m_fDistance = 500.f;
 	m_fDelay = 0.3f;
 }
@@ -48,7 +51,10 @@ void Gun::Update()
 	for (Bullet* bullet : bullets)
 	{
 		if (bullet != nullptr)
+		{
 			bullet->Update();
+			bullet->FinalUpdate();
+		}
 	}
 }
 
@@ -66,7 +72,9 @@ void Gun::Render(HDC _dc)
 void Gun::Attack(Vec2 dir)
 {
 	GetAnimator()->PlayAnim(L"Gun_Attack", false);
-	bullets.push_back(new Bullet(L"Bullet", dir
+	Bullet* bullet = new Bullet(L"Bullet", dir
 		, { GetPos().x , GetPos().y }
-		, { 100, 100 }));
+	, { 100, 100 });
+	m_pCurScene->AddWeapon(bullet);
+	bullets.push_back(bullet);
 }

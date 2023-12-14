@@ -35,9 +35,6 @@ public:
     Collider* GetCollider() const { return m_pCollider; }
     Animator* GetAnimator() { return m_pAnimator; }
 
-    //const bool& GetEnable() const { return m_setActive; }
-    //void SetEnable(bool _value) { m_setActive = _value; }
-
 public:
     float GetDistance() const { return m_fDistance; }
 
@@ -64,6 +61,8 @@ protected:
     //// 원소
     ENTITY_ELEMENT_TYPE m_eElement;
 
+    // 이름
+    wstring m_name;
     // 위치
     Vec2 m_vPos;
     // 크기
@@ -73,7 +72,7 @@ protected:
     Collider* m_pCollider;
     // 애니메이터
     Animator* m_pAnimator;
-    wstring m_name;
+
     // 현재 씬 
     std::shared_ptr<Scene> m_pCurScene;
 
@@ -83,7 +82,5 @@ protected:
 
     // 생존
     bool m_IsAlive;
-
-    //bool m_setActive;
 };
 

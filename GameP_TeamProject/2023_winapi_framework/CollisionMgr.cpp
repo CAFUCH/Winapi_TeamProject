@@ -4,6 +4,7 @@
 #include "SceneMgr.h"
 
 #include "Object.h"
+#include "Weapon.h"
 #include "Scene.h"
 #include "Collider.h"
 
@@ -24,75 +25,215 @@ void CollisionMgr::Update()
 void CollisionMgr::CollisionGroupUpdate(OBJECT_GROUP _eLeft, OBJECT_GROUP _eRight)
 {
 	std::shared_ptr<Scene> pCurScene = SceneMgr::GetInst()->GetCurScene();
-	const vector<Object*>& vecLeft = pCurScene->GetGroupObject(_eLeft);
 	const vector<Object*>& vecRight = pCurScene->GetGroupObject(_eRight);
-	// 충돌 검사를 해보자.
-	for (size_t i = 0; i < vecLeft.size(); ++i)
+	if (_eLeft == OBJECT_GROUP::WEAPON)
 	{
-		// 충돌체가 없는 경우
-		if (vecLeft[i]->GetCollider() == nullptr)
-			continue;
-		for (size_t j = 0; j < vecRight.size(); ++j)
+		const vector<Weapon*>& vecLeft = pCurScene->GetGroupWeapon();
+		for (size_t i = 0; i < vecLeft.size(); ++i)
 		{
-			if (vecRight[j]->GetCollider() == nullptr ||
-				vecLeft[i] == vecRight[j])
+			// 충돌체가 없는 경우
+			if (vecLeft[i]->GetCollider() == nullptr)
 				continue;
-			Collider* pLeftCol = vecLeft[i]->GetCollider();
-			Collider* pRightCol = vecRight[j]->GetCollider();
-			COLLIDER_ID colID;
-			colID.left_ID = pLeftCol->GetID();
-			colID.right_ID = pRightCol->GetID();
+			for (size_t j = 0; j < vecRight.size(); ++j)
+			{
+				// 같은 종류인지 확인하는건데 weapon은 관계 없음 
+				//if (vecRight[j]->GetCollider() == nullptr ||
+				//	vecLeft[i] == vecRight[j])
+				//	continue;
+				Collider* pLeftCol = vecLeft[i]->GetCollider();
+				Collider* pRightCol = vecRight[j]->GetCollider();
+				COLLIDER_ID colID;
+				colID.left_ID = pLeftCol->GetID();
+				colID.right_ID = pRightCol->GetID();
 
-			// 찾아라.
-			auto iter = m_mapColInfo.find(colID.ID);
-			// 없어용
-			if (iter == m_mapColInfo.end())
-			{
-				// 넣어라
-				m_mapColInfo.insert({ colID.ID, false });
-				// 넣은거 잡아라.
-				iter = m_mapColInfo.find(colID.ID);
-			}
-			// 충돌하네?
-			if (IsCollision(pLeftCol, pRightCol))
-			{
-				// 이전에도 충돌 중
-				if (iter->second)
+				// 찾아라.
+				auto iter = m_mapColInfo.find(colID.ID);
+				// 없어용
+				if (iter == m_mapColInfo.end())
 				{
-					// 둘중 하나 삭제 예정이라면
-					if(vecLeft[i]->GetIsDead() || vecRight[j]->GetIsDead())
+					// 넣어라
+					m_mapColInfo.insert({ colID.ID, false });
+					// 넣은거 잡아라.
+					iter = m_mapColInfo.find(colID.ID);
+				}
+				// 충돌하네?
+				if (IsCollision(pLeftCol, pRightCol))
+				{
+					// 이전에도 충돌 중
+					if (iter->second)
+					{
+						// 둘중 하나 삭제 예정이라면
+						if (vecLeft[i]->GetAlive() == false || vecRight[j]->GetIsDead())
+						{
+							pLeftCol->ExitCollision(pRightCol);
+							pRightCol->ExitCollision(pLeftCol);
+							iter->second = false;
+						}
+						else
+						{
+							pLeftCol->StayCollision(pRightCol);
+							pRightCol->StayCollision(pLeftCol);
+						}
+					}
+					// 이전에 충돌x
+					else
+					{
+						//if()
+						pLeftCol->EnterCollision(pRightCol);
+						pRightCol->EnterCollision(pLeftCol);
+						iter->second = true;
+					}
+				}
+				// 안하네?
+				else
+				{
+					if (iter->second)
 					{
 						pLeftCol->ExitCollision(pRightCol);
 						pRightCol->ExitCollision(pLeftCol);
 						iter->second = false;
 					}
-					else
-					{
-						pLeftCol->StayCollision(pRightCol);
-						pRightCol->StayCollision(pLeftCol);
-					}
-				}
-				// 이전에 충돌x
-				else
-				{
-					//if()
-					pLeftCol->EnterCollision(pRightCol);
-					pRightCol->EnterCollision(pLeftCol);
-					iter->second = true;
-				}
-			}
-			// 안하네?
-			else
-			{
-				if (iter->second)
-				{
-					pLeftCol->ExitCollision(pRightCol);
-					pRightCol->ExitCollision(pLeftCol);
-					iter->second = false;
 				}
 			}
 		}
 	}
+	else
+	{
+		const vector<Object*>& vecLeft = pCurScene->GetGroupObject(_eLeft);
+		for (size_t i = 0; i < vecLeft.size(); ++i)
+		{
+			// 충돌체가 없는 경우
+			if (vecLeft[i]->GetCollider() == nullptr)
+				continue;
+			for (size_t j = 0; j < vecRight.size(); ++j)
+			{
+				if (vecRight[j]->GetCollider() == nullptr ||
+					vecLeft[i] == vecRight[j])
+					continue;
+				Collider* pLeftCol = vecLeft[i]->GetCollider();
+				Collider* pRightCol = vecRight[j]->GetCollider();
+				COLLIDER_ID colID;
+				colID.left_ID = pLeftCol->GetID();
+				colID.right_ID = pRightCol->GetID();
+
+				// 찾아라.
+				auto iter = m_mapColInfo.find(colID.ID);
+				// 없어용
+				if (iter == m_mapColInfo.end())
+				{
+					// 넣어라
+					m_mapColInfo.insert({ colID.ID, false });
+					// 넣은거 잡아라.
+					iter = m_mapColInfo.find(colID.ID);
+				}
+				// 충돌하네?
+				if (IsCollision(pLeftCol, pRightCol))
+				{
+					// 이전에도 충돌 중
+					if (iter->second)
+					{
+						// 둘중 하나 삭제 예정이라면
+						if (vecLeft[i]->GetIsDead() || vecRight[j]->GetIsDead())
+						{
+							pLeftCol->ExitCollision(pRightCol);
+							pRightCol->ExitCollision(pLeftCol);
+							iter->second = false;
+						}
+						else
+						{
+							pLeftCol->StayCollision(pRightCol);
+							pRightCol->StayCollision(pLeftCol);
+						}
+					}
+					// 이전에 충돌x
+					else
+					{
+						//if()
+						pLeftCol->EnterCollision(pRightCol);
+						pRightCol->EnterCollision(pLeftCol);
+						iter->second = true;
+					}
+				}
+				// 안하네?
+				else
+				{
+					if (iter->second)
+					{
+						pLeftCol->ExitCollision(pRightCol);
+						pRightCol->ExitCollision(pLeftCol);
+						iter->second = false;
+					}
+				}
+			}
+		}
+	}
+	// 충돌 검사를 해보자.
+	//for (size_t i = 0; i < vecLeft.size(); ++i)
+	//{
+	//	// 충돌체가 없는 경우
+	//	if (vecLeft[i]->GetCollider() == nullptr)
+	//		continue;
+	//	for (size_t j = 0; j < vecRight.size(); ++j)
+	//	{
+	//		if (vecRight[j]->GetCollider() == nullptr ||
+	//			vecLeft[i] == vecRight[j])
+	//			continue;
+	//		Collider* pLeftCol = vecLeft[i]->GetCollider();
+	//		Collider* pRightCol = vecRight[j]->GetCollider();
+	//		COLLIDER_ID colID;
+	//		colID.left_ID = pLeftCol->GetID();
+	//		colID.right_ID = pRightCol->GetID();
+	//
+	//		// 찾아라.
+	//		auto iter = m_mapColInfo.find(colID.ID);
+	//		// 없어용
+	//		if (iter == m_mapColInfo.end())
+	//		{
+	//			// 넣어라
+	//			m_mapColInfo.insert({ colID.ID, false });
+	//			// 넣은거 잡아라.
+	//			iter = m_mapColInfo.find(colID.ID);
+	//		}
+	//		// 충돌하네?
+	//		if (IsCollision(pLeftCol, pRightCol))
+	//		{
+	//			// 이전에도 충돌 중
+	//			if (iter->second)
+	//			{
+	//				// 둘중 하나 삭제 예정이라면
+	//				if(vecLeft[i]->GetIsDead() || vecRight[j]->GetIsDead())
+	//				{
+	//					pLeftCol->ExitCollision(pRightCol);
+	//					pRightCol->ExitCollision(pLeftCol);
+	//					iter->second = false;
+	//				}
+	//				else
+	//				{
+	//					pLeftCol->StayCollision(pRightCol);
+	//					pRightCol->StayCollision(pLeftCol);
+	//				}
+	//			}
+	//			// 이전에 충돌x
+	//			else
+	//			{
+	//				//if()
+	//				pLeftCol->EnterCollision(pRightCol);
+	//				pRightCol->EnterCollision(pLeftCol);
+	//				iter->second = true;
+	//			}
+	//		}
+	//		// 안하네?
+	//		else
+	//		{
+	//			if (iter->second)
+	//			{
+	//				pLeftCol->ExitCollision(pRightCol);
+	//				pRightCol->ExitCollision(pLeftCol);
+	//				iter->second = false;
+	//			}
+	//		}
+	//	}
+	//}
 }
 
 bool CollisionMgr::IsCollision(Collider* _pLeft, Collider* _pRight)
