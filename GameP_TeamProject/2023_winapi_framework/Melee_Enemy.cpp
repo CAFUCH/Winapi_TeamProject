@@ -10,6 +10,8 @@
 #include "Enemy.h"
 
 #include "TimeMgr.h"
+#include"Particle.h"
+#include"SceneMgr.h"
 
 const  float SliceSize = 32.f;
 
@@ -61,6 +63,12 @@ Melee_Enemy::~Melee_Enemy()
 void Melee_Enemy::EnterCollision(Collider* _pOther)
 {
 	curTime = atkDelay;
+
+	Particle* m_pParticle = new Particle(PARTICLE_TYPE::HIT);
+	m_pParticle->SetOwner(this);
+	m_pParticle->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
+	m_pParticle->SetScale({ 100.f, 100.f });
+	SceneMgr::GetInst()->GetCurScene()->AddObject(m_pParticle, OBJECT_GROUP::PARTICLE);
 }
 
 void Melee_Enemy::StayCollision(Collider* _pOther)

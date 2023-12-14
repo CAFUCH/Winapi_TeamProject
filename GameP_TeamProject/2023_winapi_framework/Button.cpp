@@ -3,6 +3,8 @@
 #include "KeyMgr.h"
 #include "ResMgr.h"
 #include "Texture.h"
+#include "SceneMgr.h"
+#include "Game_Scene.h"
 
 typedef void(*myFuncDef)(void);
 
@@ -78,6 +80,25 @@ void Button::Render(HDC _dc)
 				, Width, Height, cur_tex->GetDC()
 				, 0, 0, Width, Height, RGB(255, 0, 255));
 		}
+
+		
+		if (name == L"gun") {
+			wstring ws = L"Level " + to_wstring(Game_Scene::gunCnt);
+
+			TextOut(_dc, 235, 550, ws.c_str(), ws.length());
+		}
+		if (name == L"knife") {
+			wstring ws = L"Level " + to_wstring(Game_Scene::knifeCnt);
+
+			TextOut(_dc, 570, 550, ws.c_str(), ws.length());
+		}
+		if (name == L"bomb") {
+			wstring ws = L"Level " + to_wstring(Game_Scene::bombCnt);
+
+			TextOut(_dc, 915, 550, ws.c_str(), ws.length());
+		}
+
+		
 	}
 }
 

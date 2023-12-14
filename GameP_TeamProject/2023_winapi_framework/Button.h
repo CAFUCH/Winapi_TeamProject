@@ -11,6 +11,7 @@ public:
 	void Update() override;
 	void Render(HDC _dc) override;
 public:
+	void SetName(wstring _name) { name = _name; }
 	void SetOnTexture(Texture* _tex) { on_tex = _tex; }
 	void SetOffTexture(Texture* _tex) { off_tex = _tex; }
 protected:
@@ -24,6 +25,7 @@ public: //혹시 필요할 수도 잇으니깐
 	const Vec2& GetScale() const { return scale; }
 	void SetScale(Vec2 _vScale) { scale = _vScale; }*/
 public:
+	wstring name;
 public:
 	void* onReister;
 private:

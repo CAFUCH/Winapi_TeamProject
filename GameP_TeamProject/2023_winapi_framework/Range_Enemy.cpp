@@ -11,6 +11,9 @@
 
 #include "TimeMgr.h"
 
+#include"Particle.h"
+#include"SceneMgr.h"
+
 const  float SliceSize = 32.f;
 
 Range_Enemy::Range_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, float _damage, float _atkDelay)
@@ -79,6 +82,12 @@ void Range_Enemy::EnterCollision(Collider* _pOther)
 		GetAnimator()->PlayAnim(ANIM_RIGHT_HIT_HASH, true);
 	else if (dir.x < 0)
 		GetAnimator()->PlayAnim(ANIM_LEFT_HIT_HASH, true);
+
+	Particle* m_pParticle = new Particle(PARTICLE_TYPE::HIT);
+	m_pParticle->SetOwner(this);
+	m_pParticle->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
+	m_pParticle->SetScale({ 100.f, 100.f });
+	SceneMgr::GetInst()->GetCurScene()->AddObject(m_pParticle, OBJECT_GROUP::PARTICLE);
 }
 
 void Range_Enemy::StayCollision(Collider* _pOther)

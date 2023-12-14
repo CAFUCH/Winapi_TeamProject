@@ -43,20 +43,21 @@ void OnGun() {
 	if (Game_Scene::gunCnt == 0) {
 		//얻는 무기 코드
 	}
-
-	Game_Scene::bombCnt++;
+	Game_Scene::gunCnt++;
 	OffPanel();
 }
 void OnKnife() {
 	if (Game_Scene::knifeCnt == 0) {
 		//얻는 무기 코드
 	}
+	Game_Scene::knifeCnt++;
 	OffPanel();
 }
 void OnBomb() {
 	if (Game_Scene::bombCnt == 0) {
 		//얻는 무기 코드
 	}
+	Game_Scene::bombCnt++;
 	OffPanel();
 }
 
@@ -98,6 +99,7 @@ void Game_Scene::Init()
 
 	Button* gunBtn = new Button(Vec2(300, 400),
 		Vec2(350, 500));
+	gunBtn->SetName(L"gun");
 	gunBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"GunBtn_on", L"Texture\\GunBtn_hover.bmp"));
 	gunBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"GunBtn_off", L"Texture\\GunBtn.bmp"));
 	gunBtn->onReister = OnGun;
@@ -107,8 +109,10 @@ void Game_Scene::Init()
 
 	Button* knifeBtn = new Button(Vec2((int)WINDOW_WIDTH / 2, 400),
 		Vec2(350, 500));
+	knifeBtn->SetName(L"knife");
 	knifeBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"KnifeBtn_on", L"Texture\\KnifeBtn_hover.bmp"));
 	knifeBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"KnifeBtn_off", L"Texture\\KnifeBtn.bmp"));
+
 	knifeBtn->onReister = OnKnife;
 
 	AddObject(knifeBtn, OBJECT_GROUP::UI);
@@ -116,18 +120,19 @@ void Game_Scene::Init()
 
 	Button* bombBtn = new Button(Vec2((int)WINDOW_WIDTH - 300, 400),
 		Vec2(350, 500));
+	bombBtn->SetName(L"bomb");
 	bombBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"BombBtn_on", L"Texture\\BombBtn_hover.bmp"));
 	bombBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"BombBtn_off", L"Texture\\BombBtn.bmp"));
 	bombBtn->onReister = OnBomb;
 	AddObject(bombBtn, OBJECT_GROUP::UI);
 	Game_Scene::AddUI(bombBtn);
 
-	Game_Scene::SetActive_Panel(false); //판넬 지우기
+	Game_Scene::SetActive_Panel(true); //판넬 지우기
 
 
 	// 적 생성 및 초기화 (테스트 버전)
 	{
-		StageMgr::GetInst()->NextStage(1, 1, 0.f, OnPanel);
+		//StageMgr::GetInst()->NextStage(0, 0, 0.f, OnPanel);
 	}
 	// 사운드 세팅
 	//ResMgr::GetInst()->Play(L"BGM");
@@ -148,9 +153,20 @@ void Game_Scene::Render(HDC _dc)
 
 	SetBkMode(_dc, 0);
 
-	wstring ws = to_wstring(StageMgr::GetInst()->enemyCountInWave);
-	TextOut(Core::GetInst()->GetMainDC(), 100, 100, ws.c_str(), ws.length());
+	wstring ws = L"enemy : " + to_wstring(StageMgr::GetInst()->enemyCountInWave);
 
+	HFONT font = CreateFontW(50, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
+		DEFAULT_CHARSET, OUT_OUTLINE_PRECIS, CLIP_DEFAULT_PRECIS,
+		CLEARTYPE_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"Arial");
+	SelectObject(_dc, font);
+
+	TextOutW(_dc, 100, 100, ws.c_str(), ws.length());
+
+	wstring ws2 = to_wstring(StageMgr::GetInst()->GetCurStage()) + L" wave";
+
+	TextOut(_dc, 100, 50, ws2.c_str(), ws2.length());
+
+	DeleteObject(font);
 }
 
 void Game_Scene::Release()
