@@ -4,6 +4,7 @@ class Texture;
 class Scene;
 class Collider;
 class Animator;
+class Particle;
 class Weapon
 {
 public:
@@ -49,6 +50,7 @@ public:
 public:
     void CreateCollider();
     void CreateAnimator();
+    Particle* CreateParticle(PARTICLE_TYPE _eType);
 
 protected:
     // ÇöÀç °´Ã¼

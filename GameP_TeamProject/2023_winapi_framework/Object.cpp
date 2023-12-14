@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Object.h"
+#include "Scene.h"
+#include "Particle.h"
 
 #include "KeyMgr.h"
 #include "TimeMgr.h"
@@ -8,7 +10,6 @@
 #include "Collider.h"
 #include "Animator.h"
 #include "Weapon.h"
-#include "Particle.h"
 Object::Object()
 	: m_pCollider(nullptr)
 	, m_pAnimator(nullptr)
@@ -16,7 +17,6 @@ Object::Object()
 	, m_vScale{}
 	, m_IsAlive(true)
 {
-
 }
 
 Object::~Object()
@@ -48,12 +48,9 @@ void Object::CreateAnimator()
 	m_pAnimator->m_pObjOwner = this;
 }
 
-// 정확히는 weapon이라는 컴포넌트를 생성하는 애..
 void Object::CreateWeapon()
 {
 	Weapon* weapon = new Weapon;
-	//weapon->m_pOwner = this;
-	// 잘 들어가는 것 같음...
 	m_vecWeapon.push_back(weapon);
 }
 
@@ -66,11 +63,6 @@ void Object::FinalUpdate()
 	// 콜라이더의 Update
 	if (m_pCollider)
 		m_pCollider->FinalUpdate();
-	//for (Weapon* weapon : m_vecWeapon)
-	//{
-	//	if (weapon && weapon->GetEnable())
-	//		weapon->Update();
-	//}
 }
 
 void Object::Render(HDC _dc)
@@ -97,11 +89,6 @@ void Object::Component_Render(HDC _dc)
 		m_pCollider->Render(_dc);
 	if (nullptr != m_pAnimator)
 		m_pAnimator->Render(_dc);
-	//for (Weapon* weapon : m_vecWeapon)
-	//{
-	//	if (nullptr != weapon && !weapon->GetEnable())
-	//		weapon->Render(_dc);
-	//}
 }
 
 void Object::SetDamage(float _damage)
@@ -118,10 +105,11 @@ void Object::SetDamage(float _damage)
 
 Particle* Object::CreateParticle(PARTICLE_TYPE _type)
 {
-	Particle* m_pParticle = new Particle(PARTICLE_TYPE::HIT);
+	Particle* m_pParticle = new Particle(_type);
 	m_pParticle->SetOwner(this);
 	m_pParticle->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
 	m_pParticle->SetScale({ 100.f, 100.f });
+	m_pCurScene->AddObject(m_pParticle, OBJECT_GROUP::PARTICLE);
 	return m_pParticle;
 }
 

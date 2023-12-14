@@ -248,6 +248,8 @@ void Player::Update()
 		else if (m_curWeaponIdx >= m_maxWeaponCnt)
 			m_curWeaponIdx = 0;
 
+		//if (GetWeapon(m_curWeaponIdx) ==)
+
 		m_curWeapon = GetWeapon(m_curWeaponIdx);
 		m_curWeapon->SetOwner(this);
 	}
@@ -265,11 +267,7 @@ void Player::Update()
 		SetHP(GetHP() - 1);
 		// 파티클 생성
 		{
-			Particle* m_pParticle = new Particle(PARTICLE_TYPE::HIT);
-			m_pParticle->SetOwner(this);
-			m_pParticle->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
-			m_pParticle->SetScale({ 100.f, 100.f });
-			m_pCurScene->AddObject(m_pParticle, OBJECT_GROUP::PARTICLE);
+			CreateParticle(PARTICLE_TYPE::ELECT_ELEM);
 		}
 	}
 
@@ -327,31 +325,20 @@ void Player::EnterCollision(Collider* _pOther)
 {
 	Object* pOtherObj = _pOther->GetObj();
 
-	// 플레이어 충돌한 오브젝트 (적, 적 무기, 떨어뜨리는 코인(?))
+	// 플레이어 충돌한 적
 	if (pOtherObj->GetName() == L"Enemy" || pOtherObj->GetName() == L"Enemy_Bullet")
 	{
-		// 데미지 받기
-		//SetDamage(pOtherObj->GetDamage());
-		//pOtherObj->SetDamage(m_fDamage);
+		// 충돌한 적 삭제
 		EventMgr::GetInst()->DeleteObject(_pOther->GetObj());
 		// Hit 애니메이션 실행
 		GetAnimator()->PlayAnim(L"Player_Hit_" + m_strDir, false);
-
 		// Hit 파티클 생성
-		{
-			Particle* m_pParticle = new Particle(PARTICLE_TYPE::HIT);
-			m_pParticle->SetOwner(this);
-			m_pParticle->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
-			m_pParticle->SetScale({ 100.f, 100.f });
-			m_pCurScene->AddObject(m_pParticle, OBJECT_GROUP::PARTICLE);
-		}
+		CreateParticle(PARTICLE_TYPE::HIT);
 	}
 }
 
 void Player::StayCollision(Collider* _pOther)
 {
-	//auto obj = _pOther->GetObj();
-	//obj->SetDamage(100);
 }
 
 void Player::ExitCollision(Collider* _pOther)

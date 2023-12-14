@@ -41,8 +41,8 @@ private:
     // 현재 파티클
     //Particle* m_pParticle;
 
-    // 현재 씬 
-    std::shared_ptr<Scene> m_pCurScene;
+    //// 현재 씬 
+    //std::shared_ptr<Scene> m_pCurScene;
     // 현재 씬의 적
     vector<Object*> m_vecEnemy;
     // 현재 씬의 적과의 거리

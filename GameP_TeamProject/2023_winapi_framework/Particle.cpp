@@ -21,19 +21,40 @@ Particle::Particle(PARTICLE_TYPE _type)
 	case PARTICLE_TYPE::ATTACK:
 		break;
 	case PARTICLE_TYPE::HIT:
-		m_animName = L"Effect_DieBlood";
+		m_animName = L"Effect_Hit";
 		m_pTex = ResMgr::GetInst()->TexLoad(L"Effect_Hit", L"Texture\\Effect_DieBlood.bmp");
-		GetAnimator()->CreateAnim(L"Effect_DieBlood", m_pTex, Vec2(0.f, 0.f),
+		GetAnimator()->CreateAnim(L"Effect_Hit", m_pTex, Vec2(0.f, 0.f),
 			Vec2(200.f, 200.f), Vec2(200.f, 0.f), 24, 0.02f);
 		lifeTime = 0.48f;
 		m_x = 5;
 		m_y = 7.5f;
 		break;
 	case PARTICLE_TYPE::WATHER_ELEM:
+		m_animName = L"Effect_Water";
+		m_pTex = ResMgr::GetInst()->TexLoad(L"Effect_Water", L"Texture\\Effect_Water.bmp");
+		GetAnimator()->CreateAnim(L"Effect_Water", m_pTex, Vec2(0.f, 0.f),
+			Vec2(106.f, 44.f), Vec2(106.f, 0.f), 10, 0.075f);
+		lifeTime = 0.75f;
+		m_x = 5;
+		m_y = 7.5f;
 		break;
 	case PARTICLE_TYPE::FIRE_ELEM:
+		m_animName = L"Effect_Fire";
+		m_pTex = ResMgr::GetInst()->TexLoad(L"Effect_Fire", L"Texture\\Effect_Fire.bmp");
+		GetAnimator()->CreateAnim(L"Effect_Fire", m_pTex, Vec2(0.f, 0.f),
+			Vec2(218.f, 76.f), Vec2(218.f, 0.f), 12, 0.075f);
+		lifeTime = 0.75f;
+		m_x = 5;
+		m_y = 7.5f;
 		break;
 	case PARTICLE_TYPE::ELECT_ELEM:
+		m_animName = L"Effect_Elect";
+		m_pTex = ResMgr::GetInst()->TexLoad(L"Effect_Elect", L"Texture\\Effect_Elect.bmp");
+		GetAnimator()->CreateAnim(L"Effect_Elect", m_pTex, Vec2(0.f, 0.f),
+			Vec2(128.f, 128.f), Vec2(128.f, 0.f), 7, 0.05f);
+		lifeTime = 0.35f;
+		m_x = 5;
+		m_y = 7.5f;
 		break;
 	case PARTICLE_TYPE::END:
 		assert(m_eType == PARTICLE_TYPE::END);
@@ -51,7 +72,8 @@ Particle::~Particle()
 void Particle::Update()
 {
 	// 파티클의 주인을 따라다닌다.
-	SetPos({ m_pOwner->GetPos().x + m_x, m_pOwner->GetPos().y + m_y });
+	if (m_pOwner != nullptr)
+		SetPos({ m_pOwner->GetPos().x + m_x, m_pOwner->GetPos().y + m_y });
 
 	// 시간이 지나면 삭제된다.
 	curTime += fDT;
