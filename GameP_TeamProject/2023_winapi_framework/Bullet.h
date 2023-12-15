@@ -7,7 +7,7 @@ class Bullet :
 {
 public:
     Bullet() = default;
-    Bullet(wstring _name, Vec2 dir, Vec2 pos, Vec2 scale);
+    Bullet(wstring _name, Vec2 dir, Vec2 pos, Vec2 scale, Vec2 texSize);
     ~Bullet();
 
 public:

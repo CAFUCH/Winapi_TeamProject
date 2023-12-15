@@ -91,16 +91,19 @@ void Game_Scene::Init()
 		pGun->SetPos((Vec2({ 0, 0 })));
 		pGun->SetScale(Vec2(150.f, 150.f));
 		m_mWeapon.insert({ L"Gun", pGun });
+		AddWeapon(pGun);
 
 		Weapon* pKnife = new Knife;
 		pKnife->SetPos((Vec2({ 0, 0 })));
 		pKnife->SetScale(Vec2(50.f, 50.f));
 		m_mWeapon.insert({ L"Knife", pKnife });
+		AddWeapon(pKnife);
 
 		Weapon* pBomb = new Bomb;
 		pBomb->SetPos((Vec2({ 0, 0 })));
 		pBomb->SetScale(Vec2(50.f, 50.f));
 		m_mWeapon.insert({ L"Bomb", pBomb });
+		AddWeapon(pBomb);
 	}
 
 	Panel* bg = new Panel();
