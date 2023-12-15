@@ -39,7 +39,7 @@ Bullet::Bullet(wstring _name, Vec2 dir, Vec2 pos, Vec2 scale)
 	// 공격력 초기화
 	m_fDamage = 10.f;
 	// 원소 초기화
-	m_eElement = ENTITY_ELEMENT_TYPE::FIRE;
+	m_eElement = ENTITY_ELEMENT_TYPE::WATER;
 
 	m_fcurTime = 0.f;
 	m_fLifeTime = 3.f;

@@ -18,19 +18,22 @@
 Bomb::Bomb()
 {
 	// 이미지 불러오기
-	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Bomb", L"Texture\\Bomb.bmp");
+	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Bomb", L"Texture\\bomb.bmp");
 	m_pBulletTex = ResMgr::GetInst()->TexLoad(L"Bomb_Attack", L"Texture\\Explosion.bmp");
 
 	// 콜라이더 생성
 	CreateCollider();
 	// 콜라이더 사이즈 초기화
-	GetCollider()->SetScale(Vec2(50.f, 50.f));
+	GetCollider()->SetScale(Vec2(200.f, 50.f));
 
 	// 애니메이터 생성
 	CreateAnimator();
 	/*Bomb Animation*/ {
+		GetAnimator()->CreateAnim(L"Bomb_Idle", m_pTex, Vec2(0.f, 0.f),
+			Vec2(64.f, 64.f), Vec2(1.f, 0.f), 1, 1.f);
 		GetAnimator()->CreateAnim(L"Bomb_Attack", m_pBulletTex, Vec2(0.f, 0.f),
 			Vec2(280.f, 100.f), Vec2(280.f, 0.f), 7, 0.7f);
+		GetAnimator()->PlayAnim(L"Bomb_Idle", true);
 	}
 
 	// 공격력 초기화
@@ -41,6 +44,8 @@ Bomb::Bomb()
 	m_fDistance = 1000.f;
 	// 딜레이 초기화
 	m_fDelay = 0.3f;
+	// eorl chrlghk
+	isWait = false;
 	// 폭발 초기화
 	isAttack = false;
 
@@ -61,10 +66,11 @@ void Bomb::Update()
 	if (isWait)
 	{
 		m_fcurTime += fDT;
-		if (m_fcurTime >= m_fWaitTime && isAttack == false)
+		if (m_fcurTime >= m_fWaitTime)
 		{
 			isAttack = true;
 			m_fcurTime = 0.f;
+			GetAnimator()->PlayAnim(L"Bomb_Attack", false);
 		}
 	}
 
@@ -76,28 +82,29 @@ void Bomb::Update()
 		{
 			isWait = false;
 			isAttack = false;
+			GetAnimator()->PlayAnim(L"Bomb_Idle", true);
 		}
-
-		GetAnimator()->Update();
 	}
-	else
+	
+	if (isWait == false && isAttack == false)
 		SetPos({ m_pOwner->GetPos().x - 100, m_pOwner->GetPos().y });
 
+	GetAnimator()->Update();
 }
 
 void Bomb::Render(HDC _dc)
 {
-	if (isAttack == true)
-		Component_Render(_dc);
-	else
-	{
-		TransparentBlt(_dc, (int)(m_vPos.x - m_vScale.x / 2)
-			, (int)(m_vPos.y - m_vScale.y / 2)
-			, m_pTex->GetWidth() * (m_vScale.x / 100)
-			, m_pTex->GetHeight() * (m_vScale.y / 100)
-			, m_pTex->GetDC(), 0, 0, m_pTex->GetWidth()
-			, m_pTex->GetHeight(), RGB(255, 0, 255));
-	}
+	Component_Render(_dc);
+	//if (isAttack == true)
+	//else
+	//{
+	//	TransparentBlt(_dc, (int)(m_vPos.x - m_vScale.x / 2)
+	//		, (int)(m_vPos.y - m_vScale.y / 2)
+	//		, m_pTex->GetWidth() * (m_vScale.x / 100)
+	//		, m_pTex->GetHeight() * (m_vScale.y / 100)
+	//		, m_pTex->GetDC(), 0, 0, m_pTex->GetWidth()
+	//		, m_pTex->GetHeight(), RGB(255, 0, 255));
+	//}
 }
 
 void Bomb::EnterCollision(Collider* _pOther)
@@ -130,5 +137,4 @@ void Bomb::StayCollision(Collider* _pOther)
 void Bomb::Attack(Vec2 dir)
 {
 	isWait = true;
-	GetAnimator()->PlayAnim(L"Bomb_Attack", false);
 }
