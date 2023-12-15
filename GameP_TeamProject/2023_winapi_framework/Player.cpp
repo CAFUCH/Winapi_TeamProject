@@ -37,9 +37,9 @@ Player::Player()
 	// 초기화
 	{
 		// 현재 무기 인덱스
-		m_curWeaponIdx = 0;
+		//m_curWeaponIdx = 0;
 		// 이전 무기 인덱스
-		m_preWeaponIdx = 0;
+		m_preWeaponIdx = m_curWeaponIdx;
 		// 소지 무기 개수
 		m_maxWeaponCnt = 3;
 
@@ -238,8 +238,8 @@ void Player::Update()
 		else if (m_curWeaponIdx >= m_maxWeaponCnt)
 			m_curWeaponIdx = 0;
 
-		if (GetWeapon(m_curWeaponIdx)->GetName() == L"")
-			m_curWeaponIdx = m_preWeaponIdx;
+		/*if (GetWeapon(m_curWeaponIdx)->GetName() == L"")
+			m_curWeaponIdx = m_preWeaponIdx;*/
 
 		m_curWeapon = GetWeapon(m_curWeaponIdx);
 		m_curWeapon->SetOwner(this);

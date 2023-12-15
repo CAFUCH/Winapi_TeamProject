@@ -26,6 +26,8 @@ Range_Enemy::Range_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, float _da
 
 	m_fDamage = _damage;
 
+	SetName(L"Enemy");
+
 	SetBkMode(Core::GetInst()->GetMainDC(), 0);
 
 	string pathname = "Texture\\pigeon.bmp";

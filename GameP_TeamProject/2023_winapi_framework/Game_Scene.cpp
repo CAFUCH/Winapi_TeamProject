@@ -28,7 +28,8 @@
 #include "Button.h"
 
 vector<UI*> Game_Scene::m_ui;
-Object* Game_Scene::pPlayer;
+Player* Game_Scene::pPlayer;
+
 int Game_Scene::gunCnt = 0;
 int Game_Scene::knifeCnt = 0;
 int Game_Scene::bombCnt = 0;
@@ -46,6 +47,7 @@ void OnGun() {
 	if (Game_Scene::gunCnt == 0) {
 		//얻는 무기 코드
 		Game_Scene::pPlayer->SetWeapon(0, SceneMgr::GetInst()->GetCurScene()->GetWeapon(L"Gun"));
+		Game_Scene::pPlayer->SetCurWeaponIdx(0);
 	}
 	Game_Scene::gunCnt++;
 
@@ -56,6 +58,7 @@ void OnKnife() {
 	if (Game_Scene::knifeCnt == 0) {
 		//얻는 무기 코드
 		Game_Scene::pPlayer->SetWeapon(1, SceneMgr::GetInst()->GetCurScene()->GetWeapon(L"Knife"));
+		Game_Scene::pPlayer->SetCurWeaponIdx(1);
 	}
 	Game_Scene::knifeCnt++;
 
@@ -66,6 +69,7 @@ void OnBomb() {
 	if (Game_Scene::bombCnt == 0) {
 		//얻는 무기 코드
 		Game_Scene::pPlayer->SetWeapon(2, SceneMgr::GetInst()->GetCurScene()->GetWeapon(L"Bomb"));
+		Game_Scene::pPlayer->SetCurWeaponIdx(2);
 	}
 	Game_Scene::bombCnt++;
 
@@ -80,7 +84,7 @@ void Game_Scene::Init()
 		Game_Scene::pPlayer = new Player;
 		pPlayer->SetPos((Vec2({ Core::GetInst()->GetResolution().x / 2, Core::GetInst()->GetResolution().y / 2 })));
 		pPlayer->SetScale(Vec2(100.f, 100.f));
-		AddObject(pPlayer, OBJECT_GROUP::PLAYER);
+		AddObject(Game_Scene::pPlayer, OBJECT_GROUP::PLAYER);
 
 		Camera::GetInst()->SetTarget(pPlayer);
 	}
@@ -186,6 +190,7 @@ void Game_Scene::Render(HDC _dc)
 
 void Game_Scene::Release()
 {
+	delete Game_Scene::pPlayer;
 	Scene::Release();
 	CollisionMgr::GetInst()->CheckReset();
 }

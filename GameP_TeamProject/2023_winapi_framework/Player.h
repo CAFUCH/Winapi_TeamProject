@@ -21,6 +21,7 @@ public:
 
 public:
     const Player GetPlayer() const { this; }
+    void SetCurWeaponIdx(int _idx) { m_curWeaponIdx = _idx; }
     //const std::shared_ptr<Scene> GetCurScene() const { m_pCurScene; }
 
 private:

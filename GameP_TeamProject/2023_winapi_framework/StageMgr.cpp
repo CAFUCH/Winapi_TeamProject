@@ -42,7 +42,7 @@ void StageMgr::Update()
 			((myFuncDef)action)(); //void 포인터는 이렇게 실행
 			allDead = true;
 		}
-		if (curStage >= 2) { //10스테이지가 되면 클리어씬으로
+		if (curStage >= 10) { //10스테이지가 되면 클리어씬으로
 			SceneMgr::GetInst()->LoadScene(L"Clear_Scene");
 		}
 	}

@@ -2,6 +2,7 @@
 #include "UI.h"
 #include "Scene.h"
 class Weapon;
+class Player;
 class Game_Scene :
 	public Scene
 {
@@ -28,7 +29,7 @@ public:
 private:
 	static vector<UI*> m_ui;
 public:
-	static Object* pPlayer;
+	static Player* pPlayer;
 public:
 	static int gunCnt;
 	static int knifeCnt;

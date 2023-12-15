@@ -23,6 +23,8 @@ Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, float _da
 	SetMaxHP(_hp);
 	SetHP(GetMaxHP());
 
+	SetName(L"Enemy");
+
 	m_fDamage = _damage;
 
 	SetBkMode(Core::GetInst()->GetMainDC(), 0);
