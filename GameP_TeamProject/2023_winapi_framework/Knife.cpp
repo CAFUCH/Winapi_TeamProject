@@ -21,6 +21,14 @@ Knife::Knife()
 	// 콜라이더 사이즈 초기화
 	GetCollider()->SetScale(Vec2(50.f, 50.f));
 
+	// 애니메이터 생성
+	CreateAnimator();
+	/*Gun Animation*/ {
+		GetAnimator()->CreateAnim(L"Knife_Attack", m_pTex, Vec2(0.f, 0.f),
+			Vec2(64.f, 64.f), Vec2(0.f, 0.f), 1, 1.f);
+		GetAnimator()->PlayAnim(L"Knife_Attack", false);
+	}
+
 	m_fDistance = 250.f;
 	m_fDelay = 0.3f;
 }
