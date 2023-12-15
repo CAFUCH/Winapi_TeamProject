@@ -57,7 +57,7 @@ public:
 	void CreateCollider();
 	void CreateAnimator();
 	void CreateWeapon();
-	Particle* CreateParticle(PARTICLE_TYPE _eType);
+	Particle* CreateParticle(PARTICLE_TYPE _eType, Object* _owner);
 	ENTITY_ELEMENT_TYPE m_eElement;
 
 protected:

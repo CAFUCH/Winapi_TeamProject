@@ -103,10 +103,10 @@ void Object::SetDamage(float _damage)
 		m_fHp -= _damage;
 }
 
-Particle* Object::CreateParticle(PARTICLE_TYPE _type)
+Particle* Object::CreateParticle(PARTICLE_TYPE _type, Object* _owner)
 {
 	Particle* m_pParticle = new Particle(_type);
-	m_pParticle->SetOwner(this);
+	m_pParticle->SetOwner(_owner);
 	m_pParticle->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
 	m_pParticle->SetScale({ 100.f, 100.f });
 	m_pCurScene->AddObject(m_pParticle, OBJECT_GROUP::PARTICLE);
