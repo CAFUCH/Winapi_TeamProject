@@ -47,6 +47,8 @@ public:
     const bool& GetAlive() { return m_IsAlive; }
     void SetDead() { m_IsAlive = false; }
 
+    void SetUpgrade() { m_fDamage * 1.25f; }
+
 public:
     void CreateCollider();
     void CreateAnimator();

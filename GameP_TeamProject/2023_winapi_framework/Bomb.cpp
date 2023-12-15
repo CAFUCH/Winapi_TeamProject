@@ -30,7 +30,7 @@ Bomb::Bomb()
 	CreateAnimator();
 	/*Bomb Animation*/ {
 		GetAnimator()->CreateAnim(L"Bomb_Idle", m_pTex, Vec2(0.f, 0.f),
-			Vec2(64.f, 64.f), Vec2(1.f, 0.f), 1, 1.f);
+			Vec2(32.f, 32.f), Vec2(0.f, 0.f), 1, 1.f);
 		GetAnimator()->CreateAnim(L"Bomb_Attack", m_pBulletTex, Vec2(0.f, 0.f),
 			Vec2(280.f, 100.f), Vec2(280.f, 0.f), 7, 0.7f);
 		GetAnimator()->PlayAnim(L"Bomb_Idle", true);
@@ -87,7 +87,7 @@ void Bomb::Update()
 	}
 	
 	if (isWait == false && isAttack == false)
-		SetPos({ m_pOwner->GetPos().x - 100, m_pOwner->GetPos().y });
+		SetPos({ m_pOwner->GetPos().x, m_pOwner->GetPos().y + 15 });
 
 	GetAnimator()->Update();
 }

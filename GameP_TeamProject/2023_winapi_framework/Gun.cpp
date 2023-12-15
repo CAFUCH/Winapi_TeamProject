@@ -45,7 +45,7 @@ Gun::~Gun()
 
 void Gun::Update()
 {
-	SetPos({ m_pOwner->GetPos().x - 100, m_pOwner->GetPos().y });
+	SetPos({ m_pOwner->GetPos().x + 10, m_pOwner->GetPos().y + 10});
 	GetAnimator()->Update();
 
 	for (Bullet* bullet : bullets)
@@ -74,7 +74,7 @@ void Gun::Attack(Vec2 dir)
 	GetAnimator()->PlayAnim(L"Gun_Attack", false);
 	Bullet* bullet = new Bullet(L"Bullet", dir
 		, { GetPos().x , GetPos().y }
-	, { 100, 100 });
+	, { 100, 100 }, { 21, 19 });
 	m_pCurScene->AddWeapon(bullet);
 	bullets.push_back(bullet);
 }
