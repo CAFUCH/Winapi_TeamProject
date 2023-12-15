@@ -39,7 +39,7 @@ void OnPanel() {
 
 }
 void OffPanel() {
-	StageMgr::GetInst()->NextStage(3, 3, 0.1f, OnPanel);
+	StageMgr::GetInst()->NextStage(100, 1, 0.1f, OnPanel);
 	Game_Scene::SetActive_Panel(false);
 }
 
@@ -94,22 +94,27 @@ void Game_Scene::Init()
 		Weapon* pGun = new Gun;
 		pGun->SetPos((Vec2({ 0, 0 })));
 		pGun->SetScale(Vec2(150.f, 150.f));
+		pGun->SetOwner(pPlayer);
 		m_mWeapon.insert({ L"Gun", pGun });
 		AddWeapon(pGun);
 
 		Weapon* pKnife = new Knife;
 		pKnife->SetPos((Vec2({ 0, 0 })));
 		pKnife->SetScale(Vec2(50.f, 50.f));
+		pGun->SetOwner(pPlayer);
 		m_mWeapon.insert({ L"Knife", pKnife });
 		AddWeapon(pKnife);
 
 		Weapon* pBomb = new Bomb;
 		pBomb->SetPos((Vec2({ 0, 0 })));
 		pBomb->SetScale(Vec2(50.f, 50.f));
+		pGun->SetOwner(pPlayer);
 		m_mWeapon.insert({ L"Bomb", pBomb });
 		pGun->SetName(L"Bomb");
 		AddWeapon(pBomb);
 	}
+
+	StageMgr::GetInst()->NextStage(3, 3, 0.1f, OnPanel);
 
 	Panel* bg = new Panel();
 	bg->SetTexture(ResMgr::GetInst()->TexLoad(L"Select_Panel", L"Texture\\Select_Panel.bmp"));

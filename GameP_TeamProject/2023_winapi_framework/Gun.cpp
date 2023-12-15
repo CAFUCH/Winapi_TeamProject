@@ -37,6 +37,8 @@ Gun::Gun()
 
 	m_fDistance = 500.f;
 	m_fDelay = 0.3f;
+
+	wea = 0;
 }
 
 Gun::~Gun()
@@ -48,22 +50,40 @@ void Gun::Update()
 	SetPos({ m_pOwner->GetPos().x + 10, m_pOwner->GetPos().y + 10});
 	GetAnimator()->Update();
 
-	for (Bullet* bullet : bullets)
+	/*for (Bullet* bullet : bullets)
 	{
 		if (bullet != nullptr)
 		{
-			bullet->Update();
-			bullet->FinalUpdate();
+			if (!bullet->GetAlive())
+			{
+				bullet->Update();
+				bullet->FinalUpdate();
+			}
+		}
+	}*/
+
+	for (std::pair<int, Bullet*> bullet : bullets)
+	{
+		if (bullet.second != nullptr)
+		{
+			bullet.second->Update();
+			bullet.second->FinalUpdate();
 		}
 	}
 }
 
 void Gun::Render(HDC _dc)
 {
-	for (Bullet* bullet : bullets)
+//	for (Bullet* bullet : bullets)
+//	{
+//		if (bullet != nullptr)
+//			bullet->Render(_dc);
+//	}
+
+	for (std::pair<int, Bullet*> bullet : bullets)
 	{
-		if (bullet != nullptr)
-			bullet->Render(_dc);
+		if (bullet.second != nullptr)
+			bullet.second->Render(_dc);
 	}
 
 	Component_Render(_dc);
@@ -74,7 +94,9 @@ void Gun::Attack(Vec2 dir)
 	GetAnimator()->PlayAnim(L"Gun_Attack", false);
 	Bullet* bullet = new Bullet(L"Bullet", dir
 		, { GetPos().x , GetPos().y }
-	, { 100, 100 }, { 21, 19 });
+	, { 100, 100 }, { 21, 19 }, wea, this);
 	m_pCurScene->AddWeapon(bullet);
-	bullets.push_back(bullet);
+	//bullets.push_back(bullet);
+	//bullets.push_back(bullet);
+	bullets.insert({ wea++, bullet });
 }

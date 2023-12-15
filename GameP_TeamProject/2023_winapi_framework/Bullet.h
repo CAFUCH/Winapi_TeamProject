@@ -1,5 +1,6 @@
 #pragma once
 #include "Weapon.h"
+#include "Gun.h"
 #include "Particle.h"
 #include "Scene.h"
 class Bullet :
@@ -7,7 +8,7 @@ class Bullet :
 {
 public:
     Bullet() = default;
-    Bullet(wstring _name, Vec2 dir, Vec2 pos, Vec2 scale, Vec2 texSize);
+    Bullet(wstring _name, Vec2 dir, Vec2 pos, Vec2 scale, Vec2 texSize, int test, Gun* owner);
     ~Bullet();
 
 public:
@@ -24,6 +25,7 @@ public:
 
 public:
     const bool& GetIsErase() { return m_IsErase; }
+    int test;
 
 private:
     Texture* m_pBullet;
@@ -31,5 +33,8 @@ private:
     Particle* m_pParticle;
     float m_fcurTime; float m_fLifeTime;
     bool m_IsErase;
+
+    Gun* m_pOwner;
+
 };
 

@@ -39,6 +39,7 @@ public:
 public:
     float GetDistance() const { return m_fDistance; }
 
+    const Object* GetOwner() { return m_pOwner; }
     void SetOwner(Object* _owner) { m_pOwner = _owner; }
 
     const wstring& GetName() const { return m_name; }
