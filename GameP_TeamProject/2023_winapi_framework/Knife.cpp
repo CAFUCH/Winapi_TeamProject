@@ -16,6 +16,10 @@ Knife::Knife()
 	// 이미지 불러오기
 	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Knife", L"Texture\\Knife.bmp");
 
+	CreateAnimator();
+
+	GetAnimator()->CreateAnim(L"Knife", m_pTex, Vec2(0.f, 0.f),
+		Vec2(64.f, 64.f), Vec2(1.f, 0.f), 1, 1.f);
 	// 콜라이더 생성
 	CreateCollider();
 	// 콜라이더 사이즈 초기화
@@ -31,6 +35,7 @@ Knife::~Knife()
 
 void Knife::Update()
 {
+	GetAnimator()->PlayAnim(L"Knife", true);
 	SetPos({ m_pOwner->GetPos().x - 100, m_pOwner->GetPos().y });
 }
 
