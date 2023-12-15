@@ -94,7 +94,7 @@ void Bomb::Update()
 
 void Bomb::Render(HDC _dc)
 {
-	Component_Render(_dc);
+ 	Component_Render(_dc);
 	//if (isAttack == true)
 	//else
 	//{
@@ -109,6 +109,7 @@ void Bomb::Render(HDC _dc)
 
 void Bomb::EnterCollision(Collider* _pOther)
 {
+	int a = 0;
 	if (isAttack == true)
 	{
 		if (_pOther->GetObj()->GetName() == L"Enemy")
