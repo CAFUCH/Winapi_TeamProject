@@ -22,17 +22,20 @@
 #include "Idle_State.h"
 
 #include "StageMgr.h"
+#include "SceneMgr.h"
 
 #include "Panel.h"
 #include "Button.h"
 
 vector<UI*> Game_Scene::m_ui;
+Object* Game_Scene::pPlayer;
 int Game_Scene::gunCnt = 0;
 int Game_Scene::knifeCnt = 0;
 int Game_Scene::bombCnt = 0;
 
 void OnPanel() {
 	Game_Scene::SetActive_Panel(true);
+
 }
 void OffPanel() {
 	StageMgr::GetInst()->NextStage(3, 3, 0.1f, OnPanel);
@@ -42,22 +45,31 @@ void OffPanel() {
 void OnGun() {
 	if (Game_Scene::gunCnt == 0) {
 		//얻는 무기 코드
+		Game_Scene::pPlayer->SetWeapon(0, SceneMgr::GetInst()->GetCurScene()->GetWeapon(L"Gun"));
 	}
 	Game_Scene::gunCnt++;
+
+
 	OffPanel();
 }
 void OnKnife() {
 	if (Game_Scene::knifeCnt == 0) {
 		//얻는 무기 코드
+		Game_Scene::pPlayer->SetWeapon(1, SceneMgr::GetInst()->GetCurScene()->GetWeapon(L"Knife"));
 	}
 	Game_Scene::knifeCnt++;
+
+
 	OffPanel();
 }
 void OnBomb() {
 	if (Game_Scene::bombCnt == 0) {
 		//얻는 무기 코드
+		Game_Scene::pPlayer->SetWeapon(2, SceneMgr::GetInst()->GetCurScene()->GetWeapon(L"Bomb"));
 	}
 	Game_Scene::bombCnt++;
+
+
 	OffPanel();
 }
 
@@ -65,7 +77,7 @@ void Game_Scene::Init()
 {
 	// 플레이어 생성 및 초기화
 	{
-		Object* pPlayer = new Player;
+		Game_Scene::pPlayer = new Player;
 		pPlayer->SetPos((Vec2({ Core::GetInst()->GetResolution().x / 2, Core::GetInst()->GetResolution().y / 2 })));
 		pPlayer->SetScale(Vec2(100.f, 100.f));
 		AddObject(pPlayer, OBJECT_GROUP::PLAYER);

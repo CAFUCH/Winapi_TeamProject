@@ -42,7 +42,7 @@ void StageMgr::Update()
 			((myFuncDef)action)(); //void 포인터는 이렇게 실행
 			allDead = true;
 		}
-		if (curStage >= 10) { //10스테이지가 되면 클리어씬으로
+		if (curStage >= 2) { //10스테이지가 되면 클리어씬으로
 			SceneMgr::GetInst()->LoadScene(L"Clear_Scene");
 		}
 	}
@@ -70,7 +70,7 @@ void StageMgr::EnemySpawn(int eCount)
 	{
 		int random = rand() % 2;
 
-		if (curStage >= 3 && random == 1) {
+		if (curStage >= 2 && random == 1) {
 
 			Range_Enemy* enemy2 = new Range_Enemy(i % 2 + 1, ENTITY_ELEMENT_TYPE::FIRE, 20, .01f, 3.f);
 

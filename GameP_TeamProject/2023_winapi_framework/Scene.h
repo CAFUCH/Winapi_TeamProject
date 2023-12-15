@@ -39,11 +39,11 @@ public:
 	{
 		return m_mWeapon;
 	}
+public:
+	map<wstring, Weapon*> m_mWeapon;
 protected:
 	//	Object*  m_obj;
 	vector<Object*> m_vecObj[(UINT)OBJECT_GROUP::END];
 	vector<Weapon*> m_vecWea;
-	map<wstring, Weapon*> m_mWeapon;
 };
 
-	

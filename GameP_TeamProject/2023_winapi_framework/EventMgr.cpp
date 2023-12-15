@@ -38,7 +38,7 @@ void EventMgr::DeleteWeapon(Weapon* _pWea)
 	m_vecEvent.push_back(eve);
 
 	if (_pWea->GetName() == L"Bullet") {
-		StageMgr::GetInst()->enemyCountInWave--;
+		//StageMgr::GetInst()->enemyCountInWave--;
 	}
 }
 
