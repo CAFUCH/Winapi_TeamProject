@@ -37,9 +37,9 @@ Player::Player()
 	// 초기화
 	{
 		// 현재 무기 인덱스
-		m_curWeaponIdx = 0;
+		m_curWeaponIdx = 2;
 		// 이전 무기 인덱스
-		m_preWeaponIdx = 0;
+		m_preWeaponIdx = 2;
 		// 소지 무기 개수
 		m_maxWeaponCnt = 3;
 
@@ -304,14 +304,9 @@ void Player::AutoAim()
 	}
 
 	// 에임 표시
-	//if (m_pPerTarget != m_pTarget && m_pTarget != nullptr)
-	//	m_pParticle = CreateParticle(PARTICLE_TYPE::AIM, m_pTarget);
-
 	if (m_pParticle)
-	{
 		m_pParticle->OnStop();
-		m_pParticle = CreateParticle(PARTICLE_TYPE::AIM, m_pTarget);
-	}
+	m_pParticle = CreateParticle(PARTICLE_TYPE::AIM, m_pTarget);
 
 	// 위치와 거리 초기화
 	m_vecEnemy.clear();

@@ -103,6 +103,7 @@ void Game_Scene::Init()
 		pBomb->SetPos((Vec2({ 0, 0 })));
 		pBomb->SetScale(Vec2(50.f, 50.f));
 		m_mWeapon.insert({ L"Bomb", pBomb });
+		pGun->SetName(L"Bomb");
 		AddWeapon(pBomb);
 	}
 
