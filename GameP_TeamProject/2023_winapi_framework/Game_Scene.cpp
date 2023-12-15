@@ -114,7 +114,8 @@ void Game_Scene::Init()
 		AddWeapon(pBomb);
 	}
 
-	StageMgr::GetInst()->NextStage(3, 3, 0.1f, OnPanel);
+	OnPanel();
+	//StageMgr::GetInst()->NextStage(3, 3, 0.1f, OnPanel);
 
 	Panel* bg = new Panel();
 	bg->SetTexture(ResMgr::GetInst()->TexLoad(L"Select_Panel", L"Texture\\Select_Panel.bmp"));
