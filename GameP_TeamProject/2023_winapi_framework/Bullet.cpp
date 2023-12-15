@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Bullet.h"
 #include "Scene.h"
+#include "Gun.h"
 
 #include "ResMgr.h"
 #include "SceneMgr.h"
@@ -16,7 +17,7 @@
 #include "Animator.h"
 #include "Animation.h"
 
-Bullet::Bullet(wstring _name, Vec2 dir, Vec2 pos, Vec2 scale, Vec2 texSize)
+Bullet::Bullet(wstring _name, Vec2 dir, Vec2 pos, Vec2 scale, Vec2 texSize, int test, Gun* owner)
 {
 	// 이미지 불러오기
 	m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Bullet", L"Texture\\" + _name + L".bmp");
@@ -54,6 +55,9 @@ Bullet::Bullet(wstring _name, Vec2 dir, Vec2 pos, Vec2 scale, Vec2 texSize)
 
 	// 현재 씬 불러오기
 	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
+
+	this->test = test;
+	m_pOwner = owner;
 }
 
 Bullet::~Bullet()
@@ -63,9 +67,9 @@ Bullet::~Bullet()
 void Bullet::Update()
 {
 	// 시간이 지나면 삭제
-	m_fcurTime += fDT;
-	if (m_fcurTime >= m_fLifeTime)
-		EventMgr::GetInst()->DeleteWeapon(this);
+	//m_fcurTime += fDT;
+	//if (m_fcurTime >= m_fLifeTime)
+	//	EventMgr::GetInst()->DeleteWeapon(this);
 
 	m_vPos = GetPos();
 	//m_vDir.Normalize();
@@ -104,6 +108,7 @@ void Bullet::EnterCollision(Collider* _pOther)
 
 		// 총알 삭제
 		EventMgr::GetInst()->DeleteWeapon(this);
+		m_pOwner->bullets.erase(test);
 	}
 }
 

@@ -11,6 +11,12 @@ void EventMgr::Update()
 	}
 	m_vecObjDead.clear();
 
+	//for (size_t i = 0; i < m_vecWeaDead.size(); ++i)
+	//{
+	//	delete m_vecWeaDead[i];
+	//}
+	//m_vecWeaDead.clear();
+
 	for (size_t i = 0; i < m_vecEvent.size(); ++i)
 	{
 		Excute(m_vecEvent[i]);
