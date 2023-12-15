@@ -46,11 +46,13 @@ public:
 	Collider* GetCollider() const { return m_pCollider; }
 	Animator* GetAnimator() { return m_pAnimator; }
 	Weapon* GetWeapon(int _idx) { return m_vecWeapon[_idx]; }
-	void SetWeapon(int _idx, Weapon* _weapon) 
-	{ m_vecWeapon[_idx] = _weapon; }
+	void SetWeapon(int _idx, Weapon* _weapon)
+	{
+		m_vecWeapon[_idx] = _weapon;
+	}
 
-private:
 	void SetDead() { m_IsAlive = false; }
+private:
 	friend class EventMgr;
 
 public:
@@ -63,11 +65,11 @@ public:
 protected:
 	// 기본 정보
 	// 이름
-	wstring m_strName; 
+	wstring m_strName;
 	// 위치
-	Vec2 m_vPos; 
+	Vec2 m_vPos;
 	// 크기
-	Vec2 m_vScale; 
+	Vec2 m_vScale;
 	// 원소
 
 	// 콜라이더

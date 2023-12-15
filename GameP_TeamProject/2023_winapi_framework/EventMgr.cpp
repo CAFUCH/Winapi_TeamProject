@@ -3,13 +3,14 @@
 #include "Object.h"
 #include "Weapon.h"
 #include "StageMgr.h"
+#include "SceneMgr.h"
 void EventMgr::Update()
 {
-	for (size_t i = 0; i < m_vecObjDead.size(); ++i)
+	/*for (size_t i = 0; i < m_vecObjDead.size(); ++i)
 	{
-		delete m_vecObjDead[i];
+ 		delete m_vecObjDead[i];
 	}
-	m_vecObjDead.clear();
+	m_vecObjDead.clear();*/
 
 	//for (size_t i = 0; i < m_vecWeaDead.size(); ++i)
 	//{
@@ -30,6 +31,10 @@ void EventMgr::DeleteObject(Object* _pObj)
 	eve.eEve = EVENT_TYPE::DELETE_OBJECT;
 	eve.Obj = _pObj;
 	m_vecEvent.push_back(eve);
+
+	if (_pObj->GetName() == L"Player") {
+		SceneMgr::GetInst()->LoadScene(L"GameOver_Scene");
+	}
 
 	if (_pObj->GetName() == L"Enemy") {
 		StageMgr::GetInst()->enemyCountInWave--;

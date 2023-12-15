@@ -28,7 +28,6 @@
 #include "Button.h"
 
 vector<UI*> Game_Scene::m_ui;
-Player* Game_Scene::pPlayer;
 
 int Game_Scene::gunCnt = 0;
 int Game_Scene::knifeCnt = 0;
@@ -36,18 +35,19 @@ int Game_Scene::bombCnt = 0;
 
 void OnPanel() {
 	Game_Scene::SetActive_Panel(true);
-
 }
 void OffPanel() {
-	StageMgr::GetInst()->NextStage(100, 1, 0.1f, OnPanel);
+	StageMgr::GetInst()->NextStage(2 * (StageMgr::GetInst()->GetCurStage() + 1), 2, 0.1f, OnPanel);
 	Game_Scene::SetActive_Panel(false);
 }
 
 void OnGun() {
+	auto players = SceneMgr::GetInst()->GetCurScene()->GetGroupObject(OBJECT_GROUP::PLAYER);
+	auto pPlayer = (Player*)players[0]; //플래이어는 하나니깐 0번째를 가져옴
 	if (Game_Scene::gunCnt == 0) {
 		//얻는 무기 코드
-		Game_Scene::pPlayer->SetWeapon(0, SceneMgr::GetInst()->GetCurScene()->GetWeapon(L"Gun"));
-		Game_Scene::pPlayer->SetCurWeaponIdx(0);
+		pPlayer->SetWeapon(0, SceneMgr::GetInst()->GetCurScene()->GetWeapon(L"Gun"));
+		pPlayer->SetCurWeaponIdx(0);
 	}
 	Game_Scene::gunCnt++;
 
@@ -55,10 +55,12 @@ void OnGun() {
 	OffPanel();
 }
 void OnKnife() {
+	auto players = SceneMgr::GetInst()->GetCurScene()->GetGroupObject(OBJECT_GROUP::PLAYER);
+	auto pPlayer = (Player*)players[0]; //플래이어는 하나니깐 0번째를 가져옴
 	if (Game_Scene::knifeCnt == 0) {
 		//얻는 무기 코드
-		Game_Scene::pPlayer->SetWeapon(1, SceneMgr::GetInst()->GetCurScene()->GetWeapon(L"Knife"));
-		Game_Scene::pPlayer->SetCurWeaponIdx(1);
+		pPlayer->SetWeapon(1, SceneMgr::GetInst()->GetCurScene()->GetWeapon(L"Knife"));
+		pPlayer->SetCurWeaponIdx(1);
 	}
 	Game_Scene::knifeCnt++;
 
@@ -66,10 +68,12 @@ void OnKnife() {
 	OffPanel();
 }
 void OnBomb() {
+	auto players = SceneMgr::GetInst()->GetCurScene()->GetGroupObject(OBJECT_GROUP::PLAYER);
+	auto pPlayer = (Player*)players[0]; //플래이어는 하나니깐 0번째를 가져옴
 	if (Game_Scene::bombCnt == 0) {
 		//얻는 무기 코드
-		Game_Scene::pPlayer->SetWeapon(2, SceneMgr::GetInst()->GetCurScene()->GetWeapon(L"Bomb"));
-		Game_Scene::pPlayer->SetCurWeaponIdx(2);
+		pPlayer->SetWeapon(2, SceneMgr::GetInst()->GetCurScene()->GetWeapon(L"Bomb"));
+		pPlayer->SetCurWeaponIdx(2);
 	}
 	Game_Scene::bombCnt++;
 
@@ -80,39 +84,39 @@ void OnBomb() {
 void Game_Scene::Init()
 {
 	// 플레이어 생성 및 초기화
-	{
-		Game_Scene::pPlayer = new Player;
-		pPlayer->SetPos((Vec2({ Core::GetInst()->GetResolution().x / 2, Core::GetInst()->GetResolution().y / 2 })));
-		pPlayer->SetScale(Vec2(100.f, 100.f));
-		AddObject(Game_Scene::pPlayer, OBJECT_GROUP::PLAYER);
 
-		Camera::GetInst()->SetTarget(pPlayer);
-	}
+	Player* pPlayer = new Player;
+	pPlayer->SetPos((Vec2({ Core::GetInst()->GetResolution().x / 2, Core::GetInst()->GetResolution().y / 2 })));
+	pPlayer->SetScale(Vec2(100.f, 100.f));
+	AddObject(pPlayer, OBJECT_GROUP::PLAYER);
+
+	Camera::GetInst()->SetTarget(pPlayer);
+
 
 	// 무기 생성 및 초기화
-	{
-		Weapon* pGun = new Gun;
-		pGun->SetPos((Vec2({ 0, 0 })));
-		pGun->SetScale(Vec2(150.f, 150.f));
-		pGun->SetOwner(pPlayer);
-		m_mWeapon.insert({ L"Gun", pGun });
-		AddWeapon(pGun);
 
-		Weapon* pKnife = new Knife;
-		pKnife->SetPos((Vec2({ 0, 0 })));
-		pKnife->SetScale(Vec2(50.f, 50.f));
-		pGun->SetOwner(pPlayer);
-		m_mWeapon.insert({ L"Knife", pKnife });
-		AddWeapon(pKnife);
+	Weapon* pGun = new Gun;
+	pGun->SetPos((Vec2({ 0, 0 })));
+	pGun->SetScale(Vec2(150.f, 150.f));
+	pGun->SetOwner(pPlayer);
+	m_mWeapon.insert({ L"Gun", pGun });
+	AddWeapon(pGun);
 
-		Weapon* pBomb = new Bomb;
-		pBomb->SetPos((Vec2({ 0, 0 })));
-		pBomb->SetScale(Vec2(50.f, 50.f));
-		pGun->SetOwner(pPlayer);
-		m_mWeapon.insert({ L"Bomb", pBomb });
-		pGun->SetName(L"Bomb");
-		AddWeapon(pBomb);
-	}
+	Weapon* pKnife = new Knife;
+	pKnife->SetPos((Vec2({ 0, 0 })));
+	pKnife->SetScale(Vec2(50.f, 50.f));
+	pGun->SetOwner(pPlayer);
+	m_mWeapon.insert({ L"Knife", pKnife });
+	AddWeapon(pKnife);
+
+	Weapon* pBomb = new Bomb;
+	pBomb->SetPos((Vec2({ 0, 0 })));
+	pBomb->SetScale(Vec2(50.f, 50.f));
+	pGun->SetOwner(pPlayer);
+	m_mWeapon.insert({ L"Bomb", pBomb });
+	pGun->SetName(L"Bomb");
+	AddWeapon(pBomb);
+
 
 	OnPanel();
 	//StageMgr::GetInst()->NextStage(3, 3, 0.1f, OnPanel);
@@ -197,7 +201,6 @@ void Game_Scene::Render(HDC _dc)
 
 void Game_Scene::Release()
 {
-	delete Game_Scene::pPlayer;
 	Scene::Release();
 	CollisionMgr::GetInst()->CheckReset();
 }

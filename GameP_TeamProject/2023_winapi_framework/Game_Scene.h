@@ -29,8 +29,6 @@ public:
 private:
 	static vector<UI*> m_ui;
 public:
-	static Player* pPlayer;
-public:
 	static int gunCnt;
 	static int knifeCnt;
 	static int bombCnt;

@@ -23,8 +23,7 @@ Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, float _da
 	SetMaxHP(_hp);
 	SetHP(GetMaxHP());
 
-	SetName(L"Enemy");
-
+	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
 	m_fDamage = _damage;
 
 	SetBkMode(Core::GetInst()->GetMainDC(), 0);
@@ -58,6 +57,14 @@ Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, float _da
 
 		GetAnimator()->PlayAnim(ANIM_RIGHT_HASH, true);
 	}
+
+	HP* pHP = new HP();
+	pHP->SetOwner(this);
+	pHP->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
+	pHP->SetScale({ 100.f, 100.f });
+	pHP->SetMaxHP(GetMaxHP());
+	pHP->SetHP(GetHP());
+	m_pCurScene->AddObject(pHP, OBJECT_GROUP::UI);
 }
 
 Melee_Enemy::~Melee_Enemy()

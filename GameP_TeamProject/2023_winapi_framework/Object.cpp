@@ -6,6 +6,7 @@
 #include "KeyMgr.h"
 #include "TimeMgr.h"
 #include "EventMgr.h"
+#include "SceneMgr.h"
 
 #include "Collider.h"
 #include "Animator.h"
@@ -93,11 +94,12 @@ void Object::Component_Render(HDC _dc)
 
 void Object::SetDamage(float _damage)
 {
-  	if (m_fHp - _damage <= 0)
+	if (m_fHp - _damage <= 0)
 	{
 		m_fHp = 0;
 		// PoolMgr를 사용할거면 EventMgr를 손 봐야 한다
 		EventMgr::GetInst()->DeleteObject(this);
+
 	}
 	else
 		m_fHp -= _damage;
