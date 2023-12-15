@@ -43,14 +43,14 @@ Bullet::Bullet(wstring _name, Vec2 dir, Vec2 pos, Vec2 scale, Vec2 texSize)
 	// 크기 초기화
 	SetScale(scale);
 	// 속도 초기화
-	m_fAttackSpeed = 300.f;
+	m_fAttackSpeed = 500.f;
 	// 공격력 초기화
 	m_fDamage = 10.f;
 	// 원소 초기화
-	m_eElement = ENTITY_ELEMENT_TYPE::WATER;
+	m_eElement = ENTITY_ELEMENT_TYPE::FIRE;
 
 	m_fcurTime = 0.f;
-	m_fLifeTime = 3.f;
+	m_fLifeTime = 1.5f;
 
 	// 현재 씬 불러오기
 	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
@@ -68,10 +68,16 @@ void Bullet::Update()
 		EventMgr::GetInst()->DeleteWeapon(this);
 
 	m_vPos = GetPos();
-	m_vDir.Normalize();
+	//m_vDir.Normalize();
 
-	SetPos(m_vPos
-		+ Vec2{ m_vDir.x * m_fAttackSpeed * fDT, m_vDir.y * m_fAttackSpeed * fDT });
+	Vec2 dir = (m_vDir - m_vPos).Normalize();
+	m_vPos.x += dir.x * m_fAttackSpeed * fDT;
+	m_vPos.y += dir.y * m_fAttackSpeed * fDT;
+
+	SetPos(m_vPos);
+
+	//SetPos(m_vPos
+	//	+ Vec2{ m_vDir.x * m_fAttackSpeed * fDT, m_vDir.y * m_fAttackSpeed * fDT });
 }
 
 void Bullet::Render(HDC _dc)

@@ -44,8 +44,8 @@ Particle::Particle(PARTICLE_TYPE _type)
 		GetAnimator()->CreateAnim(L"Effect_Fire", m_pTex, Vec2(0.f, 0.f),
 			Vec2(218.f, 76.f), Vec2(218.f, 0.f), 12, 0.075f);
 		lifeTime = 0.75f;
-		m_x = 5;
-		m_y = 7.5f;
+		m_x = 0;
+		m_y = 0;
 		break;
 	case PARTICLE_TYPE::ELECT_ELEM:
 		m_animName = L"Effect_Elect";
@@ -53,6 +53,15 @@ Particle::Particle(PARTICLE_TYPE _type)
 		GetAnimator()->CreateAnim(L"Effect_Elect", m_pTex, Vec2(0.f, 0.f),
 			Vec2(128.f, 128.f), Vec2(128.f, 0.f), 7, 0.05f);
 		lifeTime = 0.35f;
+		m_x = 5;
+		m_y = 7.5f;
+		break;
+	case PARTICLE_TYPE::AIM:
+		m_animName = L"Aim";
+		m_pTex = ResMgr::GetInst()->TexLoad(L"Aim", L"Texture\\Aim.bmp");
+		GetAnimator()->CreateAnim(L"Aim", m_pTex, Vec2(0.f, 0.f),
+			Vec2(64.f, 64.f), Vec2(64.f, 0.f), 4, 0.25f);
+		lifeTime = 1.f;
 		m_x = 5;
 		m_y = 7.5f;
 		break;
@@ -87,4 +96,9 @@ void Particle::Update()
 void Particle::Render(HDC _dc)
 {
 	Component_Render(_dc);
+}
+
+void Particle::OnStop()
+{
+	EventMgr::GetInst()->DeleteObject(this);
 }
