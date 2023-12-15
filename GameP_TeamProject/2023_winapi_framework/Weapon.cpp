@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Weapon.h"
+#include "Particle.h"
 #include "Texture.h"
+#include "Scene.h"
 
 #include "Collider.h"
 #include "Animator.h"
@@ -73,4 +75,13 @@ void Weapon::CreateAnimator()
 {
 	m_pAnimator = new Animator;
 	m_pAnimator->m_pWeaOwner = this;
+}
+
+Particle* Weapon::CreateParticle(PARTICLE_TYPE _eType)
+{
+	Particle* m_pParticle = new Particle(_eType);
+	m_pParticle->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
+	m_pParticle->SetScale({ 100.f, 100.f });
+	m_pCurScene->AddObject(m_pParticle, OBJECT_GROUP::PARTICLE);
+	return m_pParticle;
 }

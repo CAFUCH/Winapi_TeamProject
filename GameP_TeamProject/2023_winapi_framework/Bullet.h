@@ -1,5 +1,6 @@
 #pragma once
 #include "Weapon.h"
+#include "Particle.h"
 #include "Scene.h"
 class Bullet :
     public Weapon
@@ -27,6 +28,7 @@ public:
 private:
     Texture* m_pBullet;
     Vec2 m_vDir;
+    Particle* m_pParticle;
     float m_fcurTime; float m_fLifeTime;
     bool m_IsErase;
 };

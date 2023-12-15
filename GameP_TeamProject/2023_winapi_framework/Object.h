@@ -3,6 +3,7 @@ class Collider;
 class Animator;
 class Weapon;
 class Particle;
+class Scene;
 class Object
 {
 public:
@@ -69,15 +70,15 @@ protected:
 	Vec2 m_vScale; 
 	// 원소
 
-	// 얘네는 컴포넌트임!!!
 	// 콜라이더
 	Collider* m_pCollider;
 	// 애니메이터
 	Animator* m_pAnimator;
 	// 무기 (정확히는 obj에게 달릴 weapon의 컴포넌트를 생성하고 담는 곳)
 	vector<Weapon*> m_vecWeapon;
-	// ㅋㅋ 파티클임
-	Particle* m_pParticle;
+
+	// 현재 씬 
+	std::shared_ptr<Scene> m_pCurScene;
 
 	// 엔티티 정보
 	// 생존
