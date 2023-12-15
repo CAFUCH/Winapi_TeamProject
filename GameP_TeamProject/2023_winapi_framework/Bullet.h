@@ -24,7 +24,8 @@ public:
     virtual void Attack(Vec2 dir) override;
 
 public:
-    const bool& GetIsErase() { return m_IsErase; }
+    //const bool& GetIsErase() { return m_IsErase; }
+    //void SetIsErase() { m_IsErase = true; }
     int test;
 
 private:
@@ -32,7 +33,7 @@ private:
     Vec2 m_vDir;
     Particle* m_pParticle;
     float m_fcurTime; float m_fLifeTime;
-    bool m_IsErase;
+    //bool m_IsErase;
 
     Gun* m_pOwner;
 

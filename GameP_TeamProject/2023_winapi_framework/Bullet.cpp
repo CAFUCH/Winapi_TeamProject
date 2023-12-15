@@ -58,6 +58,8 @@ Bullet::Bullet(wstring _name, Vec2 dir, Vec2 pos, Vec2 scale, Vec2 texSize, int 
 
 	this->test = test;
 	m_pOwner = owner;
+
+	m_IsAlive = true;
 }
 
 Bullet::~Bullet()
@@ -66,49 +68,58 @@ Bullet::~Bullet()
 
 void Bullet::Update()
 {
-	// 시간이 지나면 삭제
-	//m_fcurTime += fDT;
-	//if (m_fcurTime >= m_fLifeTime)
-	//	EventMgr::GetInst()->DeleteWeapon(this);
+	if (GetAlive())
+	{
+		// 시간이 지나면 삭제
+		m_fcurTime += fDT;
+		if (m_fcurTime >= m_fLifeTime)
+			SetDead();
+			//EventMgr::GetInst()->DeleteWeapon(this);
 
-	m_vPos = GetPos();
-	//m_vDir.Normalize();
+		m_vPos = GetPos();
+		//m_vDir.Normalize();
 
-	Vec2 dir = (m_vDir - m_vPos).Normalize();
-	m_vPos.x += dir.x * m_fAttackSpeed * fDT;
-	m_vPos.y += dir.y * m_fAttackSpeed * fDT;
+		Vec2 dir = (m_vDir - m_vPos).Normalize();
+		m_vPos.x += dir.x * m_fAttackSpeed * fDT;
+		m_vPos.y += dir.y * m_fAttackSpeed * fDT;
 
-	SetPos(m_vPos);
+		SetPos(m_vPos);
 
-	//SetPos(m_vPos
-	//	+ Vec2{ m_vDir.x * m_fAttackSpeed * fDT, m_vDir.y * m_fAttackSpeed * fDT });
+		//SetPos(m_vPos
+		//	+ Vec2{ m_vDir.x * m_fAttackSpeed * fDT, m_vDir.y * m_fAttackSpeed * fDT });
+	}
 }
 
 void Bullet::Render(HDC _dc)
 {
-	Component_Render(_dc);
+	if (GetAlive())
+		Component_Render(_dc);
 }
 
 void Bullet::EnterCollision(Collider* _pOther)
 {
-	Object* pOtherObj = _pOther->GetObj();
-
-	// 총알과 충돌한 것이 적 오브젝트라면
-	if (pOtherObj->GetName() == L"Enemy")
+	if (GetAlive())
 	{
-		// 상성 효과
-		m_fDamage = ElementMgr::GetInst()->Elemenet
-		(this->m_eElement, pOtherObj->m_eElement, m_fDamage);
+		Object* pOtherObj = _pOther->GetObj();
 
-		// 데미지 주기
-		pOtherObj->SetDamage(m_fDamage);
+		// 총알과 충돌한 것이 적 오브젝트라면
+		if (pOtherObj->GetName() == L"Enemy")
+		{
+			// 상성 효과
+			m_fDamage = ElementMgr::GetInst()->Elemenet
+			(this->m_eElement, pOtherObj->m_eElement, m_fDamage);
 
-		// 파티클 생성
-		CreateParticle((PARTICLE_TYPE)m_eElement);
+			// 데미지 주기
+			pOtherObj->SetDamage(m_fDamage);
 
-		// 총알 삭제
-		EventMgr::GetInst()->DeleteWeapon(this);
-		m_pOwner->bullets.erase(test);
+			// 파티클 생성
+			CreateParticle((PARTICLE_TYPE)m_eElement);
+
+			// 총알 삭제
+			//EventMgr::GetInst()->DeleteWeapon(this);
+			//m_pOwner->bullets.erase(test);
+			SetDead();
+		}
 	}
 }
 
