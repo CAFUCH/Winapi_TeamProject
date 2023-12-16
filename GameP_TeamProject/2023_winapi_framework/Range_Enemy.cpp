@@ -24,6 +24,7 @@ Range_Enemy::Range_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, float _da
 	SetMaxHP(_hp);
 	SetHP(GetMaxHP());
 
+	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
 	m_fDamage = _damage;
 
 	SetBkMode(Core::GetInst()->GetMainDC(), 0);
@@ -64,6 +65,15 @@ Range_Enemy::Range_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, float _da
 		GetAnimator()->PlayAnim(ANIM_RIGHT_HASH, true);
 	}
 
+
+	HP* pHP = new HP();
+	pHP->SetOwner(this);
+	pHP->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
+	pHP->SetScale({ 100.f, 100.f });
+	pHP->SetMaxHP(GetMaxHP());
+	pHP->SetHP(GetHP());
+	m_pCurScene->AddObject(pHP, OBJECT_GROUP::UI);
+
 }
 
 Range_Enemy::~Range_Enemy()
@@ -74,23 +84,6 @@ Range_Enemy::~Range_Enemy()
 void Range_Enemy::EnterCollision(Collider* _pOther)
 {
 	curTime = atkDelay;
-
-	/*Object* obj = _pOther->GetObj();
-	obj->SetDamage(m_fDamage);
-	Vec2 thisPos = GetPos();
-	Vec2 pPos = obj->GetPos();
-	Vec2 dir = (pPos - thisPos).Normalize();
-
-	if (dir.x > 0)
-	else if (dir.x < 0)
-		GetAnimator()->PlayAnim(ANIM_LEFT_HIT_HASH, true);*/
-
-	GetAnimator()->PlayAnim(ANIM_RIGHT_HIT_HASH, true);
-	Particle* m_pParticle = new Particle(PARTICLE_TYPE::HIT);
-	m_pParticle->SetOwner(this);
-	m_pParticle->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
-	m_pParticle->SetScale({ 100.f, 100.f });
-	SceneMgr::GetInst()->GetCurScene()->AddObject(m_pParticle, OBJECT_GROUP::PARTICLE);
 }
 
 void Range_Enemy::StayCollision(Collider* _pOther)

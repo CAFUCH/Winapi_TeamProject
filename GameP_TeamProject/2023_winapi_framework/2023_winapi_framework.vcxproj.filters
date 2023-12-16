@@ -203,6 +203,10 @@
     <ClInclude Include="Panel.h" />
     <ClInclude Include="Control_Scene.h" />
     <ClInclude Include="Explain_Scene.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Clear_Scene.h" />
+    <ClInclude Include="GameOver_Scene.h" />
+    <ClInclude Include="Enemy_Bullet.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2023_winapi_framework.rc">
@@ -327,5 +331,9 @@
     <ClCompile Include="Panel.cpp" />
     <ClCompile Include="Control_Scene.cpp" />
     <ClCompile Include="Explain_Scene.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Clear_Scene.cpp" />
+    <ClCompile Include="GameOver_Scene.cpp" />
+    <ClCompile Include="Enemy_Bullet.cpp" />
   </ItemGroup>
 </Project>

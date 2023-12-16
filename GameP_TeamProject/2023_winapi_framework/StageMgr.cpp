@@ -20,32 +20,49 @@ typedef void(*myFuncDef)(void);
 void StageMgr::Init()
 {
 	curStage = 0;
-	enemyCountInWave = 10; //임시로 정해줌
+	enemyCountInWave = 100; //임시로 정해줌
+	isUpdate = true;
 }
 
 void StageMgr::Update()
 {
-	if (isStageStart) {
-		curTime += fDT;
-		if (curTime >= spawnDelay) {
-			EnemySpawn(enemyCount);
-			curTime = 0;
-			--spawnCount;
+	if (isUpdate) {
+		if (isStageStart) {
+			curTime += fDT;
+			if (curTime >= spawnDelay) {
+				EnemySpawn(enemyCount);
+				curTime = 0;
+				--spawnCount;
+			}
 		}
-	}
-	if (spawnCount <= 0) {
-		isStageStart = false;
-	}
+		if (spawnCount <= 0) {
+			isStageStart = false;
+		}
 
-	if (enemyCountInWave <= 0) {
-		if (!allDead) {
-			((myFuncDef)action)(); //void 포인터는 이렇게 실행
-			allDead = true;
-		}
-		if (curStage >= 2) { //10스테이지가 되면 클리어씬으로
-			SceneMgr::GetInst()->LoadScene(L"Clear_Scene");
+		if (enemyCountInWave <= 0) {
+			if (!allDead) {
+				((myFuncDef)action)(); //void 포인터는 이렇게 실행
+				allDead = true;
+			}
+			if (curStage >= 2) { //10스테이지가 되면 클리어씬으로
+				SceneMgr::GetInst()->LoadScene(L"Clear_Scene");
+			}
 		}
 	}
+}
+
+void StageMgr::Setting()
+{
+	enemyCountInWave = 100;
+	isUpdate = true;
+	curTime = 0;
+	spawnDelay = 0;
+
+	curStage = 0;
+	spawnCount = 0;
+	enemyCount = 0;
+	isStageStart = true;
+	allDead = false;
 }
 
 void StageMgr::NextStage(int _enemyCount, int _spawnCount, float _spawnDelay, void* (_action))
@@ -72,9 +89,9 @@ void StageMgr::EnemySpawn(int eCount)
 
 		if (curStage >= 2 && random == 1) {
 
-			Range_Enemy* enemy2 = new Range_Enemy(i % 2 + 1, ENTITY_ELEMENT_TYPE::FIRE, 20, .01f, 3.f);
+			Range_Enemy* enemy2 = new Range_Enemy(i % 2 + 1, ENTITY_ELEMENT_TYPE::FIRE, 20, 10.f, 3.f);
 
-			enemy2->SetPos(Vec2((int)WINDOW_WIDTH / 2 + rand() % 500, (int)WINDOW_HEIGHT / 2 + rand() % 400));
+			enemy2->SetPos(Vec2((int)WINDOW_WIDTH / 2 + rand() % 1000 - 500, (int)WINDOW_HEIGHT / 2 + rand() % 1000 - 500));
 			enemy2->SetScale(Vec2(64, 64));
 			SceneMgr::GetInst()->GetCurScene()->AddObject(enemy2, OBJECT_GROUP::MONSTER);
 
@@ -83,36 +100,18 @@ void StageMgr::EnemySpawn(int eCount)
 			ai2->AddState(ENEMY_STATE::IDLE, new Idle_State(ai2, 2.f));
 			ai2->AddState(ENEMY_STATE::ATTACK, new Attack_State_Range(ai2)); //댐지, 기다리는 시간
 			ai2->InitState(ENEMY_STATE::CHASE);
-
-
-			HP* pHP2 = new HP();
-			pHP2->SetOwner(enemy2);
-			pHP2->SetPos({ enemy2->GetPos().x, enemy2->GetPos().y - enemy2->GetScale().y / 2 });
-			pHP2->SetScale({ 100.f, 100.f });
-			pHP2->SetMaxHP(20.f);
-			pHP2->SetHP(pHP2->GetMaxHP());
-			SceneMgr::GetInst()->GetCurScene()->AddObject(pHP2, OBJECT_GROUP::UI);
 		}
 		else {
 			Melee_Enemy* enemy = new Melee_Enemy(i % 7 + 1, ENTITY_ELEMENT_TYPE::FIRE
-				, 20, .01f, 3.f);
+				, 20, 5.f, .5f);
 
-			enemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 + rand() % 500, (int)WINDOW_HEIGHT / 2 + rand() % 400));
+			enemy->SetPos(Vec2((int)WINDOW_WIDTH / 2 + rand() % 1000 - 500, (int)WINDOW_HEIGHT / 2 + rand() % 1000 - 500));
 			enemy->SetScale(Vec2(64, 64));
 			SceneMgr::GetInst()->GetCurScene()->AddObject(enemy, OBJECT_GROUP::MONSTER);
 
 			AI* ai = new AI(enemy);
-			ai->AddState(ENEMY_STATE::CHASE, new Chase_State_Melee(ai, rand() % 100 + 5));
+			ai->AddState(ENEMY_STATE::CHASE, new Chase_State_Melee(ai, rand() % 100 + 20));
 			ai->InitState(ENEMY_STATE::CHASE);
-
-
-			HP* pHP = new HP();
-			pHP->SetOwner(enemy);
-			pHP->SetPos({ enemy->GetPos().x, enemy->GetPos().y - enemy->GetScale().y / 2 });
-			pHP->SetScale({ 100.f, 100.f });
-			pHP->SetMaxHP(20.f);
-			pHP->SetHP(pHP->GetMaxHP());
-			SceneMgr::GetInst()->GetCurScene()->AddObject(pHP, OBJECT_GROUP::UI);
 		}
 	}
 }

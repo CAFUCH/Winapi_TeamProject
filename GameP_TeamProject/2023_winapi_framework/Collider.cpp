@@ -10,7 +10,7 @@ UINT Collider::m_sNextID = 0;
 Collider::Collider()
 	: m_pObjOwner(nullptr)
 	, m_pWeaOwner(nullptr)
-	, m_vScale(Vec2(40.f,40.f))
+	, m_vScale(Vec2(40.f, 40.f))
 	, m_ID(m_sNextID++)
 	, m_check(0)
 	, m_vFinalPos{}
@@ -44,7 +44,7 @@ void Collider::Render(HDC _dc)
 
 void Collider::EnterCollision(Collider* _pOther)
 {
- 	++m_check;
+	++m_check;
 
 	if (m_pObjOwner != nullptr)
 		m_pObjOwner->EnterCollision(_pOther);

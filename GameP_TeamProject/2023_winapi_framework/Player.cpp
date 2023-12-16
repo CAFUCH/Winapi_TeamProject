@@ -26,20 +26,21 @@ bool cmp1(std::pair<Object*, double>& left, std::pair<Object*, double>& right)
 Player::Player()
 	: m_pTex(nullptr)
 {
-	m_fHp = 30;
-	m_fHpMax = 30;
+	/*m_fHp = 30;
+	m_fHpMax = 30;*/
 	// 이미지 불러오기
 	m_pTex = ResMgr::GetInst()->TexLoad(L"PlayerT", L"Texture\\Player.bmp");
 
 	// 현재 씬 불러오기
 	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
 
+	SetName(L"Player");
 	// 초기화
 	{
 		// 현재 무기 인덱스
-		m_curWeaponIdx = 0;
+		//m_curWeaponIdx = 0;
 		// 이전 무기 인덱스
-		m_preWeaponIdx = 0;
+		m_preWeaponIdx = m_curWeaponIdx;
 		// 소지 무기 개수
 		m_maxWeaponCnt = 3;
 
@@ -211,7 +212,7 @@ void Player::Update()
 
 	// 공격
 	if (KEY_DOWN(KEY_TYPE::SPACE) && m_curWeapon != NULL)
-	{		 
+	{
 		// 현재 무기 사용
 		if (m_vAttackDir.x != 0 || m_vAttackDir.y != 0)
 			m_curWeapon->Attack(m_vAttackDir);
@@ -238,8 +239,8 @@ void Player::Update()
 		else if (m_curWeaponIdx >= m_maxWeaponCnt)
 			m_curWeaponIdx = 0;
 
-		//if (GetWeapon(m_curWeaponIdx)->GetOwner() == nullptr)
-		//	m_curWeaponIdx = m_preWeaponIdx;
+		/*if (GetWeapon(m_curWeaponIdx)->GetName() == L"")
+			m_curWeaponIdx = m_preWeaponIdx;*/
 
 		m_curWeapon = GetWeapon(m_curWeaponIdx);
 		m_curWeapon->SetOwner(this);
@@ -277,7 +278,7 @@ void Player::AutoAim()
 {
 	// 위치 받아오기
 	Vec2 vPos = GetPos();
-	
+
 	// 현재씬의 에너미를 가져온다.
 	m_vecEnemy = m_pCurScene->GetGroupObject(OBJECT_GROUP::MONSTER);
 
@@ -304,10 +305,14 @@ void Player::AutoAim()
 	}
 
 	// 에임 표시
+	//if (m_pPerTarget != m_pTarget && m_pTarget != nullptr)
+	//	m_pParticle = CreateParticle(PARTICLE_TYPE::AIM, m_pTarget);
+
 	if (m_pParticle)
+	{
 		m_pParticle->OnStop();
-	if (m_pTarget)
 		m_pParticle = CreateParticle(PARTICLE_TYPE::AIM, m_pTarget);
+	}
 
 	// 위치와 거리 초기화
 	m_vecEnemy.clear();
@@ -321,12 +326,12 @@ void Player::EnterCollision(Collider* _pOther)
 	// 플레이어 충돌한 적
 	if (pOtherObj->GetName() == L"Enemy" || pOtherObj->GetName() == L"Enemy_Bullet")
 	{
-		// 충돌한 적 삭제
-		EventMgr::GetInst()->DeleteObject(_pOther->GetObj());
 		// Hit 애니메이션 실행
 		GetAnimator()->PlayAnim(L"Player_Hit_" + m_strDir, false);
 		// Hit 파티클 생성
 		CreateParticle(PARTICLE_TYPE::HIT, this);
+		// 충돌한 적 삭제
+		//EventMgr::GetInst()->DeleteObject(_pOther->GetObj());
 	}
 }
 

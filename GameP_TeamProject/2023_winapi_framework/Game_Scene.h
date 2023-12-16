@@ -2,6 +2,7 @@
 #include "UI.h"
 #include "Scene.h"
 class Weapon;
+class Player;
 class Game_Scene :
 	public Scene
 {
@@ -27,8 +28,6 @@ public:
 	//Weapon* GetWeapon(wstring _name) { return m_mWeapon[_name]; }
 private:
 	static vector<UI*> m_ui;
-public:
-	static Object* pPlayer;
 public:
 	static int gunCnt;
 	static int knifeCnt;

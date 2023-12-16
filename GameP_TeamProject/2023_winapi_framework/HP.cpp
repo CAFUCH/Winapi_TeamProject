@@ -22,6 +22,7 @@ HP::HP()
 
 HP::~HP()
 {
+
 }
 
 void HP::Update()
@@ -32,24 +33,26 @@ void HP::Update()
 
 void HP::Render(HDC _dc)
 {
-	m_vPos = Camera::GetInst()->GetRenderPos(m_vPos);
+	if (!m_pOwner->GetIsDead()) {
+		m_vPos = Camera::GetInst()->GetRenderPos(m_vPos);
 
-	 TransparentBlt(_dc
-		 , (int)(m_vPos.x - m_pBackTex->GetWidth() / 2)
-		 , (int)(m_vPos.y - m_vScale.y / 2)
-		 , m_pBackTex->GetWidth(), m_pBackTex->GetHeight()
-		 , m_pBackTex->GetDC()
-		 , 0, 0
-		 , m_pBackTex->GetWidth(), m_pBackTex->GetHeight()
-		 , RGB(255, 0, 255));
+		TransparentBlt(_dc
+			, (int)(m_vPos.x - m_pBackTex->GetWidth() / 2)
+			, (int)(m_vPos.y - m_vScale.y / 2)
+			, m_pBackTex->GetWidth(), m_pBackTex->GetHeight()
+			, m_pBackTex->GetDC()
+			, 0, 0
+			, m_pBackTex->GetWidth(), m_pBackTex->GetHeight()
+			, RGB(255, 0, 255));
 
-	TransparentBlt(_dc
-		, (int)(m_vPos.x - m_pFillTex->GetWidth() / 2)
-		, (int)(m_vPos.y - m_vScale.y / 2)
-		, (m_pFillTex->GetWidth() / GetMaxHP()) * GetHP()
-		, m_pFillTex->GetHeight()
-		, m_pFillTex->GetDC()
-		,0, 0
-		,m_pFillTex->GetWidth(), m_pFillTex->GetHeight()
-		, RGB(255, 0, 255));
+		TransparentBlt(_dc
+			, (int)(m_vPos.x - m_pFillTex->GetWidth() / 2)
+			, (int)(m_vPos.y - m_vScale.y / 2)
+			, (m_pFillTex->GetWidth() / GetMaxHP()) * GetHP()
+			, m_pFillTex->GetHeight()
+			, m_pFillTex->GetDC()
+			, 0, 0
+			, m_pFillTex->GetWidth(), m_pFillTex->GetHeight()
+			, RGB(255, 0, 255));
+	}
 }

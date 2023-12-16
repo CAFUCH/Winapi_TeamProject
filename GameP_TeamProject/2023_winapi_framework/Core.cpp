@@ -65,8 +65,8 @@ void Core::Update()
 	// === Manager Update === 
 	TimeMgr::GetInst()->Update();
 	KeyMgr::GetInst()->Update();
-	SceneMgr::GetInst()->Update();
 	CollisionMgr::GetInst()->Update();
+	SceneMgr::GetInst()->Update();
 	StageMgr::GetInst()->Update();
 	Camera::GetInst()->Update();
 //	Vec2 vPos = m_obj.GetPos();

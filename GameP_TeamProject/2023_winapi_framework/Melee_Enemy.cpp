@@ -23,6 +23,7 @@ Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, float _da
 	SetMaxHP(_hp);
 	SetHP(GetMaxHP());
 
+	m_pCurScene = SceneMgr::GetInst()->GetCurScene();
 	m_fDamage = _damage;
 
 	SetBkMode(Core::GetInst()->GetMainDC(), 0);
@@ -56,6 +57,14 @@ Melee_Enemy::Melee_Enemy(int _idx, ENTITY_ELEMENT_TYPE _type, int _hp, float _da
 
 		GetAnimator()->PlayAnim(ANIM_RIGHT_HASH, true);
 	}
+
+	HP* pHP = new HP();
+	pHP->SetOwner(this);
+	pHP->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
+	pHP->SetScale({ 100.f, 100.f });
+	pHP->SetMaxHP(GetMaxHP());
+	pHP->SetHP(GetHP());
+	m_pCurScene->AddObject(pHP, OBJECT_GROUP::UI);
 }
 
 Melee_Enemy::~Melee_Enemy()
@@ -66,12 +75,6 @@ Melee_Enemy::~Melee_Enemy()
 void Melee_Enemy::EnterCollision(Collider* _pOther)
 {
 	curTime = atkDelay;
-
-	Particle* m_pParticle = new Particle(PARTICLE_TYPE::HIT);
-	m_pParticle->SetOwner(this);
-	m_pParticle->SetPos({ GetPos().x, GetPos().y - GetScale().y / 2 });
-	m_pParticle->SetScale({ 100.f, 100.f });
-	SceneMgr::GetInst()->GetCurScene()->AddObject(m_pParticle, OBJECT_GROUP::PARTICLE);
 }
 
 void Melee_Enemy::StayCollision(Collider* _pOther)

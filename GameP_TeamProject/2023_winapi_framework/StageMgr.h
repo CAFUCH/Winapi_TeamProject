@@ -7,6 +7,7 @@ class StageMgr
 public:
 	void Init();
 	void Update();
+	void Setting();
 public:
 	void NextStage(int _enemyCount, int _spawnCount, float spawnDelay, void* (_action));
 	//(몇마리)를 (몇번) (몇초)마다 실행, 적이 다 죽으면 실행함 (함수)
@@ -15,11 +16,14 @@ public:
 	{
 		return curStage;
 	}
+public:
+	void Dead() { isUpdate = false; }
 private:
 	void EnemySpawn(int _eCount);
 
 public:
 	int enemyCountInWave;
+	bool isUpdate;
 private:
 	float curTime;
 	float spawnDelay;
