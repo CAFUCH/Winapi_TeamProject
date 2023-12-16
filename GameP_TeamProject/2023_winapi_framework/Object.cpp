@@ -27,11 +27,11 @@ Object::~Object()
 		delete m_pCollider;
 	if (nullptr != m_pAnimator)
 		delete m_pAnimator;
-	for (Weapon* weapon : m_vecWeapon)
+	/*for (Weapon* weapon : m_vecWeapon)
 	{
 		if (nullptr != weapon)
 			delete weapon;
-	}
+	}*/
 
 	// Entity는 소멸자에서 삭제하지 않는다.
 	// Entity는 체력에 따라 생존 여부가 결정되기 때문에 EventMgr에서 삭제를 지원해주고 잇다.!

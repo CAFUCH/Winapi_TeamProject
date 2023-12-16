@@ -32,9 +32,7 @@ void EventMgr::DeleteObject(Object* _pObj)
 	eve.Obj = _pObj;
 	m_vecEvent.push_back(eve);
 
-	if (_pObj->GetName() == L"Player") {
-		SceneMgr::GetInst()->LoadScene(L"GameOver_Scene");
-	}
+	
 
 	if (_pObj->GetName() == L"Enemy") {
 		StageMgr::GetInst()->enemyCountInWave--;
@@ -64,6 +62,10 @@ void EventMgr::Excute(const tEvent& _eve)
 			Object* pDeadObj = _eve.Obj;
 			pDeadObj->SetDead();
 			m_vecObjDead.push_back(pDeadObj);
+
+			if (pDeadObj->GetName() == L"Player") {
+				SceneMgr::GetInst()->LoadScene(L"GameOver_Scene");
+			}
 		}
 		if (_eve.Wea != nullptr)
 		{

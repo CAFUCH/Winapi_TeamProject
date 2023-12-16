@@ -26,6 +26,7 @@ void CollisionMgr::CollisionGroupUpdate(OBJECT_GROUP _eLeft, OBJECT_GROUP _eRigh
 {
 	std::shared_ptr<Scene> pCurScene = SceneMgr::GetInst()->GetCurScene();
 	const vector<Object*>& vecRight = pCurScene->GetGroupObject(_eRight);
+
 	if (_eLeft == OBJECT_GROUP::WEAPON)
 	{
 		const vector<Weapon*>& vecLeft = pCurScene->GetGroupWeapon();

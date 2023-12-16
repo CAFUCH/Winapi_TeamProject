@@ -59,6 +59,7 @@ Bomb::Bomb()
 
 Bomb::~Bomb()
 {
+
 }
 
 void Bomb::Update()

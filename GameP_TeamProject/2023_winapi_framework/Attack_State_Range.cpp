@@ -39,7 +39,7 @@ void Attack_State_Range::Update()
 
 		Vec2 dir = (pPos - thisPos).Normalize();
 
-		Enemy_Bullet* pBullet = new Enemy_Bullet(10.f, 600.f);
+		Enemy_Bullet* pBullet = new Enemy_Bullet(owner->GetDamage(), 300.f);
 		pBullet->SetPos(thisPos);
 		pBullet->SetScale(Vec2(25.f, 25.f));
 		pBullet->SetDir(dir);

@@ -16,12 +16,12 @@ void GameOver_Scene::Init()
 
 	AddObject(bg, OBJECT_GROUP::Panel);
 
-	Button* backBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT - 200),
-		Vec2(350, 120));
-	backBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"BackBtn_on", L"Texture\\BackBtn_hover.bmp"));
-	backBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"BackBtn_off", L"Texture\\BackBtn.bmp"));
-	backBtn->onReister = GoIntroScene;
-	AddObject(backBtn, OBJECT_GROUP::UI);
+	//Button* backBtn = new Button(Vec2((int)WINDOW_WIDTH / 2 - 30, (int)WINDOW_HEIGHT - 200),
+	//	Vec2(350, 120));
+	//backBtn->SetOnTexture(ResMgr::GetInst()->TexLoad(L"BackBtn_on", L"Texture\\BackBtn_hover.bmp"));
+	//backBtn->SetOffTexture(ResMgr::GetInst()->TexLoad(L"BackBtn_off", L"Texture\\BackBtn.bmp"));
+	//backBtn->onReister = GoIntroScene;
+	//AddObject(backBtn, OBJECT_GROUP::UI);
 }
 
 void GameOver_Scene::Update()

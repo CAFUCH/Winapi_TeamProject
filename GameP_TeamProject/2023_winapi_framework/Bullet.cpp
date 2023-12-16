@@ -25,7 +25,7 @@ Bullet::Bullet(wstring _name, Vec2 dir, Vec2 pos, Vec2 scale, Vec2 texSize, int 
 	// 콜라이더 생성
 	CreateCollider();
 	// 콜라이더 사이즈 초기화
-	GetCollider()->SetScale(Vec2(50.f, 50.f));
+	//GetCollider()->SetScale(Vec2(20.f, 20.f));
 
 	// 애니메이터 생성
 	/*Bomb Animation*/ {

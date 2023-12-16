@@ -52,18 +52,18 @@ void Scene::Render(HDC _dc)
 
 void Scene::Release()
 {
+	for (size_t j = 0; j < m_vecWea.size(); ++j) {
+		delete m_vecWea[j];
+	}
+	m_vecWea.clear();
+
 	for (UINT i = 0; i < (UINT)OBJECT_GROUP::END; ++i)
 	{
 		for (size_t j = 0; j < m_vecObj[i].size(); ++j)
 		{
 			delete m_vecObj[i][j];
 		}
-		if (i == (UINT)OBJECT_GROUP::WEAPON) {
-			for (size_t j = 0; j < m_vecWea.size(); ++j) {
-				delete m_vecWea[j];
-			}
-			m_vecWea.clear();
-		}
 		m_vecObj[i].clear();
 	}
+	
 }

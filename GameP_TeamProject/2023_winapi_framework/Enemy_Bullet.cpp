@@ -8,6 +8,7 @@
 #include "Collider.h"
 #include "Animator.h"
 #include "Animation.h"
+#include "EventMgr.h"
 Enemy_Bullet::Enemy_Bullet(float _damage, float _speed)
 	:m_fDir(-1.f)
 	, m_vDir(Vec2(0.f, 0.f))
@@ -15,12 +16,17 @@ Enemy_Bullet::Enemy_Bullet(float _damage, float _speed)
 	, m_bulletSpeed(_speed)
 	, m_pTex(nullptr)
 {
+
+	SetName(L"Enemy_Bullet");
+
 	m_pTex = ResMgr::GetInst()->TexFind(L"Weapon_Bullet");
 	//m_pTex = ResMgr::GetInst()->TexLoad(L"Weapon_Bullet", L"Texture\\" + _name + L".bmp");
 
 	CreateCollider();
 
 	CreateAnimator();
+	GetAnimator()->CreateAnim(L"Bullet_Attack", m_pTex, Vec2(0.f, 0.f),
+		{ 21, 19 }, Vec2(0.f, 0.f), 1, 1.f);
 	GetAnimator()->PlayAnim(L"Bullet_Attack", true);
 }
 
@@ -43,21 +49,8 @@ void Enemy_Bullet::Update()
 void Enemy_Bullet::Render(HDC _dc)
 {
 	if (!GetIsDead()) {
-		Vec2 vPos = GetPos();
-		Vec2 vScale = GetScale();
-
-		int Width = m_pTex->GetWidth();
-		int Height = m_pTex->GetHeight();
-
-		TransparentBlt(_dc
-			, (int)(vPos.x - vScale.x / 2)
-			, (int)(vPos.y - vScale.y / 2)
-			, Width, Height, m_pTex->GetDC()
-			, 0, 0, Width, Height, RGB(255, 0, 255));
+		Component_Render(_dc);
 	}
-
-
-	Component_Render(_dc);
 }
 
 void Enemy_Bullet::EnterCollision(Collider* _pOther)
@@ -69,15 +62,14 @@ void Enemy_Bullet::EnterCollision(Collider* _pOther)
 		if (pOtherObj->GetName() == L"Player")
 		{
 			// 상성 효과
-			m_fDamage = ElementMgr::GetInst()->Elemenet
-			(this->m_eElement, pOtherObj->m_eElement, m_fDamage);
+			m_damage = ElementMgr::GetInst()->Elemenet
+			(this->m_eElement, pOtherObj->m_eElement, m_damage);
 
 			// 데미지 주기
-			pOtherObj->SetDamage(m_fDamage);
+			pOtherObj->SetDamage(m_damage);
 
-			// 파티클 생성
-			CreateParticle((PARTICLE_TYPE)m_eElement, this);
-			SetDead();
+			EventMgr::GetInst()->DeleteObject(this);
+			//SetDead();
 		}
 	}
 }

@@ -20,32 +20,49 @@ typedef void(*myFuncDef)(void);
 void StageMgr::Init()
 {
 	curStage = 0;
-	enemyCountInWave = 10; //임시로 정해줌
+	enemyCountInWave = 100; //임시로 정해줌
+	isUpdate = true;
 }
 
 void StageMgr::Update()
 {
-	if (isStageStart) {
-		curTime += fDT;
-		if (curTime >= spawnDelay) {
-			EnemySpawn(enemyCount);
-			curTime = 0;
-			--spawnCount;
+	if (isUpdate) {
+		if (isStageStart) {
+			curTime += fDT;
+			if (curTime >= spawnDelay) {
+				EnemySpawn(enemyCount);
+				curTime = 0;
+				--spawnCount;
+			}
 		}
-	}
-	if (spawnCount <= 0) {
-		isStageStart = false;
-	}
+		if (spawnCount <= 0) {
+			isStageStart = false;
+		}
 
-	if (enemyCountInWave <= 0) {
-		if (!allDead) {
-			((myFuncDef)action)(); //void 포인터는 이렇게 실행
-			allDead = true;
-		}
-		if (curStage >= 10) { //10스테이지가 되면 클리어씬으로
-			SceneMgr::GetInst()->LoadScene(L"Clear_Scene");
+		if (enemyCountInWave <= 0) {
+			if (!allDead) {
+				((myFuncDef)action)(); //void 포인터는 이렇게 실행
+				allDead = true;
+			}
+			if (curStage >= 2) { //10스테이지가 되면 클리어씬으로
+				SceneMgr::GetInst()->LoadScene(L"Clear_Scene");
+			}
 		}
 	}
+}
+
+void StageMgr::Setting()
+{
+	enemyCountInWave = 100;
+	isUpdate = true;
+	curTime = 0;
+	spawnDelay = 0;
+
+	curStage = 0;
+	spawnCount = 0;
+	enemyCount = 0;
+	isStageStart = true;
+	allDead = false;
 }
 
 void StageMgr::NextStage(int _enemyCount, int _spawnCount, float _spawnDelay, void* (_action))
