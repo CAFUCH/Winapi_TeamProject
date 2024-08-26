@@ -24,7 +24,7 @@ int BaseWindow::Run(HINSTANCE _hInst, LPWSTR _lpCmdline, int _nCmdShow)
     // Init();
     if (!Core::GetInst()->Init(m_hWnd, m_ptResolution))
     {
-        MessageBox(m_hWnd, L"Core ÃÊ±âÈ­ ½ÇÆÐ", L"FAIL", MB_OK);
+        MessageBox(m_hWnd, L"Core ì´ˆê¸°í™” ì‹¤íŒ¨", L"FAIL", MB_OK);
     }
     return this->MessageLoop();
 }
@@ -75,12 +75,12 @@ LRESULT BaseWindow::WndProc(HWND _hWnd, UINT _message, WPARAM _wParam, LPARAM _l
 {
     switch (_message)
     {
-    //    // ¿ì¸®°¡ PAINT¸¦ ¾µ±î..?
+    //    // ìš°ë¦¬ê°€ PAINTë¥¼ ì“¸ê¹Œ..?
     //case WM_PAINT:
     //{
     //    PAINTSTRUCT ps;
     //    HDC hdc = BeginPaint(_hWnd, &ps);
-    //    // TODO: ¿©±â¿¡ hdc¸¦ »ç¿ëÇÏ´Â ±×¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù...
+    //    // TODO: ì—¬ê¸°ì— hdcë¥¼ ì‚¬ìš©í•˜ëŠ” ê·¸ë¦¬ê¸° ì½”ë“œë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤...
     //    Rectangle(hdc, 10, 10, 110, 110);
     //    EndPaint(_hWnd, &ps);
     //}
@@ -97,10 +97,10 @@ LRESULT BaseWindow::WndProc(HWND _hWnd, UINT _message, WPARAM _wParam, LPARAM _l
 int BaseWindow::MessageLoop()
 {
     MSG msg;
-    // ±âº» ¸Þ½ÃÁö ·çÇÁÀÔ´Ï´Ù:
+    // ê¸°ë³¸ ë©”ì‹œì§€ ë£¨í”„ìž…ë‹ˆë‹¤:
     while (true)
     {
-        // ¾î? ¸Þ½ÃÁö ÀÖ³×? ±×·³ ¿©±â ¤·¤»
+        // ë©”ì‹œì§€ê°€ ìžˆë‹¤ë©´ ë©”ì‹œì§€ë¥¼ ì²˜ë¦¬
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
             if (msg.message == WM_QUIT)
@@ -110,7 +110,7 @@ int BaseWindow::MessageLoop()
         }
         else
         {
-            // ¾î? ¸Þ½ÃÁö ¾øÀ½? ¤·¤» ³ª µû·Î³ð °ÔÀÓÇÔ
+            // ë©”ì‹œì§€ê°€ ì—†ë‹¤ë©´ ê²Œìž„ ì‹œìž‘
             Core::GetInst()->GameLoop();
         }
     }
