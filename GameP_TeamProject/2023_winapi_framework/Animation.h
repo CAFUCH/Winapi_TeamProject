@@ -2,13 +2,13 @@
 class Texture; class Animator;
 struct tAnimFrame
 {
-	// ¾Ö´Ï¸ŞÀÌ¼ÇÀÇ ½ÃÀÛ°ª (left, top)
+	// ì• ë‹ˆë©”ì´ì…˜ì˜ ì‹œì‘ê°’ (left, top)
 	Vec2 vLT;
-	// ¾Ö´Ï¸ŞÀÌ¼Ç ÇÑ ÇÁ·¹ÀÓ Å©±â
+	// ì• ë‹ˆë©”ì´ì…˜ í•œ í”„ë ˆì„ í¬ê¸°
 	Vec2 vSlice;
-	// ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı ½Ã°£
+	// ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ ì‹œê°„
 	float fDuration;
-	// ¾Ö´Ï¸ŞÀÌ¼Ç ¿ÀÇÁ¼Â (¹ºÁö Á¤È®È÷ ¸ğ¸£°ÚÀ½)
+	// ì• ë‹ˆë©”ì´ì…˜ ì˜¤í”„ì…‹
 	Vec2 vOffset;
 };
 
@@ -24,7 +24,7 @@ public:
 	void Render(HDC _dc);
 
 public:
-	// ¾Ö´Ï¸ŞÀÌ¼Ç »ı¼º (½ÃÀÛ À§Ä¡, Å©±â, Å©±â, ÇÁ·¹ÀÓ ¼ö, Àç»ı ½Ã°£) 
+	// ì• ë‹ˆë©”ì´ì…˜ ìƒì„± (ì‹œì‘ ìœ„ì¹˜, í¬ê¸°, í¬ê¸°, í”„ë ˆì„ ìˆ˜, ì¬ìƒ ì‹œê°„) 
 	void Create(Texture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, 
 		Vec2 _vStep, int _framecount, float _fDuration);
 
@@ -41,22 +41,22 @@ public:
 	friend class Animator;
 
 private:
-	// ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌ¸§
+	// ì• ë‹ˆë©”ì´ì…˜ ì´ë¦„
 	wstring m_strName;
-	// ¾Ö´Ï¸ŞÀÌÅÍ
+	// ì• ë‹ˆë©”ì´í„°
 	Animator* m_pAnimator;
-	// ¾Ö´Ï¸ŞÀÌ¼Ç ÇÁ·¹ÀÓ
+	// ì• ë‹ˆë©”ì´ì…˜ í”„ë ˆì„
 	vector<tAnimFrame> m_vecAnimFrame;
 
-	// ¾Ö´Ï¸ŞÀÌ¼Ç ÅØ½ºÃ³
+	// ì• ë‹ˆë©”ì´ì…˜ í…ìŠ¤ì²˜
 	Texture* m_pTex; 
-	// ÇöÀç ÇÁ·¹ÀÓ
+	// í˜„ì¬ í”„ë ˆì„
 	UINT m_CurFrame; 
-	// ´©Àû ½Ã°£
+	// ëˆ„ì  ì‹œê°„
 	float m_fAccTime;
-	// ¹İº¹ È½¼ö
+	// ë°˜ë³µ íšŸìˆ˜
 	int m_repeatcnt; 
-	// ÇöÀç ÁøÇàÀÌ ³¡³µ´ÂÁö
+	// í˜„ì¬ ì§„í–‰ì´ ëë‚¬ëŠ”ì§€
 	bool m_isAnim;
 };
 
