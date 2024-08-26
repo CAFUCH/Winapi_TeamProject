@@ -27,7 +27,7 @@ void Chase_State::Update()
 {
 	Vec2 thisPos = owner->GetPos();
 	const Player* pObj = owner->GetPlayer();
-	Vec2 pPos = pObj->GetPos(); //ÀÌ°Å ¾È‰Î 
+	Vec2 pPos = pObj->GetPos(); //Ã€ÃŒÂ°Ã… Â¾Ãˆâ€°ÃŽ 
 
 	Vec2 dir = (pPos - thisPos).Normalize();
 
@@ -35,14 +35,14 @@ void Chase_State::Update()
 		thisPos.x += fDT * speed * dir.x;
 	thisPos.y += fDT * speed * dir.y;
 
-	//if (dir.y > 0)//¾Æ·¡	
+	//if (dir.y > 0)
 	//	owner->GetAnimator()->PlayAnim(owner->ANIM_FRONT_HASH, true);
-	//else if (dir.y < 0)//À§				 
+	//else if (dir.y < 0)				 
 	//	owner->GetAnimator()->PlayAnim(owner->ANIM_BACK_HASH, true);
 
-	if (dir.x > 0) //¿À¸¥ÂÊ
+	if (dir.x > 0) 
 		owner->GetAnimator()->PlayAnim(owner->ANIM_RIGHT_HASH, true);
-	else if (dir.x < 0)//¿ÞÂÊ							
+	else if (dir.x < 0)							
 		owner->GetAnimator()->PlayAnim(owner->ANIM_LEFT_HASH, true);
 
 	owner->SetPos(thisPos);
