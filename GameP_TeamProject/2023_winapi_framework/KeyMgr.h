@@ -3,8 +3,8 @@
 
 struct tKeyInfo
 {
-	KEY_STATE eState; // 키 상태
-	bool	  IsPrevCheck; // 이전에 눌렸냐
+	KEY_STATE eState; 
+	bool	  IsPrevCheck; 
 };
 
 class KeyMgr // InputMgr
