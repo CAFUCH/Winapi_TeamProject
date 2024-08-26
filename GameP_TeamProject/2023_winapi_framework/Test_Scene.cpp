@@ -11,7 +11,6 @@
 #include "Core.h"
 
 void HandleSceneChangedGameScene() {
-	//페이드하면 좋을듯
 	SceneMgr::GetInst()->LoadScene(L"Game_Scene");
 }
 void Test_Scene::Init()
