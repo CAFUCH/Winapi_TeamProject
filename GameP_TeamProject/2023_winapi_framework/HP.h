@@ -18,9 +18,7 @@ public:
 	void SetOwner(Object* _owner) { m_pOwner = _owner; }
 
 private:
-	// Hp 배경 이미지
 	Texture* m_pBackTex;
-	// Hp 이미지
 	Texture* m_pFillTex;
 
 	std::shared_ptr<Scene> m_pCurScene;
