@@ -18,7 +18,6 @@ public:
 	Vec2& Normalize()
 	{
 		float fLen = Length();
-		// 0¿Ã∏È æ»µ≈.
 		//assert(fLen != 0.f);
 		x /= fLen;
 		y /= fLen;
