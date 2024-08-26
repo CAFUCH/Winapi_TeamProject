@@ -6,9 +6,9 @@ public:
 	~AI();
 public:
 	void InitState(ENEMY_STATE _enemyType);
-	void AddState(ENEMY_STATE _enemyType, State* _state); //상태 추가
+	void AddState(ENEMY_STATE _enemyType, State* _state); 
 	void UpdateState();
-	void ChangeState(ENEMY_STATE _enemyType); //상태 변경
+	void ChangeState(ENEMY_STATE _enemyType);
 	State* FindState(ENEMY_STATE _stateType);
 public:
 	Enemy* GetOnwer() const { return owner; }
